@@ -1,0 +1,135 @@
+.login_container {
+    display: flex;
+    justify-content: center;
+    border-radius: 20px;
+}
+
+.login_wapper {
+    border-radius: 0.3rem;
+    display: flex;
+    max-width: 100%;
+    flex-direction: column;
+    align-items: center;
+    background: #fff;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
+    
+}
+
+.login_fa-block {}
+
+.login_tittle {
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.login_form {
+    padding: 0 10px 10px;
+}
+
+
+/* begin text input */
+
+.login_group {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    font-size: 15px;
+    margin-bottom: 0.675rem;
+}
+
+.login_userip {}
+
+.login_loginf {
+    display: flex;
+    font-size: 15px;
+    min-width: 16rem;
+    background-color: #fff;
+    border: solid 1px #d3cece;
+}
+
+#login_user input {
+    width: 251px;
+    padding: 5px;
+    height: 37px;
+    border: none;
+    /*
+    border: solid 1px #E7E7E7;; */
+}
+
+.login_passwordipagain {
+    margin-top: 5px;
+}
+
+#login_pass input {
+    width: 251px;
+    padding: 5px;
+    height: 37px;
+    /* // border: solid 1px #E7E7E7; */
+    border: 0px;
+}
+
+.login_icon {
+    height: 37px;
+    background-color: rgb(218, 228, 219);
+    border: solid 1px #e4dddd;
+    padding: 0px 10px;
+    line-height: 37px;
+}
+
+
+#login_showpass {
+    margin-left: -20px;;
+    height: 37px;
+    line-height: 37px;
+}
+
+#login_showpass>button {
+   
+    width: 34px;
+    border: none;
+    background-color: #fff;
+    margin-left: -24px;
+    position: absolute;
+   
+}
+
+.login_messerror {
+    color: red;
+    min-width: 1rem;
+    font-size: 0.75rem;
+    margin: 0;
+    padding: 0.25rem 0 0;
+    background: unset!important;
+}
+
+.login_messerror>span {
+    background: none;
+    color: red;
+}
+
+.login_submit_btn {
+    margin-bottom: 20px;
+}
+
+.login_submit_btn button {
+    text-align: center;
+    font-size: 16px;
+    color: #fff;
+    margin-top: 5px;
+    padding: 10px 20px;
+    width: 100%;
+    background-color: #01a14b;
+    border: 0;
+    border-radius: 0.3rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+sp1 span {
+    display: block;
+    padding: 1px 1px 10px;
+}
+
+sp1 span>a {
+    color: blue;
+}
