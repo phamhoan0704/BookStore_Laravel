@@ -7,6 +7,7 @@ use App\Http\Controllers\admin\AuthorController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\backend\NewsController;
 use App\Models\Category;
+use App\Http\Controllers\CustomAuthController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -117,4 +118,16 @@ Route::prefix('/admin')->name('admin.')->group(function(){
         Route::post('/delete',[AuthorController::class,'destroy'])->name('delete');
         // Route::post('/deleteall/{id?}',[SupplierController::class,'destroyAll'])->name('deleteall');
     });
+});
+Route::get('/login',[CustomAuthController::class,'logIn'])->name('logIn');
+Route::get('/register',[CustomAuthController::class,'register'])->name('register');
+Route::post('/new-user',[CustomAuthController::class,'storeNewUser'])->name('storeUser');
+Route::get('/homepage', [CustomAuthController::class,'homepage'])->middleware('isLogIn');
+Route::post('/checkAcount',[CustomAuthController::class,'checkLogin'])->name('check-login');
+Route::get('logout',[CustomAuthController::class,'logOut']);
+route::get('/header',function(){
+    return view('header');
+});
+route::get('/footer',function(){
+    return view('footer');
 });
