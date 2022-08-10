@@ -45,7 +45,7 @@
             </div>
             @enderror
             <div class="form_row">
-                <button type="submit" name="" class="deleteCategoryBtn">Cập nhật</button>
+                <button class="btn btn-success" type="submit" name="" class="deleteCategoryBtn">Cập nhật</button>
             </div>
         </div>
 </div>

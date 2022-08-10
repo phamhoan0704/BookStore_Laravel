@@ -77,13 +77,11 @@
         document.getElementById("home-tab-item-hide").style.background = "#5cb85c";
                 document.getElementById("home-tab-item-hide-link").style.color = "white";
     </script>
-    }
-    @else{
+    @else
     <script>
         document.getElementById("home-tab-item-all").style.background = "#5cb85c";
                 document.getElementById("home-tab-item-all-link").style.color = "white";
     </script>
-    }
     @endif
 
     <script>

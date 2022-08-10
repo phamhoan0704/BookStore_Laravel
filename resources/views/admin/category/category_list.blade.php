@@ -88,7 +88,6 @@
                         <td><input type="checkbox" name="" id="checkall" onclick="selects(this)"></td>
                         <td>Mã danh mục</td>
                         <td>Tên danh mục</td>
-                        <td>Số sản phẩm</td>
                         <td>Ngày tạo</td>
                         <td>Ngày cập nhật</td>
                         <td>Ẩn/Hiện</td>
@@ -106,7 +105,6 @@
                         </td>
                         <td>{{$item->id}}</td>
                         <td>{{$item->category_name}}</td>
-                        <td></td>
                         <td>{{date('d-m-Y', strtotime($item->created_at))}}</td>
                             <td>{{date('d-m-Y', strtotime($item->updated_at))}}</td>
                         <td>@if ($item->active==0)
@@ -141,7 +139,6 @@
                             </td>
                             <td>Mã danh mục</td>
                             <td>Tên danh mục</td>
-                            <td>Số sản phẩm</td>
                             <td>Ngày tạo</td>
                             <td>Ngày cập nhật</td>
                             <td>Ẩn/Hiện</td>
@@ -158,7 +155,6 @@
                             </td>
                             <td>{{$item->id}}</td>
                             <td>{{$item->category_name}}</td>
-                            <td></td>
                             <td>{{date('d-m-Y', strtotime($item->created_at))}}</td>
                             <td>{{date('d-m-Y', strtotime($item->updated_at))}}</td>
                             <td>@if ($item->active==0)
