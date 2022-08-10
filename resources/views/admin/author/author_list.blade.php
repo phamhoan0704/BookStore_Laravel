@@ -47,7 +47,7 @@
             <div class="layout-list-row layout-list-btn-wrap">
                 <form method="Get" action="">
                     {{-- <label for="" class="label_search">Tìm kiếm</label> --}}
-                    <input placeholder="Nhập tên nhà cung cấp" class="ipn_search" type="search" name="search_txt"
+                    <input placeholder="Nhập tên tác giả" class="ipn_search" type="search" name="search_txt"
                         value="{{request()->search_txt}}">
                     <button type="submit" class="btn btn-success" value="" name="">Tìm kiếm</button>
                 </form>

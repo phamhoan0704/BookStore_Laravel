@@ -105,7 +105,7 @@
         <textarea type="" name="detail" class="form-control detail_txt" id="content" placeholder="Mô tả" ></textarea>
       </div>
       <div class="form_row">
-        <button type="submit" class="deleteCategoryBtn">Thêm mới</button>
+        <button class="btn btn-success" type="submit" class="deleteCategoryBtn">Thêm mới</button>
       </div>
     </div>
 </form>

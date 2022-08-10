@@ -29,7 +29,7 @@
         <textarea type="" name="detail" class="form-control detail_txt" id="content" placeholder="Mô tả" >{{old('detail')??$detail->author_description}}</textarea>
       </div>
       <div class="form_row">
-        <button type="submit" class="deleteCategoryBtn">Cập nhật</button>
+        <button class="btn btn-success" type="submit" class="deleteCategoryBtn">Cập nhật</button>
       </div>
     </div>
 </form>
