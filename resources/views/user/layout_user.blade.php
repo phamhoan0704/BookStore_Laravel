@@ -115,7 +115,9 @@
                     <li class="header__nav-item">
                         <a href="product_category.php?id=0" class="header__nav-item-link">Sản phẩm</a>
                         <ul class="header__secondary-nav">
-
+                            @foreach ($categoryList as $item)
+                                <li>{{$item->category_name}}</li>
+                            @endforeach
                         </ul>
                     </li>
                     <li class="header__nav-item">

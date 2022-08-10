@@ -52,7 +52,8 @@
 // ?>
 
 <!-- --------------------------------------------------- -->
-@extends(user.layout_user)
+@extends('user.layout_user')
+@section('Content')
     <div id="home-page">
         <div id="slideShow" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
@@ -207,4 +208,4 @@
 
     <!-- <?php //include 'footer.php'; ?> -->
     <script src="../js/home_tab.js "></script>
-@extends('user.footer')
+    @endsection

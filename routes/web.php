@@ -4,10 +4,14 @@ use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\admin\AuthorController;
+
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\backend\NewsController;
 use App\Models\Category;
 use App\Http\Controllers\CustomAuthController;
+use App\Http\Controllers\user\CartConroller;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,21 +26,18 @@ use App\Http\Controllers\CustomAuthController;
 Route::get('/admin', function () {
     return view('admin.layout_admin');
 });
-
-
-
-Route::get('/user', function () {
-    return view('user.layout_user');
-});
+Route::get('/user',[layoutController::class, 'index']);
 Route::get('/user/cart', function () {
     return view('user.cart');
 });
 //User 
-Route::get('user/cart',[CartController::class, 'index'])->name('user.cart');
+//Route::get('user/cart',[CartController::class, 'index'])->name('user.cart');
 Route::get('/user/news' ,[NewsController::class, 'index'])->name('user.news');
 //Admin
 Route::get('/admin/login',[LoginController::class, 'index'])->name('login');
-
+// Route::prefix('/user')->name('user.')->group(function(){
+//     Route::get('/cart',[CartConroller::class,'index'])->name('cart');
+// }
 Route::prefix('/admin')->name('admin.')->group(function(){
     //Category
     Route::prefix('/category')->name('category.')->group(function(){
@@ -119,6 +120,8 @@ Route::prefix('/admin')->name('admin.')->group(function(){
         // Route::post('/deleteall/{id?}',[SupplierController::class,'destroyAll'])->name('deleteall');
     });
 });
+
+
 Route::get('/login',[CustomAuthController::class,'logIn'])->name('logIn');
 Route::get('/register',[CustomAuthController::class,'register'])->name('register');
 Route::post('/new-user',[CustomAuthController::class,'storeNewUser'])->name('storeUser');

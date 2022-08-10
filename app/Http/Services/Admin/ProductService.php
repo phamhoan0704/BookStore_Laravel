@@ -17,6 +17,7 @@ class ProductService{
             $category=$category->where($filters);
         }
         $category=$category->paginate(5);
+
         return $category;
     }
     public function getCount($x){
@@ -50,8 +51,6 @@ class ProductService{
     return $resultSearch; 
     }
     public function addProduct($dataInsert){
-    
-
         try{
             DB::table($this->table)->insert([
                 'product_name'=>(string)$dataInsert['product_name'],
@@ -67,8 +66,6 @@ class ProductService{
                 'created_at'=>$dataInsert['created_at'],
                 'active'=>'1',
             ]);
-        
-          
          session()->flash('success','Tạo sản phẩm mới thành công!');
         }catch(Exception $err){
             dd($err);
