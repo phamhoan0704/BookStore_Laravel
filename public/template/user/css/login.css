@@ -47,9 +47,11 @@
     background-color: #fff;
     border: solid 1px #d3cece;
 }
-
+#login_user {
+    width: 100%;
+}
 #login_user input {
-    width: 251px;
+    width: 100%;
     padding: 5px;
     height: 37px;
     border: none;
@@ -60,9 +62,11 @@
 .login_passwordipagain {
     margin-top: 5px;
 }
-
+#login_pass{
+    width: 100%;
+}
 #login_pass input {
-    width: 251px;
+    width: 100%;
     padding: 5px;
     height: 37px;
     /* // border: solid 1px #E7E7E7; */
@@ -73,24 +77,26 @@
     height: 37px;
     background-color: rgb(218, 228, 219);
     border: solid 1px #e4dddd;
-    padding: 0px 10px;
+    padding: 10px 10px;
     line-height: 37px;
 }
 
 
 #login_showpass {
-    margin-left: -20px;;
+  
     height: 37px;
     line-height: 37px;
 }
 
 #login_showpass>button {
    
-    width: 34px;
+    width: 32px;
     border: none;
     background-color: #fff;
-    margin-left: -24px;
     position: absolute;
+    height: 30px;
+    margin: 2px 2px 2px -35px;
+    
    
 }
 

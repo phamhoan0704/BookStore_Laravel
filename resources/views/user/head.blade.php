@@ -21,3 +21,5 @@
   <link rel="stylesheet" href="{{asset('template/user/css/productSearch.css')}}">
   <link rel="stylesheet" href="style.css">
 
+
+

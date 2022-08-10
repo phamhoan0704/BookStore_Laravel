@@ -249,6 +249,6 @@
         </div>
     </div>
 
-    <script src="{{asset('template/user/js/home_tab.js')}}"></script> 
-@endsection
-<!-- @extends('user.footer') -->
+    <!-- <?php //include 'footer.php'; ?> -->
+    <script src="../js/home_tab.js "></script>
+@extends('user.footer')

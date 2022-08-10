@@ -129,10 +129,18 @@ Route::prefix('/admin')->name('admin.')->group(function(){
 Route::get('/login',[CustomAuthController::class,'logIn'])->name('logIn');
 Route::get('/register',[CustomAuthController::class,'register'])->name('register');
 Route::post('/new-user',[CustomAuthController::class,'storeNewUser'])->name('storeUser');
+
+
+Route::get('/home',function(){
+    return view('user.home');
+})->name('noLogin');
+
 Route::get('/homepage', [CustomAuthController::class,'homepage'])->middleware('isLogIn');
 Route::get('/homepage', [App\Http\Controllers\user\ProductController::class,'index'])->name('homepage');
 Route::post('/checkAcount',[CustomAuthController::class,'checkLogin'])->name('check-login');
-Route::get('logout',[CustomAuthController::class,'logOut']);
+Route::get('/user/home', [CustomAuthController::class,'homepage'])->name('user_home');
+
+Route::get('logout',[CustomAuthController::class,'logOut'])->name('logOut');
 route::get('/header',function(){
     return view('header');
 });
@@ -142,4 +150,7 @@ Route::get('/search/{name?}', [App\Http\Controllers\user\ProductController::clas
 
 route::get('/footer',function(){
     return view('footer');
+});
+route::get('/Modal',function(){
+    return view('user.a');
 });

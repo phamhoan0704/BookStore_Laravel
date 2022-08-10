@@ -88,11 +88,10 @@
 }
 
 .register_icon {
-    height: 26px;
+    height: 30px;
     background-color: rgb(218, 228, 219);
     border: solid 1px #e4dddd;
-    padding: 0px 10px;
-    line-height: 30px;
+    padding: 7px 10px;
 }
 
 #showpass {
@@ -103,14 +102,13 @@
 }
 
 #showpass>button {
-    width: 100%;
+
     width: 34px;
     border: none;
     background-color: #fff;
-    margin-left: -35px;
     position: absolute;
-    margin-right: 2px;
-    height: 30px;
+    margin: 1px 2px 1px -35px;
+    height: 28px;
     line-height: 30px;
 }
 
@@ -201,6 +199,7 @@
     margin-bottom: 10px;
     cursor: pointer;
     color:#fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
    
 }
 

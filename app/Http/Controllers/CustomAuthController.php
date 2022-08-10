@@ -6,6 +6,7 @@ use App\Http\Requests\checkLoginRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\checkRegisterRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use phpDocumentor\Reflection\DocBlock\Tags\Uses;
@@ -16,7 +17,7 @@ class CustomAuthController extends Controller
     //
     public function logIn()
     {
-        return view('User.login');
+        return view('user.login');
     }
     public function checkLogin(Request $request)
     {
@@ -38,7 +39,11 @@ class CustomAuthController extends Controller
             if(Hash::check($request->input('password'),$user->user_password))
             {
                 $request->session()->put('loginId',$user->id);
+<<<<<<< HEAD
+                return redirect('/user/home');
+=======
                 return redirect('homepage');
+>>>>>>> 14cf7ba7ec33bdc959d93d408c64b668f194938d
             }
             else{
                 return back()->with('fail2','Mật khẩu không chính xác!');
@@ -52,7 +57,7 @@ class CustomAuthController extends Controller
     
     public function register()
     {
-        return view("User.register");
+        return view("user.register");
     }
     public function storeNewUser(Request $request)
     {
@@ -101,20 +106,29 @@ class CustomAuthController extends Controller
         } else {
             return back()->with('fail', 'Tài khoản không hợp lệ');
         }
+        
     }
     public function homepage(){
         $data=array();
         if(Session::has('loginId')){
+<<<<<<< HEAD
+            $data=DB::table('users')->where('id','=',Session::get('loginId'))->first();
+        }
+        return view('user.home',compact('data'));
+       
+=======
             $data=DB::table('Users')->where('id','=',Session::get('loginId'))->first();
         }
         return view('user.home',compact('data'));
         
 
+>>>>>>> 14cf7ba7ec33bdc959d93d408c64b668f194938d
     }
-    // public function logOut(){
-    //     if(Session::has('loginId')){
-    //         Session::pull('loginId');
-    //         redirect('home');
-    //     }
-    // }
+    public function logOut(){
+        if(Session::has('loginId')){
+            Session::pull('loginId');
+            redirect('noLogin');
+        }
+    }
+    
 }
