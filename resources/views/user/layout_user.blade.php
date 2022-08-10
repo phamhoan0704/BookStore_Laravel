@@ -4,6 +4,7 @@
 </head>
 
 <body>
+   
     <i class="far fa-frown"></i>
 
     <div id="body" style="font-family: 'Open Sans', sans-serif!important;box-sizing: border-box;margin: 0; padding: 0;">
@@ -13,17 +14,24 @@
                     <div class="site-topbar__text">
                         Công ty cổ phần xuất bản và truyền thông Trí Tuệ
                     </div>
-                    <div class="site-topbar__user">
+                    <div class="site-topbar__user @if(Session::has('loginId')){{'active'}}
+                            @else {{''}}
+                            @endif">
                         <a href="information.php" class="site-topbar__user-name">Xin chào :
+                            @if(Session::has('loginId')){{$data->user_name}}
+                            @else
+                            @endif
 
                         </a>
                         <span class="sep">|</span>
-                        <a href="log_out.php" class="site-topbar__logout">Đăng xuất</a>
+                        <a href="{{route('logOut')}}" class="site-topbar__logout">Đăng xuất</a>
                     </div>
-                    <div class="">
-                        <a href="" class="site-topbar__user-name">Đăng nhập </a>
+                    <div class="site-topbar__user @if(Session::has('loginId')){{''}}
+                            @else {{'active'}}
+                            @endif">
+                        <a href="{{route ('logIn')}}" class="site-topbar__user-name">Đăng nhập </a>
                         <span class="sep">|</span>
-                        <a href="" class="site-topbar__logout"> Đăng kí</a>
+                        <a href="{{route('register')}}" class="site-topbar__logout"> Đăng kí</a>
                     </div>
                 </div>
             </div>

@@ -6,6 +6,7 @@ use App\Http\Requests\checkLoginRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\checkRegisterRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use phpDocumentor\Reflection\DocBlock\Tags\Uses;
@@ -16,7 +17,7 @@ class CustomAuthController extends Controller
     //
     public function logIn()
     {
-        return view('User.login');
+        return view('user.login');
     }
     public function checkLogin(Request $request)
     {
@@ -32,13 +33,13 @@ class CustomAuthController extends Controller
             'password.min' => 'Mật khẩu tối thiểu phải có :min kí tự'
 
         ]);
-        $user=DB::table('users')->where('name',$request->input('name'))->first();
+        $user=DB::table('users')->where('user_name',$request->input('name'))->first();
         if(isset($user)){
             
             if(Hash::check($request->input('password'),$user->user_password))
             {
-                $request->session()->put('loginId',$user->user_id);
-                return redirect('homepage');
+                $request->session()->put('loginId',$user->id);
+                return redirect('/user/home');
             }
             else{
                 return back()->with('fail2','Mật khẩu không chính xác!');
@@ -52,7 +53,7 @@ class CustomAuthController extends Controller
     
     public function register()
     {
-        return view("User.register");
+        return view("user.register");
     }
     public function storeNewUser(Request $request)
     {
@@ -101,20 +102,21 @@ class CustomAuthController extends Controller
         } else {
             return back()->with('fail', 'Tài khoản không hợp lệ');
         }
+        
     }
     public function homepage(){
         $data=array();
         if(Session::has('loginId')){
-            $data=DB::table('Users')->where('user_id','=',Session::get('loginId'))->first();
+            $data=DB::table('users')->where('id','=',Session::get('loginId'))->first();
         }
-        return view('User.homepage',compact('data'));
-        
-
+        return view('user.home',compact('data'));
+       
     }
-    // public function logOut(){
-    //     if(Session::has('loginId')){
-    //         Session::pull('loginId');
-    //         redirect('home');
-    //     }
-    // }
+    public function logOut(){
+        if(Session::has('loginId')){
+            Session::pull('loginId');
+            redirect('noLogin');
+        }
+    }
+    
 }

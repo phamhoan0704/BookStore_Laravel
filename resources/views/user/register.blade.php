@@ -1,5 +1,30 @@
 @extends('user.layout_user')
 @section('Content')
+{{Modal}}
+<!-- tạo hộp thoại thông báo đăng ký thành công -->
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="" method="POST">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel">Thông báo</h4>
+                    <button type="button" class="close" data-dismiss="modal"></button>
+                </div>
+                <div>tôi là ai</div>
+                <div class="modal-body">
+                    <input type="hidden" name="delete_id" id="category_id">
+                    <h5>Tạo tài khoản thành công </h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-danger">
+                        <a href="{{ route('login')}}">Đăng nhập ngay</a></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--  -->
 <div class="register_container">
         <div class="register_wapper">
             <div class="register_tittler">
@@ -7,6 +32,7 @@
             </div>
             <form class="register_form" action="{{ route('storeUser')}}" method="POST">
             @csrf
+            <!-- box thông báo đăng ký thành công -->
                 <div class="register_group userip">
                     <div class="register_loginf">
                         <div class="register_icon">
@@ -130,10 +156,19 @@
 
     <script src="../js/register.js"></script>
 
-//@if(Session::has('success'))
-//tao hop thoai 
+<!-- @if(Session::has('success')) -->
 
-
-
-//@endif
+<!-- 
+@endif -->
+@endsection
+@section('Scripts')
+<script>
+    $(document).ready(function() {
+          $('.submit_btn').click(function(){   
+                var category_id=this.value;
+                $('#category_id').val(category_id);
+                $('#deleteModal').modal();
+            });
+         });
+</script>
 @endsection
