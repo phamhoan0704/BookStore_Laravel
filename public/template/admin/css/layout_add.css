@@ -36,7 +36,7 @@ table input{
     height: 30px;
 } */
 
-.add_form{
+.add_form {
     width: 100%;
     border-spacing: 0;
     font-size: 14px;
@@ -44,26 +44,30 @@ table input{
     -webkit-box-shadow: 0 1px 4px 0 rgb(0 0 0 / 10%);
     box-shadow: 0 1px 4px 0 rgb(0 0 0 / 10%);
     background-color: white;
+    padding: 16px 24px;
 }
-.form_row{
+
+.form_row {
     height: 70px;
     padding: 20px;
 }
-.form_row label{
+
+.form_row label {
     width: 200px;
 }
-.add_form .des{
+
+.add_form .des {
     /* height: 100%; */
     /* width: 500px; */
 }
-.detail_txt{
-  
 
-}
-input[type=file]{
+.detail_txt {}
+
+input[type=file] {
     display: inline;
 }
-.detail_form{
+
+.detail_form {
     width: 95%;
     margin-left: 20px;
 }

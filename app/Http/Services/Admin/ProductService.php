@@ -17,6 +17,7 @@ class ProductService{
             $category=$category->where($filters);
         }
         $category=$category->paginate(5);
+        // dd($category);
         return $category;
     }
     public function getCount($x){
@@ -29,6 +30,7 @@ class ProductService{
         $count=$count ->count();            
         return $count;
     }
+
     public function getSearchProduct($search_txt,$filters=[]){
         $category=DB::table($this->table)
         ->select('*');
@@ -47,8 +49,10 @@ class ProductService{
             'listSearch'=>$category,
             'titleSearch'=>$titleSearch,
         ];
+
     return $resultSearch; 
     }
+
     public function addProduct($dataInsert){
     
 
@@ -125,4 +129,47 @@ class ProductService{
         }
 
     }
+
+
+
+
+
+    // USER
+    public function getNewProduct($filters=[]){
+        $category=DB::table($this->table)
+        ->select('*')
+        ->where('active','1')
+        ->orderByDesc('product_year')
+        ->get();
+        // dd($category);
+        return $category;
+    }
+
+    public function getProductByCategory($category_id,$filters=[]){
+        if($category_id==0)
+        {
+            $category_list=DB::table($this->table)
+            ->select('*')
+            ->where('active','1')
+            ->orderByDesc('product_year');
+        } else {
+            $category_list=DB::table($this->table)
+            ->select('*')
+            ->where('active','1')
+            ->where('category_id',$category_id)
+            ->orderByDesc('product_year');
+        }
+        $category_list=$category_list->paginate(16);
+        // dd($category_list);
+        return $category_list;
+    }
+
+    public function searchProduct($search){
+        $search_list=DB::table($this->table)
+        ->select('*')
+        ->where('product_name','like','%'.$search.'%');
+        $search_list=$search_list->paginate(16);
+        return $search_list; 
+    }
+
 }

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\backend\NewsController;
 use App\Models\Category;
 use App\Http\Controllers\CustomAuthController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,9 +23,6 @@ use App\Http\Controllers\CustomAuthController;
 Route::get('/admin', function () {
     return view('admin.layout_admin');
 });
-
-
-
 Route::get('/user', function () {
     return view('user.layout_user');
 });
@@ -78,6 +76,7 @@ Route::prefix('/admin')->name('admin.')->group(function(){
         Route::post('/delete',[ProductController::class,'destroy'])->name('delete');
         Route::post('/deleteall/{id?}',[ProductController::class,'destroyAll'])->name('deleteall');
     });
+
     //Supplier
     Route::prefix('/supplier')->name('supplier.')->group(function(){
         // Add
@@ -98,6 +97,7 @@ Route::prefix('/admin')->name('admin.')->group(function(){
         Route::post('/delete',[SupplierController::class,'destroy'])->name('delete');
         // Route::post('/deleteall/{id?}',[SupplierController::class,'destroyAll'])->name('deleteall');
     });
+
      //Author
      Route::prefix('/author')->name('author.')->group(function(){
         // Add
@@ -117,8 +117,15 @@ Route::prefix('/admin')->name('admin.')->group(function(){
         //Delete
         Route::post('/delete',[AuthorController::class,'destroy'])->name('delete');
         // Route::post('/deleteall/{id?}',[SupplierController::class,'destroyAll'])->name('deleteall');
-    });
+    }); 
+
+    //SALE REPORT
+    Route::get('/report',[ReportController::class,'create'])->name('report');
+
+
+
 });
+
 Route::get('/login',[CustomAuthController::class,'logIn'])->name('logIn');
 Route::get('/register',[CustomAuthController::class,'register'])->name('register');
 Route::post('/new-user',[CustomAuthController::class,'storeNewUser'])->name('storeUser');
@@ -127,6 +134,9 @@ Route::post('/new-user',[CustomAuthController::class,'storeNewUser'])->name('sto
 Route::get('/home',function(){
     return view('user.home');
 })->name('noLogin');
+
+Route::get('/homepage', [CustomAuthController::class,'homepage'])->middleware('isLogIn');
+Route::get('/homepage', [App\Http\Controllers\user\ProductController::class,'index'])->name('homepage');
 Route::post('/checkAcount',[CustomAuthController::class,'checkLogin'])->name('check-login');
 Route::get('/user/home', [CustomAuthController::class,'homepage'])->name('user_home');
 
@@ -134,6 +144,10 @@ Route::get('logout',[CustomAuthController::class,'logOut'])->name('logOut');
 route::get('/header',function(){
     return view('header');
 });
+
+Route::get('/category/{id}', [App\Http\Controllers\user\ProductController::class,'getProductByCategory'])->name('category');
+Route::get('/search/{name?}', [App\Http\Controllers\user\ProductController::class,'searchProduct'])->name('search');
+
 route::get('/footer',function(){
     return view('footer');
 });

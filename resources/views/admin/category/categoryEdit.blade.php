@@ -18,7 +18,7 @@
                 @enderror
             </div>
             <div class="form_row">
-                <button type="submit" name="">Cập nhật</button>
+                <button class="btn btn-success" type="submit" name="">Cập nhật</button>
 
             </div>
         </div>

@@ -1,5 +1,4 @@
 <head>
-
     @include('user.head')
 </head>
 
@@ -12,7 +11,7 @@
             <div class="site-topbar">
                 <div class="site-topbar__container">
                     <div class="site-topbar__text">
-                        Công ty cổ phần xuất bản và truyền thông Trí Tuệ
+                        Công ty cổ phần xuất bản và truyền thông IPM
                     </div>
                     <div class="site-topbar__user @if(Session::has('loginId')){{'active'}}
                             @else {{''}}
@@ -39,14 +38,14 @@
             <div class="site-header-container">
                 <div class="site-header">
                     <div class="site-header__logo">
-                        <a href="home.php">
+                        <a href="{{ route('homepage') }}">
                             <img src="{{ url('template/user/image/icon/logo.jpg') }}" alt="" class="img-logo">
                         </a>
                     </div>
                     <div class="site-header__search-wrap">
-                        <form action="search_page.php" method="get">
+                        <form action="{{ route('search') }}" method="get">
                             <div class="header__search">
-                                <input type="text" class="header__search-input" placeholder="Tìm kiếm" name="search_pdt"
+                                <input type="text" class="header__search-input" placeholder="Tìm kiếm" name="search"
                                     id="header_search">
                                 <button type="submit" class="header__search-btn">
                                     <svg class="header__search-icon" height="64px" id="SVGRoot" version="1.1"
@@ -82,16 +81,31 @@
                         <div class="site-header__cart">
                             <div class="header__cart-wrap">
                                 <i class="bi bi-cart-plus-fill" style="color: 009234;font-size:40px"></i>
-                                {{-- <i class="header__cart-icon fa fa-solid fa-cart-plus"
-                                    style="font-family:Font Awesome 6 Free !important;"></i> --}}
-                                <span class="header__cart-notice">
-                                </span>
+                                
+                                <span class="header__cart-notice">0</span>
                                 <div class="header__cart-list">
                                     <div class="header__cart-list-heading">
                                         <span>Sản Phẩm Mới Thêm</span>
                                     </div>
                                     <ul class="header__cart-list-item">
                                         <!-- Cart item -->
+                                        <?php
+                                        // if($total > 0) 
+                                        // {
+                                        //     for($i=0;$i<count($data);$i++) {
+                                        //         echo 
+                                        //         '<li class="header__cart-item">
+                                        //             <a href="productdetail.php?id='.$data[$i]['product_id'].'" class="header__cart-item-link">
+                                        //                 <div class="header__cart-img-block">
+                                        //                 <img src="../img/product/'.$data[$i]['product_image'].'" alt="'.$data[$i]['product_name'].'" class="header__cart-img">
+                                        //                 </div>
+                                        //                 <h5 class="header__cart-item-name">'.$data[$i]['product_name'].'</h5>
+                                        //                 <span class="header__cart-item-price">'.number_format($data[$i]['product_price']).' x '.$data[$i]['product_amount'].'</span>
+                                        //             </a>
+                                        //         </li>';  
+                                        //     }
+                                        // }
+                                    ?>
                                     </ul>
                                     <div class="text-mini-cart">
                                         <span class="text-left">Tổng tiền</span>
@@ -121,9 +135,13 @@
                         <a href="home.php" class="header__nav-item-link">Trang chủ</a>
                     </li>
                     <li class="header__nav-item">
-                        <a href="product_category.php?id=0" class="header__nav-item-link">Sản phẩm</a>
+                        <a href="{{route('category',['id'=>'0'])}}" class="header__nav-item-link">Sản phẩm</a>
                         <ul class="header__secondary-nav">
-
+                            @foreach ($categoryList as $item)
+                                <li class="secondary-nav-item">
+                                    <a class="secondary-nav-item-link" href="{{route('category',['id'=>$item->id])}}">{{$item->category_name}}</a>
+                                </li>
+                            @endforeach
                         </ul>
                     </li>
                     <li class="header__nav-item">

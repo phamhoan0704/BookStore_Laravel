@@ -53,12 +53,14 @@ class CategoryService{
         $category=$category->paginate(5);
         return $category;
     }
+    
     public function getCategory(){    
         $category=DB::table($this->table)
    
         ->get();
         return $category;
     }
+
     public function getCount($x){
         $count=DB::table($this->table);
         if($x==1){
@@ -69,6 +71,7 @@ class CategoryService{
         $count=$count ->count();            
         return $count;
     }
+
     public function getSearchCategory($search_txt,$filters=[]){
             $category=DB::table($this->table)
             ->select('*');
@@ -88,7 +91,8 @@ class CategoryService{
                 'titleSearch'=>$titleSearch,
             ];
         return $resultSearch; 
-}
+    }
+
     public function addcategory($dataInsert){
         try{
             DB::table($this->table)->insert([
@@ -145,6 +149,7 @@ class CategoryService{
             session()->flash('error','Có lỗi xảy ra. Vui lòng thử lại!');
         }
     }
+
     public function deleteCategory($category_id)
     {
         try{
@@ -157,6 +162,7 @@ class CategoryService{
         }
 
     }
+
     public function activeCategory($ids,$id,$active){
         $category=DB::table($this->table);
         if(!empty($ids)){
@@ -171,4 +177,15 @@ class CategoryService{
         
         //return $category;
     }
+
+
+
+
+    public function getCategoryList($filters=[]){
+        $category=DB::table($this->table)
+        ->select('*')
+        ->where('active','1')
+        ->get();
+        return $category;
+}
 }
