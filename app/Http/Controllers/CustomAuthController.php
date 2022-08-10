@@ -32,12 +32,12 @@ class CustomAuthController extends Controller
             'password.min' => 'Mật khẩu tối thiểu phải có :min kí tự'
 
         ]);
-        $user=DB::table('users')->where('name',$request->input('name'))->first();
+        $user=DB::table('users')->where('user_name',$request->input('name'))->first();
         if(isset($user)){
             
             if(Hash::check($request->input('password'),$user->user_password))
             {
-                $request->session()->put('loginId',$user->user_id);
+                $request->session()->put('loginId',$user->id);
                 return redirect('homepage');
             }
             else{
@@ -105,9 +105,9 @@ class CustomAuthController extends Controller
     public function homepage(){
         $data=array();
         if(Session::has('loginId')){
-            $data=DB::table('Users')->where('user_id','=',Session::get('loginId'))->first();
+            $data=DB::table('Users')->where('id','=',Session::get('loginId'))->first();
         }
-        return view('User.homepage',compact('data'));
+        return view('user.home',compact('data'));
         
 
     }

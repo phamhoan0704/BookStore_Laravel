@@ -34,7 +34,7 @@
         <a href="homepage.php">
             <img src="" alt="" style="margin: 0 50px">
         </a>
-        <h1>NHÀ SÁCH TRÍ TUỆ</h1>
+        <h1 style="padding-left: 16px;">NHÀ SÁCH IPM</h1>
     </div>
     <div class="main_content">
         <div class="main_menu">
@@ -48,7 +48,7 @@
                 <li><a id="header-supply" href="{{route('admin.supplier.index')}}">Quản lí nhà cung cấp</a></li>
                 <li><a id="header-user" href="../admin/user_management_ad.php">Quản lí tài khoản</a></li>
                 <li><a id="header-order" href="../admin/order_management_ad.php">Quản lí đơn hàng</a></li>
-                <li><a id="header-report" href="sale_management.php">Quản lí doanh thu</a></li>
+                <li><a id="header-report" href="{{route('admin.report')}}">Quản lí doanh thu</a></li>
             </ul>
         </div>
 
