@@ -1,6 +1,7 @@
 <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
+  <link rel="shortcut icon" href="//theme.hstatic.net/200000287623/1000800165/14/favicon.png?v=126" type="image/png" />
+  <title>Nhà Sách IPM</title>
   <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="{{asset('https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css')}}">
 
@@ -12,5 +13,6 @@
   <link rel="stylesheet" href="{{asset('template/admin/css/layout_list.css')}}">
   <link rel="stylesheet" href="{{asset('template/admin/css/tab.css')}}">
   <link rel="stylesheet" href="{{asset('template/admin/css/layout_add.css')}}">
+  <!-- <link rel="stylesheet" href="{{asset('template/admin/css/sale_report.css')}}"> -->
 
   @yield('head')

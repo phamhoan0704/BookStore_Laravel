@@ -21,7 +21,7 @@ class ProductController extends Controller
     }
     public function index($name=0,Request $request){
 
-        $countActive=$this->productService->getCount(1);
+        $countActive= $this->productService->getCount(1);
         $countHide= $this->productService->getCount(0);
         $countAll= $this->productService->getCount(-1);
         $count=[$countAll,$countActive,$countHide];
@@ -35,7 +35,7 @@ class ProductController extends Controller
         $filters[]=['products.active','=',$active];
         }
         $productList=$this->productService->getAllCategories($filters);
-        //Search 
+        //Search  
         $search_txt=$request->search_txt;
         if(!empty($search_txt)){
             $resultSearch=$this->productService->getSearchProduct($search_txt,$filters);
@@ -45,8 +45,8 @@ class ProductController extends Controller
         }
         return view('admin.product.product_list',compact(['productList','resultSearch','count']));
     }
-    public function create()
-    {
+    
+    public function create(){
         $cat=new CategoryService();
         $category=$cat->getCategory();
         $sup=new SupplierService();
@@ -55,8 +55,8 @@ class ProductController extends Controller
         $author=$aut->getAuthor();
         return view('admin.product.productAdd',compact (['category','author','supplier']));
     }
-    public function postAdd(ProductRequest $request)
-    {
+
+    public function postAdd(ProductRequest $request){
       
         $image = $request->file('product_image')->getClientOriginalName();
         $file= $request->file('product_image');

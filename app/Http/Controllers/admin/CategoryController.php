@@ -43,10 +43,12 @@ class CategoryController extends Controller
         }
         return view('admin.category.category_list',compact(['categoryList','resultSearch','count']));
     }
+
     public function create()
     {
         return view('admin.category.categoryAdd');
     }
+
     public function postAdd(CategoryRequest $request)
     {
          $dataInsert=[
@@ -61,6 +63,7 @@ class CategoryController extends Controller
         $categoryDetail=$id;
         return view('admin.category.categoryEdit',compact(['categoryDetail']));
     }
+
     public function postEdit(CategoryRequest $request,$id){
         $data=[
             'category_name'=>$request->category_name,
@@ -69,6 +72,7 @@ class CategoryController extends Controller
         $this->categoryService->updateCategory($data,$id);
         return redirect()->route('admin.category.index');
     }
+
     public function postActive(Request $request){
         $ids=$request->ids;  
         $id=$request->id;
@@ -107,4 +111,14 @@ class CategoryController extends Controller
     // }
 
 
+
+
+
+    // USER
+    public function getAllCategories(){
+     
+        $categoryList=$this->categoryService->getAllCategories();
+        
+        return view('user.layout_user',compact(['categoryList']));
+    }
 }
