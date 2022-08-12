@@ -1,8 +1,8 @@
-@extends('user.layout_user')
+<!-- @extends('user.layout_user') -->
 @section('Content')
-{{Modal}}
+
 <!-- tạo hộp thoại thông báo đăng ký thành công -->
-<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="true">
+<!-- <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <form action="" method="POST">
@@ -23,14 +23,14 @@
             </form>
         </div>
     </div>
-</div>
+</div> -->
 <!--  -->
 <div class="register_container">
         <div class="register_wapper">
             <div class="register_tittler">
                 <h2>Tạo tài khoản<h2>
             </div>
-            <form class="register_form" action="{{ route('storeUser')}}" method="POST">
+            <form class="register_form" action="{{ route('user.storeUser')}}" method="POST">
             @csrf
             <!-- box thông báo đăng ký thành công -->
                 <div class="register_group userip">
@@ -121,7 +121,7 @@
                     <button name="submit_btn">Đăng ký</button>
                 </div>
                 <div class="register_sp1">
-                    <span>Bạn đã có tài khoản? Đăng nhập <a href="{{ route('logIn')}}">Tại đây</a></span>
+                    <span>Bạn đã có tài khoản? Đăng nhập <a href="{{ route('user.logIn')}}">Tại đây</a></span>
                 </div>
                 <!-- <span>hoặc</span><hr>
                 <div class="register_separator">
@@ -156,19 +156,9 @@
 
     <script src="../js/register.js"></script>
 
-<!-- @if(Session::has('success')) -->
+@if(Session::has('success'))
+{{rotue}}
 
 <!-- 
 @endif -->
-@endsection
-@section('Scripts')
-<script>
-    $(document).ready(function() {
-          $('.submit_btn').click(function(){   
-                var category_id=this.value;
-                $('#category_id').val(category_id);
-                $('#deleteModal').modal();
-            });
-         });
-</script>
 @endsection
