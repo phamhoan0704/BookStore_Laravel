@@ -5,7 +5,7 @@
         <div class="login_tittle">
             <h2>Đăng nhập<h2>
         </div>
-        <form method="post" action="{{route('check-login')}}">
+        <form method="post" action="{{route('user.check-login')}}">
             @csrf
             <div class="login_group userip">
                 <div class="login_loginf">
@@ -58,7 +58,7 @@
 
                 </div>
                 <div>
-                    <span>Bạn đã có tài khoản chưa? Đăng ký <a href="{{route('register')}}">Tại đây</a></span>
+                    <span>Bạn đã có tài khoản chưa? Đăng ký <a href="{{route('user.register')}}">Tại đây</a></span>
                 </div>
             </div>
             </from>

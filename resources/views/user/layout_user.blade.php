@@ -23,14 +23,14 @@
 
                         </a>
                         <span class="sep">|</span>
-                        <a href="{{route('logOut')}}" class="site-topbar__logout">Đăng xuất</a>
+                        <a href="{{route('user.logOut')}}" class="site-topbar__logout">Đăng xuất</a>
                     </div>
                     <div class="site-topbar__user @if(Session::has('loginId')){{''}}
                             @else {{'active'}}
                             @endif">
-                        <a href="{{route ('logIn')}}" class="site-topbar__user-name">Đăng nhập </a>
+                        <a href="{{route ('user.logIn')}}" class="site-topbar__user-name">Đăng nhập </a>
                         <span class="sep">|</span>
-                        <a href="{{route('register')}}" class="site-topbar__logout"> Đăng kí</a>
+                        <a href="{{route('user.register')}}" class="site-topbar__logout"> Đăng kí</a>
                     </div>
                 </div>
             </div>
