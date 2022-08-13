@@ -70,17 +70,17 @@
     @if(request()->name == 'active')
     <script>
         document.getElementById("home-tab-item-active").style.background = "#5cb85c";
-                document.getElementById("home-tab-item-active-link").style.color = "white";
+        document.getElementById("home-tab-item-active-link").style.color = "white";
     </script>
     @elseif(request()->name=='hide') {
     <script>
         document.getElementById("home-tab-item-hide").style.background = "#5cb85c";
-                document.getElementById("home-tab-item-hide-link").style.color = "white";
+        document.getElementById("home-tab-item-hide-link").style.color = "white";
     </script>
     @else
     <script>
         document.getElementById("home-tab-item-all").style.background = "#5cb85c";
-                document.getElementById("home-tab-item-all-link").style.color = "white";
+        document.getElementById("home-tab-item-all-link").style.color = "white";
     </script>
     @endif
 

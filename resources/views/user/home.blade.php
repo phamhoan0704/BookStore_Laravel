@@ -251,5 +251,6 @@
 
     <!-- <?php //include 'footer.php'; ?> -->
     <script src="../js/home_tab.js "></script>
+
     @endsection
 @extends('user.footer')
