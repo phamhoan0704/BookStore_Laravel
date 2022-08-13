@@ -39,11 +39,9 @@ class CustomAuthController extends Controller
             if(Hash::check($request->input('password'),$user->user_password))
             {
                 $request->session()->put('loginId',$user->id);
-<<<<<<< HEAD
-                return redirect('/user/home');
-=======
-                return redirect('homepage');
->>>>>>> 14cf7ba7ec33bdc959d93d408c64b668f194938d
+
+                return redirect('user.home');
+
             }
             else{
                 return back()->with('fail2','Mật khẩu không chính xác!');
@@ -111,18 +109,13 @@ class CustomAuthController extends Controller
     public function homepage(){
         $data=array();
         if(Session::has('loginId')){
-<<<<<<< HEAD
+
             $data=DB::table('users')->where('id','=',Session::get('loginId'))->first();
         }
         return view('user.home',compact('data'));
        
-=======
-            $data=DB::table('Users')->where('id','=',Session::get('loginId'))->first();
-        }
-        return view('user.home',compact('data'));
-        
 
->>>>>>> 14cf7ba7ec33bdc959d93d408c64b668f194938d
+
     }
     public function logOut(){
         if(Session::has('loginId')){

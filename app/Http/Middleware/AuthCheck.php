@@ -18,7 +18,7 @@ class AuthCheck
     public function handle(Request $request, Closure $next)
     {
         if(!Session()->has('logId')){
-            return redirect('/login')->with('fail','Bạn chưa đăng nhập');
+            return redirect('/user/login')->with('fail','Bạn chưa đăng nhập');
         }
         return $next($request);
     }
