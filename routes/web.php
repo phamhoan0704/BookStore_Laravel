@@ -76,7 +76,6 @@ Route::prefix('/admin')->name('admin.')->group(function(){
         Route::post('/delete',[ProductController::class,'destroy'])->name('delete');
         Route::post('/deleteall/{id?}',[ProductController::class,'destroyAll'])->name('deleteall');
     });
-
     //Supplier
     Route::prefix('/supplier')->name('supplier.')->group(function(){
         // Add
@@ -97,7 +96,6 @@ Route::prefix('/admin')->name('admin.')->group(function(){
         Route::post('/delete',[SupplierController::class,'destroy'])->name('delete');
         // Route::post('/deleteall/{id?}',[SupplierController::class,'destroyAll'])->name('deleteall');
     });
-
      //Author
      Route::prefix('/author')->name('author.')->group(function(){
         // Add
@@ -121,9 +119,6 @@ Route::prefix('/admin')->name('admin.')->group(function(){
 
     //SALE REPORT
     Route::get('/report',[ReportController::class,'create'])->name('report');
-
-
-
 });
 
 Route::get('/login',[CustomAuthController::class,'logIn'])->name('logIn');

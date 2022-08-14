@@ -130,10 +130,6 @@ class ProductService{
 
     }
 
-
-
-
-
     // USER
     public function getNewProduct($filters=[]){
         $category=DB::table($this->table)
