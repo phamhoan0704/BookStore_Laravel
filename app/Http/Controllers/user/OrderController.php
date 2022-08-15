@@ -10,6 +10,7 @@ use App\Http\Services\User\OrderService;
 use App\Http\Services\User\OrderProductService;
 
 use App\Http\Requests\user\OrderRequest;
+use App\Http\Services\User\UserService;
 
 class OrderController extends Controller
 {
@@ -17,20 +18,24 @@ class OrderController extends Controller
     protected $categoryService;
     protected $orderService;
     protected $orderProductService;
+    protected $userService;
+   
 
 
 
-    public function __construct(CartService $cartService,CategoryService $categoryService,OrderService $orderService,OrderProductService $orderProductService)
+    public function __construct(CartService $cartService,CategoryService $categoryService,OrderService $orderService,OrderProductService $orderProductService,UserService $userService)
     {
         $this->cartService=$cartService;
         $this->categoryService=$categoryService;
         $this->orderService=$orderService;
         $this->orderProductService=$orderProductService;
+        $this->userService=$userService;
     }
     public function index(){
         $cartList=$this->cartService->getCartList();
         $categoryList=$this->categoryService->getCategoryList();
-        return view('user.order',compact(['cartList','categoryList']));
+        $data=$this->userService->getUser();
+        return view('user.order',compact(['cartList','categoryList','data']));
     }
 
     public function add(OrderRequest $request){
@@ -59,6 +64,14 @@ class OrderController extends Controller
         $orderDetail=$this->orderService->getOrderDetail($order_id)[0];
         $orderProductDetail=$this->orderProductService->getOrderProductList($order_id);
         $categoryList=$this->categoryService->getCategoryList();
-        return view('user.orderDetail',compact(['orderDetail','orderProductDetail','categoryList']));
+        $data=$this->userService->getUser();
+        return view('user.orderDetail',compact(['orderDetail','orderProductDetail','categoryList','data']));
+    }
+    public function getOrderList(){
+        $categoryList=$this->categoryService->getCategoryList();
+        $data=$this->userService->getUser();
+        $userOrderList=$this->orderService->getOrderList();
+        return view('user.user_order_list',compact(['categoryList','userOrderList','data']));
+
     }
 }

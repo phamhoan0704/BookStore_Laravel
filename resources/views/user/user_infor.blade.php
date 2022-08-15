@@ -88,7 +88,7 @@
                                 <div class="infor_inp boxbtn">
                                     <div class="infor_label"><label for=""></label></div>
                                     <div class="infor_btnsave">
-                                        <button name="btnsubmit" formaction="{{route('check.changeProfile')}}">Lưu</button>
+                                        <button name="btnsubmit" formaction="{{route('user.changeProfile')}}">Lưu</button>
                                     </div>
                                 </div>
                             </div>

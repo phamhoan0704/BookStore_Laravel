@@ -68,7 +68,7 @@ class CustomAuthController extends Controller
         $user=DB::table('users')->where('user_name',$request->input('name'))->first();
         if(isset($user)){
             
-            if(Hash::check($request->input('password'),$user->password))
+            if(Hash::check($request->input('password'),$user->user_password))
             {
                 $request->session()->put('loginId',$user->id);
                
@@ -142,7 +142,7 @@ class CustomAuthController extends Controller
          $cart=new Cart();
          $cart->user_id=$user->id;
          $res = $cart->save();
-          dd('orewuiyoiewiy');
+          
         if ($res) {
             return redirect('user/login')->with('success', 'Tạo tài khoản thành công');
         } else {
@@ -152,16 +152,7 @@ class CustomAuthController extends Controller
       
         
     }
-    public function login(){
-
-        $categoryList=$this->categoryService->getCategoryList();        
-        return view('user.login',compact(['categoryList']));
-    }
-    public function register(){
-
-        $categoryList=$this->categoryService->getCategoryList();        
-        return view('user.register',compact(['categoryList']));
-    }
+    
    
     public function profile(Request $request){
         $categoryList=$this->categoryService->getCategoryList();

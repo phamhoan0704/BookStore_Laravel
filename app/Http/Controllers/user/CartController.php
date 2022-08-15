@@ -7,6 +7,7 @@ use App\Http\Services\User\CartService;
 use Illuminate\Http\Request;
 use App\Http\Services\Admin\CategoryService;
 use App\Http\Services\Admin\ProductService;
+use App\Http\Services\User\UserService;
 use App\Models\Cart;
 
 class CartController extends Controller
@@ -14,19 +15,25 @@ class CartController extends Controller
     protected $cartService;
     protected $categoryService;
     protected $productService;
+    protected $userService;
+    
+    
+
 
 
     
-    public function __construct(CartService $cartService,CategoryService $categoryService,ProductService $productService)
+    public function __construct(CartService $cartService,CategoryService $categoryService,ProductService $productService,UserService $userService)
     {
         $this->cartService=$cartService;
         $this->categoryService=$categoryService;
         $this->productService=$productService;
+        $this->userService=$userService;
     }
     public function index(){
         $cartList=$this->cartService->getCartList();
         $categoryList=$this->categoryService->getCategoryList();
-        return view('user.cart',compact(['cartList','categoryList']));
+        $data=$this->userService->getUser();
+        return view('user.cart',compact(['cartList','categoryList','data']));
     }
     public function delete( Request $request){
         $id=$request->id;
