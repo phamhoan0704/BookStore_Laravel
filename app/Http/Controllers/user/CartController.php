@@ -50,9 +50,14 @@ class CartController extends Controller
     }
     public function add(Request $request){
         $product_id=$request->id;
+        $numproduct=$request->numproduct;
+        //dd($product_id);
+        
+         if(empty($numproduct))
+         $numproduct=1;
         $dataInsert=$this->productService->getDetailProduct($product_id)[0];
         if($dataInsert->product_quantity>0){
-            $this->cartService->add($dataInsert);
+            $this->cartService->add($dataInsert,$numproduct);
         }else{
             
         }
