@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use phpDocumentor\Reflection\DocBlock\Tags\Uses;
 use Illuminate\Support\Facades\Session;
+use App\Http\Services\User\CartService;
 
 use App\Http\Services\Admin\CategoryService;
 use Exception;
@@ -19,17 +20,20 @@ use Exception;
 class CustomAuthController extends Controller
 {
     protected $categoryService;
+    protected $cartService;
 
-    public function __construct( CategoryService $categoryService)
+    public function __construct( CategoryService $categoryService, CartService $cartService)
     {
         $this->categoryService=$categoryService;
+        $this->cartService=$cartService;
     }
     //
     public function logIn()
     {
         $categoryList=$this->categoryService->getCategoryList();
+        $cartList=$this->cartService->getCartList();
 
-        return view('user.login',compact('categoryList'));
+        return view('user.login',compact(['categoryList','cartList']));
     }
     public function store(Request $request){
         // dd($requests->input());
@@ -91,9 +95,10 @@ class CustomAuthController extends Controller
 
     public function register()
     {
+        $cartList=$this->cartService->getCartList();
         $categoryList=$this->categoryService->getCategoryList();
 
-        return view("user.register",compact('categoryList'));
+        return view("user.register",compact(['categoryList','cartList']));
     }
 
     public function storeNewUser(Request $request)
@@ -156,6 +161,7 @@ class CustomAuthController extends Controller
    
     public function profile(Request $request){
         $categoryList=$this->categoryService->getCategoryList();
+        $cartList=$this->cartService->getCartList();
         $data=array();
        
         if(Session::has('loginId')){
@@ -163,7 +169,7 @@ class CustomAuthController extends Controller
             $data=DB::table('users')->where('id','=',Session::get('loginId'))->first();
 
         }
-        return view('user.user_infor',compact(['categoryList','data'])); 
+        return view('user.user_infor',compact(['categoryList','data','cartList'])); 
 
        
     }
