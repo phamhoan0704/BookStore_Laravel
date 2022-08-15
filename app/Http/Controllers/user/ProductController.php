@@ -26,7 +26,6 @@ class ProductController extends Controller
 
         $productList=$this->productService->getNewProduct();
         $categoryList=$this->categoryService->getCategoryList();
-        
         return view('user.home',compact(['productList','categoryList']));
     }
 

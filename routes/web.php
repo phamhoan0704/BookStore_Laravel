@@ -4,6 +4,10 @@ use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\admin\AuthorController;
+use App\Http\Controllers\user\CartController;
+use App\Http\Controllers\user\OrderController;
+
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\backend\NewsController;
 use App\Models\Category;
@@ -26,14 +30,15 @@ Route::get('/admin', function () {
 Route::get('/user', function () {
     return view('user.layout_user');
 });
-Route::get('/user/cart', function () {
-    return view('user.cart');
-});
+// Route::get('/user/cart', function () {
+//     return view('user.cart');
+// });
 //User 
-Route::get('user/cart',[CartController::class, 'index'])->name('user.cart');
+//
+//Route::get('user/cart',[CartController::class, 'index'])->name('user.cart');
 Route::get('/user/news' ,[NewsController::class, 'index'])->name('user.news');
 //Admin
-Route::get('/admin/login',[LoginController::class, 'index'])->name('login');
+//Route::get('/admin/login',[LoginController::class, 'index'])->name('login');
 
 Route::prefix('/admin')->name('admin.')->group(function(){
     //Category
@@ -126,31 +131,51 @@ Route::prefix('/admin')->name('admin.')->group(function(){
 
 });
 Route::prefix('/user')->name('user.')->group(function(){
+    Route::get('/homepage', [App\Http\Controllers\user\ProductController::class,'index'])->name('homepage');
+    Route::get('/login',[CustomAuthController::class,'logIn'])->name('login');
+    Route::post('/checkAcount',[CustomAuthController::class,'checkLogin'])->name('check-login');
 
-    Route::get('/login',[CustomAuthController::class,'logIn'])->name('logIn');
+
+});
+Route::middleware(['isLogIn'])->group(function(){
+    Route::prefix('/user/auth')->name('user.')->group(function(){
+    Route::prefix('/cart')->name('cart.')->group(function(){
+        Route::get('/index',[CartController::class,'index'])->name('index');
+        Route::get('/delete/{id}',[CartController::class,'delete'])->name('delete');
+        Route::post('/update',[CartController::class,'update'])->name('update');
+        Route::get('/add/{id}',[CartController::class,'add'])->name('add');
+
+    });
+    Route::prefix('/order')->name('order.')->group(function(){
+        Route::get('/index',[OrderController::class,'index'])->name('index');
+        Route::post('/add',[OrderController::class,'add'])->name('add');
+        Route::get('/order-detail/{id}',[OrderController::class,'getOrderDetail'])->name('orderDetail');
+    });
+
+    });
+});
+
+Route::prefix('/user')->name('user.')->group(function(){
+
+  //  Route::get('/login',[CustomAuthController::class,'logIn'])->name('logIn');
     Route::get('/register',[CustomAuthController::class,'register'])->name('register');
     Route::post('/new-user',[CustomAuthController::class,'storeNewUser'])->name('storeUser');
     Route::get('/home',function(){
         return view('user.home');
     })->name('noLogin');
     Route::get('/logout',[CustomAuthController::class,'logOut'])->name('logOut');
-    Route::post('/checkAcount',[CustomAuthController::class,'checkLogin'])->name('check-login');
+    //Route::post('/checkAcount',[CustomAuthController::class,'checkLogin'])->name('check-login');
     Route::get('/user/home', [CustomAuthController::class,'homepage'])->name('user_home');
     
 });
 
-route::prefix('/user')->name('check.')->group(function(){
+// route::prefix('/user')->name('check.')->group(function(){
 
-    Route::get('/homepage', [CustomAuthController::class,'homepage']);
-    // ->middleware('isLogIn');
-});
+//     Route::get('/homepage', [CustomAuthController::class,'homepage']);
+//     // ->middleware('isLogIn');
+// });
 
-
-
-
-
-
-Route::get('/homepage', [App\Http\Controllers\user\ProductController::class,'index'])->name('homepage');
+//Route::get('/homepage', [App\Http\Controllers\user\ProductController::class,'index'])->name('homepage');
 Route::get('/category/{id}', [App\Http\Controllers\user\ProductController::class,'getProductByCategory'])->name('category');
 Route::get('/search/{name?}', [App\Http\Controllers\user\ProductController::class,'searchProduct'])->name('search');
 route::get('/header',function(){
