@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Session;
+use Illuminate\Support\Facades\Auth;
 
 class AuthCheck
 {
@@ -17,7 +18,9 @@ class AuthCheck
      */
     public function handle(Request $request, Closure $next)
     {
+
         if(!Session()->has('loginId')){
+
             return redirect('/user/login')->with('fail','Bạn chưa đăng nhập');
     }
         return $next($request);

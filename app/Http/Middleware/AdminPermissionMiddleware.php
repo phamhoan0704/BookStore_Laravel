@@ -31,7 +31,7 @@ class AdminPermissionMiddleware
         }
         else
         {
-            return redirect('/login')->with('status','Please Login First');
+            return redirect('/user/login')->with('status','Please Login First');
         }
     }
 }

@@ -162,7 +162,7 @@
                                                         </svg>                         
                                                     </i>
                                                 </a>
-                                                <a class="btn-add-to-cart" title="Thêm vào giỏ">
+                                                <a class="btn-add-to-cart" title="Thêm vào giỏ" href="{{route('user.cart.add',['id'=>$item->id])}}">
                                                     <i class="icon_list">
                                                         <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                                         width="446.843px" height="446.843px" viewBox="0 0 446.843 446.843" style="enable-background:new 0 0 446.843 446.843;"
@@ -251,5 +251,6 @@
 
     <!-- <?php //include 'footer.php'; ?> -->
     <script src="../js/home_tab.js "></script>
+
     @endsection
 @extends('user.footer')

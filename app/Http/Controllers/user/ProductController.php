@@ -32,6 +32,7 @@ class ProductController extends Controller
 
         $productList=$this->productService->getNewProduct();
         $categoryList=$this->categoryService->getCategoryList();
+
         $categoryList=$this->categoryService->getCategoryList();   
         $data=array();
         if(Session::has('loginId')){
@@ -39,6 +40,7 @@ class ProductController extends Controller
             $data=DB::table('users')->where('id','=',Session::get('loginId'))->first();
         }
         return view('user.home',compact(['productList','categoryList','data']));
+
     }
 
     public function getProductByCategory($id){

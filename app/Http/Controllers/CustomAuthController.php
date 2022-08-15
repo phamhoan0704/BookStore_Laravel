@@ -12,19 +12,45 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use phpDocumentor\Reflection\DocBlock\Tags\Uses;
 use Illuminate\Support\Facades\Session;
-use App\Http\Services\Admin\ProductService;
+
 use App\Http\Services\Admin\CategoryService;
+use Exception;
 
 class CustomAuthController extends Controller
-{   
-     protected $categoryService;
+{
+    protected $categoryService;
 
-    public function __construct(CategoryService $categoryService)
+    public function __construct( CategoryService $categoryService)
     {
-        
         $this->categoryService=$categoryService;
     }
+    //
+    public function logIn()
+    {
+        $categoryList=$this->categoryService->getCategoryList();
+
+        return view('user.login',compact('categoryList'));
+    }
+    public function store(Request $request){
+        // dd($requests->input());
+        $credentials = [
+            'user_name' => $request['name'],
+            'user_password' => $request['password'],
+        ];
     
+       if(Auth::attempt([
+           'user_name'=>$credentials['user_name'],
+           'password'=>$credentials['user_password']],
+        ))  {
+           
+            return redirect()->route('user.homepage');
+        }else{
+            dd("ffhjkk");
+        }
+    
+     }
+
+
     public function checkLogin(Request $request)
     {
         $request->validate(
@@ -42,12 +68,14 @@ class CustomAuthController extends Controller
         $user=DB::table('users')->where('user_name',$request->input('name'))->first();
         if(isset($user)){
             
-            if(Hash::check($request->input('password'),$user->user_password))
+            if(Hash::check($request->input('password'),$user->password))
             {
                 $request->session()->put('loginId',$user->id);
                
 
+
                 return redirect('user/home');
+
 
             }
             else{
@@ -60,7 +88,14 @@ class CustomAuthController extends Controller
         }
     }
     
-    
+
+    public function register()
+    {
+        $categoryList=$this->categoryService->getCategoryList();
+
+        return view("user.register",compact('categoryList'));
+    }
+
     public function storeNewUser(Request $request)
     {
 
@@ -131,11 +166,14 @@ class CustomAuthController extends Controller
     public function profile(Request $request){
         $categoryList=$this->categoryService->getCategoryList();
         $data=array();
+       
         if(Session::has('loginId')){
 
             $data=DB::table('users')->where('id','=',Session::get('loginId'))->first();
+
         }
         return view('user.user_infor',compact(['categoryList','data'])); 
+
        
     }
     public function updateProfile(Request $request)
@@ -155,7 +193,9 @@ class CustomAuthController extends Controller
         if(Session::has('loginId')){
             Session::pull('loginId');
         }
+
          return redirect('user/home');
+
     }
     
 }
