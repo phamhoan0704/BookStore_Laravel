@@ -16,23 +16,25 @@ class CartService{
     }
     
    public function getCartList(){
-//     if(Session::has('loginId')){
-//     print(Session::get('loginId'));
-  
-//    }
-   
-    $user_id=session()->get('loginId');
-    $id=DB::table('carts')->select('cart_id')->where('user_id',$user_id)->first();
-    $id=$id->cart_id;
-    $cartList=DB::table($this->table)
-    ->join('products', 'cart_product.product_id', '=', 'products.id')
-    ->where('cart_id',$id)
-    ->get();
+        if(Session::has('loginId')){
+            $user_id=session()->get('loginId');
+            $id=DB::table('carts')->select('cart_id')->where('user_id',$user_id)->first();
+            $id=$id->cart_id;
+            $cartList=DB::table($this->table)
+            ->join('products', 'cart_product.product_id', '=', 'products.id')
+            ->where('cart_id',$id)
+            ->get();
+        
+    }
+    else
+    {
+        $cartList=array();
+     }
   
     return $cartList;
   
     }
-    public function add($dataInsert){
+    public function add($dataInsert,$numproduct){
         $user_id=session()->get('loginId');
         $id=DB::table('carts')->select('cart_id')->where('user_id',$user_id)->first();
         $id=$id->cart_id;
@@ -44,12 +46,12 @@ class CartService{
             DB::table($this->table)->insert([
                 'cart_id'=>$id,
                 'product_id'=>$dataInsert->id,
-                'product_amount'=>1
+                'product_amount'=>$numproduct
             ]);
         }
         else{
             $product_amount=$productItem->product_amount;
-            $product_amount+=1;
+            $product_amount+=$numproduct;
             DB::table($this->table)
             ->where('cart_id',$id)
             ->where('product_id',$dataInsert->id)

@@ -181,12 +181,13 @@ class CustomAuthController extends Controller
         $user->user_phone=$request->input('phone');
         $user->email=$request->input('email');
         $user->update();
-        return redirect()->route('check.infor');
+        return redirect()->route('user.infor');
 
     }
 
 
     public function logOut(){
+        $cartList=$this->cartService->getCartList();
         if(Session::has('loginId')){
             Session::pull('loginId');
         }

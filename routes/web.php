@@ -147,7 +147,7 @@ Route::middleware(['isLogIn'])->group(function(){
         Route::get('/index',[CartController::class,'index'])->name('index');
         Route::get('/delete/{id}',[CartController::class,'delete'])->name('delete');
         Route::post('/update',[CartController::class,'update'])->name('update');
-        Route::get('/add/{id}',[CartController::class,'add'])->name('add');
+        Route::any('/add/{id?}',[CartController::class,'add'])->name('add');
 
     });
     Route::prefix('/order')->name('order.')->group(function(){

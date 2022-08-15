@@ -5,15 +5,17 @@
 <script>
     function submit(){
         var btn=document.getElementById('quantity');
+        return btn.value;
     }
     function checksubtract(){
         var result = document.getElementById('quantity'); var qty = result.value; 
-                                            if( !isNaN(qty)&&(qty > 1 )) result.value--;return false;
+             if( !isNaN(qty)&&(qty > 1 )) result.value--;return false;
     }
     function checkadd(){
         var result = document.getElementById('quantity'); var qty = result.value;
-                                        if(!isNaN(qty)&&(qty< quantity)) result.value++;return false;
+            if(!isNaN(qty)&&(qty< quantity)) result.value++;return false;
     }
+    
 </script>
     <div class="container">
         <div class="wapper">
@@ -62,11 +64,12 @@
                         </div>
                     </div>
                     <div class="box">
-                        <form method="post">
+                        <form action="{{route('user.cart.add')}}" method="post"> 
+                            @csrf
                             <div class="boxwapp">
                                 <div class="box2">
                                     <div class="select_quantity">
-
+                                        <input type="hidden" value="{{$product->id}}" name="id">
                                         <input onclick="checksubtract();" type='button' value='-' name="subtract" />
                                         <input  min='1' id='quantity' type='text' value='1' name="numproduct" />
                                         <input onclick="checkadd();" type='button' value='+' name="add" />
@@ -76,13 +79,14 @@
                                     </div>
                                 </div>
                                 <div class="btnsubmit">
-                                   <a href="{route('user.cart.add,['id'=>$product->id]"><input type="button" id="ipt1" value="Thêm vào giỏ hàng" name="addcart"></a> 
+                                 
+                                    <input type="submit" id="ipt1" value="Thêm vào giỏ hàng" name="addcart"></a> 
 
-                                    <a href=""><input type="button" id="ipt2" value="Mua ngay" name="ordernow"></a>
+                                    <input type="submit" id="ipt2" value="Mua ngay" name="ordernow"></a>
 
                                 </div>
                             </div>
-                        </form>
+                            </form>
                     </div>
                 </div>
             </div>

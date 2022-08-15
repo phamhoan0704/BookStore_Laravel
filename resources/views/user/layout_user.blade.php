@@ -83,7 +83,10 @@
                             <div class="header__cart-wrap">
                                 <i class="bi bi-cart-plus-fill" style="color: 009234;font-size:40px"></i>
                                 
-                                <span class="header__cart-notice">{{$cartList->count()}}</span>
+                                <span class="header__cart-notice">
+                                    @if(!empty($cartList)) {{$cartList->count()}} 
+                                    @else {{0}}
+                                    @endif</span>
                                 <div class="header__cart-list">
                                     <div class="header__cart-list-heading">
                                         <span>Sản Phẩm Mới Thêm</span>
@@ -91,7 +94,7 @@
                                     <ul class="header__cart-list-item">
 
                                         <!-- Cart item -->
-                                        @if($cartList->count() > 0)
+                                        @if(!empty($cartList))
                                             @for($i=0;$i<$cartList->count();$i++)
                                                 <li class="header__cart-item">
                                                     <a href="{{route('user.product-detail',['id'=>$cartList[$i]->id])}}" class="header__cart-item-link">
@@ -104,6 +107,7 @@
                                                 </li>
                                             @endfor
                                         @endif
+                                      
 
                                     </ul>
                                     <div class="text-mini-cart">
