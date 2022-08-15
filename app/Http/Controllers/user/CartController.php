@@ -48,9 +48,12 @@ class CartController extends Controller
             $this->cartService->add($dataInsert);
         }else{
             
+         
         }
 
-        return redirect()->route('user.cart.index');
+        }
+
+        return.cart.index');
     }
 
 }
