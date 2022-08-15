@@ -1,4 +1,4 @@
-<!-- @extends('user.layout_user') -->
+@extends('user.layout_user')
 @section('Content')
 
 <!-- tạo hộp thoại thông báo đăng ký thành công -->
@@ -154,11 +154,5 @@
     </div>
     </div>
 
-    <script src="../js/register.js"></script>
 
-@if(Session::has('success'))
-{{rotue}}
-
-<!-- 
-@endif -->
 @endsection

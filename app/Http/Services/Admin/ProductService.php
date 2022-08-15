@@ -171,6 +171,7 @@ class ProductService{
         $search_list=$search_list->paginate(16);
         return $search_list; 
     }
+
     public function getDetailProduct($product_id){
         $productDetail=DB::table($this->table)
         ->where('id',$product_id)
@@ -178,5 +179,6 @@ class ProductService{
         return $productDetail;
 
     }
+
 
 }

@@ -113,7 +113,7 @@
                                         @endif
                                             >HẾT HÀNG</div>
                                         <div class="img">
-                                            <a href="" class="product__img-link">
+                                            <a href="{{route('user.product-detail',['id'=>$item->id])}}" class="product__img-link">
                                                 <img src="{{ url('template/image/product/'.$item->product_image) }}" alt="" class="product__img">
                                             </a>
                                             <div class="pdt_icon">

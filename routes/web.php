@@ -157,25 +157,33 @@ Route::middleware(['isLogIn'])->group(function(){
 
 Route::prefix('/user')->name('user.')->group(function(){
 
-  //  Route::get('/login',[CustomAuthController::class,'logIn'])->name('logIn');
+
+    Route::get('/login',[CustomAuthController::class,'login'])->name('logIn');
     Route::get('/register',[CustomAuthController::class,'register'])->name('register');
     Route::post('/new-user',[CustomAuthController::class,'storeNewUser'])->name('storeUser');
-    Route::get('/home',function(){
-        return view('user.home');
-    })->name('noLogin');
     Route::get('/logout',[CustomAuthController::class,'logOut'])->name('logOut');
-    //Route::post('/checkAcount',[CustomAuthController::class,'checkLogin'])->name('check-login');
-    Route::get('/user/home', [CustomAuthController::class,'homepage'])->name('user_home');
-    
+
+    Route::post('/checkAcount',[CustomAuthController::class,'checkLogin'])->name('check-login');
+    Route::get('/home', [App\Http\Controllers\user\ProductController::class,'index'])->name('homepage');
+    route::get('/product/{id}',[App\Http\Controllers\user\ProductController::class,'showProductDetail'])->name('product-detail');
+   
+   
+
+});
+route::middleware('isLogIn')->group(function(){
+
+route::prefix('/user')->name('check.')->group(function(){
+
+    Route::get('/profile', [CustomAuthController::class,'profile'])->name('infor');
+    Route::post('/change-Profile',[CustomAuthController::class,'updateProfile'])->name('changeProfile');
+   
+});
 });
 
-// route::prefix('/user')->name('check.')->group(function(){
 
-//     Route::get('/homepage', [CustomAuthController::class,'homepage']);
-//     // ->middleware('isLogIn');
-// });
 
-//Route::get('/homepage', [App\Http\Controllers\user\ProductController::class,'index'])->name('homepage');
+
+
 Route::get('/category/{id}', [App\Http\Controllers\user\ProductController::class,'getProductByCategory'])->name('category');
 Route::get('/search/{name?}', [App\Http\Controllers\user\ProductController::class,'searchProduct'])->name('search');
 route::get('/header',function(){

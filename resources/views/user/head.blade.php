@@ -19,6 +19,12 @@
   <link rel="stylesheet" href="{{asset('template/user/css/product.css')}}">
   <link rel="stylesheet" href="{{asset('template/user/css/productCategory.css')}}">
   <link rel="stylesheet" href="{{asset('template/user/css/productSearch.css')}}">
+
+  <link rel="stylesheet" href="{{asset('template/user/css/user_infor.css')}}">
+  <link rel="stylesheet" href="{{asset('template/user/css/menuleft_infor.css')}}">
+  <link rel="stylesheet" href="{{asset('template/user/css/productDetail.css')}}">
+  <link rel="stylesheet" href="{{asset('template/user/css/orderList.css')}}">
+
   <link rel="stylesheet" href="{{asset('template/user/css/cart.css')}}">
   <link rel="stylesheet" href="{{asset('template/user/css/order.css')}}">
   <link rel="stylesheet" href="{{asset('template/user/css/orderDetail.css')}}">
@@ -26,6 +32,7 @@
 
 
   <link rel="stylesheet" href="style.css">
+
 
 
 

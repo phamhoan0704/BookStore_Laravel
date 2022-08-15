@@ -20,9 +20,9 @@ class AuthCheck
     {
 
         if(!Session()->has('loginId')){
-           
+
             return redirect('/user/login')->with('fail','Bạn chưa đăng nhập');
-        }
+    }
         return $next($request);
     }
 }
