@@ -11,14 +11,43 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use phpDocumentor\Reflection\DocBlock\Tags\Uses;
 use Illuminate\Support\Facades\Session;
+use App\Http\Services\Admin\CategoryService;
+use Exception;
 
 class CustomAuthController extends Controller
 {
+    protected $categoryService;
+
+    public function __construct( CategoryService $categoryService)
+    {
+        $this->categoryService=$categoryService;
+    }
     //
     public function logIn()
     {
-        return view('user.login');
+        $categoryList=$this->categoryService->getCategoryList();
+
+        return view('user.login',compact('categoryList'));
     }
+    public function store(Request $request){
+        // dd($requests->input());
+        $credentials = [
+            'user_name' => $request['name'],
+            'user_password' => $request['password'],
+        ];
+    
+       if(Auth::attempt([
+           'user_name'=>$credentials['user_name'],
+           'password'=>$credentials['user_password']],
+        ))  {
+           
+            return redirect()->route('user.homepage');
+        }else{
+            dd("ffhjkk");
+        }
+    
+     }
+
     public function checkLogin(Request $request)
     {
         $request->validate(
@@ -36,11 +65,11 @@ class CustomAuthController extends Controller
         $user=DB::table('users')->where('user_name',$request->input('name'))->first();
         if(isset($user)){
             
-            if(Hash::check($request->input('password'),$user->user_password))
+            if(Hash::check($request->input('password'),$user->password))
             {
                 $request->session()->put('loginId',$user->id);
 
-                return redirect('user.home');
+                return redirect()->route('user.homepage');
 
             }
             else{
@@ -55,7 +84,9 @@ class CustomAuthController extends Controller
     
     public function register()
     {
-        return view("user.register");
+        $categoryList=$this->categoryService->getCategoryList();
+
+        return view("user.register",compact('categoryList'));
     }
     public function storeNewUser(Request $request)
     {
@@ -108,10 +139,11 @@ class CustomAuthController extends Controller
     }
     public function homepage(){
         $data=array();
+       
         if(Session::has('loginId')){
 
             $data=DB::table('users')->where('id','=',Session::get('loginId'))->first();
-        }
+        } 
         return view('user.home',compact('data'));
        
 
@@ -120,8 +152,8 @@ class CustomAuthController extends Controller
     public function logOut(){
         if(Session::has('loginId')){
             Session::pull('loginId');
-            redirect('noLogin');
         }
+        return redirect()->route('user.homepage');
     }
     
 }

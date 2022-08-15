@@ -141,7 +141,7 @@ class ProductService{
         ->where('active','1')
         ->orderByDesc('product_year')
         ->get();
-        // dd($category);
+        //dd($category);
         return $category;
     }
 
@@ -170,6 +170,13 @@ class ProductService{
         ->where('product_name','like','%'.$search.'%');
         $search_list=$search_list->paginate(16);
         return $search_list; 
+    }
+    public function getDetailProduct($product_id){
+        $productDetail=DB::table($this->table)
+        ->where('id',$product_id)
+        ->get();
+        return $productDetail;
+
     }
 
 }

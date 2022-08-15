@@ -1,6 +1,16 @@
 <head>
     @include('user.head')
 </head>
+{{-- @if (Auth::check()) 
+ {{
+    print(Auth::user()->name)}}
+ 
+ @else
+    {{print("iii")}} 
+ @endif --}}
+ @if(Session::has('loginId'))
+ {{print(Session::get('loginId'))}}
+ @endif
 
 <body>
    
@@ -17,9 +27,9 @@
                             @else {{''}}
                             @endif">
                         <a href="information.php" class="site-topbar__user-name">Xin chào :
-                            @if(Session::has('loginId')){{$data->user_name}}
+                            {{-- @if(Session::has('loginId')){{$data->user_name}}
                             @else
-                            @endif
+                            @endif --}}
 
                         </a>
                         <span class="sep">|</span>
@@ -28,7 +38,7 @@
                     <div class="site-topbar__user @if(Session::has('loginId')){{''}}
                             @else {{'active'}}
                             @endif">
-                        <a href="{{route ('user.logIn')}}" class="site-topbar__user-name">Đăng nhập </a>
+                        <a href="{{route ('user.login')}}" class="site-topbar__user-name">Đăng nhập </a>
                         <span class="sep">|</span>
                         <a href="{{route('user.register')}}" class="site-topbar__logout"> Đăng kí</a>
                     </div>
@@ -38,7 +48,7 @@
             <div class="site-header-container">
                 <div class="site-header">
                     <div class="site-header__logo">
-                        <a href="{{ route('homepage') }}">
+                        <a href="{{ route('user.homepage') }}">
                             <img src="{{ url('template/user/image/icon/logo.jpg') }}" alt="" class="img-logo">
                         </a>
                     </div>
@@ -77,7 +87,7 @@
                             </div>
                         </form>
                     </div>
-                    <a href="" class="site-header__cart-container">
+                    <a href="{{route('user.cart.index')}}" class="site-header__cart-container">
                         <div class="site-header__cart">
                             <div class="header__cart-wrap">
                                 <i class="bi bi-cart-plus-fill" style="color: 009234;font-size:40px"></i>
