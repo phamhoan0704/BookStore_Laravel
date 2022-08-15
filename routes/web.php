@@ -161,8 +161,6 @@ Route::middleware(['isLogIn'])->group(function(){
 });
 
 Route::prefix('/user')->name('user.')->group(function(){
-
-
     Route::get('/login',[CustomAuthController::class,'login'])->name('logIn');
     Route::get('/register',[CustomAuthController::class,'register'])->name('register');
     Route::post('/new-user',[CustomAuthController::class,'storeNewUser'])->name('storeUser');

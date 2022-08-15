@@ -63,13 +63,15 @@ class OrderController extends Controller
         $order_id=$request->id;
         $orderDetail=$this->orderService->getOrderDetail($order_id)[0];
         $orderProductDetail=$this->orderProductService->getOrderProductList($order_id);
+        $cartList=$this->cartService->getCartList();
         $categoryList=$this->categoryService->getCategoryList();
         $data=$this->userService->getUser();
-        return view('user.orderDetail',compact(['orderDetail','orderProductDetail','categoryList','data']));
+        return view('user.orderDetail',compact(['orderDetail','orderProductDetail','categoryList','data','cartList']));
     }
     public function getOrderList(){
         $categoryList=$this->categoryService->getCategoryList();
         $data=$this->userService->getUser();
+
         $orderList=$this->orderService->getOrderList();
        
         return view('user.user_order_list',compact(['categoryList','orderList','data']));
@@ -79,12 +81,16 @@ class OrderController extends Controller
        
         $categoryList=$this->categoryService->getCategoryList();
         $data=$this->userService->getUser();
+        $cartList=$this->cartService->getCartList();
         $orderList0=$this->orderService->getOrderListActive('0');
         $orderList1=$this->orderService->getOrderListActive('1');
         $orderList2=$this->orderService->getOrderListActive('2');
         $orderList3=$this->orderService->getOrderListActive('3');
         $orderList4=$this->orderService->getOrderListActive('4');
-        return view('user.user_order_list',compact(['categoryList','orderList0','orderList1','orderList2','orderList3','orderList4','data']));
+        return view('user.user_order_list',compact(['categoryList','orderList0','orderList1','orderList2','orderList3','orderList4','data','cartList']));
+
+       
+      
 
     }
 }

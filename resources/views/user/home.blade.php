@@ -249,8 +249,7 @@
         </div>
     </div>
 
-    <!-- <?php //include 'footer.php'; ?> -->
-    <script src="../js/home_tab.js "></script>
+    <script src="{{asset('template/user/js/home_tab.js')}}"></script>
 
     @endsection
 @extends('user.footer')

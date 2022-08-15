@@ -1,17 +1,6 @@
 <head>
     @include('user.head')
 </head>
-{{-- @if (Auth::check()) 
- {{
-    print(Auth::user()->name)}}
- 
- @else
-    {{print("iii")}} 
- @endif --}}
- @if(Session::has('loginId'))
- {{print(Session::get('loginId'))}}
- @endif
-
 <body>
    
     <i class="far fa-frown"></i>
@@ -94,31 +83,28 @@
                             <div class="header__cart-wrap">
                                 <i class="bi bi-cart-plus-fill" style="color: 009234;font-size:40px"></i>
                                 
-                                <span class="header__cart-notice">0</span>
+                                <span class="header__cart-notice">{{$cartList->count()}}</span>
                                 <div class="header__cart-list">
                                     <div class="header__cart-list-heading">
                                         <span>Sản Phẩm Mới Thêm</span>
                                     </div>
                                     <ul class="header__cart-list-item">
-                                        Cart item
-                                        
-                                        <?php
-                                        // if($total > 0) 
-                                        // {
-                                        //     for($i=0;$i<count($data);$i++) {
-                                        //         echo 
-                                        //         '<li class="header__cart-item">
-                                        //             <a href="productdetail.php?id='.$data[$i]['product_id'].'" class="header__cart-item-link">
-                                        //                 <div class="header__cart-img-block">
-                                        //                 <img src="../img/product/'.$data[$i]['product_image'].'" alt="'.$data[$i]['product_name'].'" class="header__cart-img">
-                                        //                 </div>
-                                        //                 <h5 class="header__cart-item-name">'.$data[$i]['product_name'].'</h5>
-                                        //                 <span class="header__cart-item-price">'.number_format($data[$i]['product_price']).' x '.$data[$i]['product_amount'].'</span>
-                                        //             </a>
-                                        //         </li>';  
-                                        //     }
-                                        // }
-                                    ?>
+
+                                        <!-- Cart item -->
+                                        @if($cartList->count() > 0)
+                                            @for($i=0;$i<$cartList->count();$i++)
+                                                <li class="header__cart-item">
+                                                    <a href="{{route('user.product-detail',['id'=>$cartList[$i]->id])}}" class="header__cart-item-link">
+                                                        <div class="header__cart-img-block">
+                                                        <img src="{{ url('template/image/product/'.$cartList[$i]->product_image) }}" alt="" class="header__cart-img">
+                                                        </div>
+                                                        <h5 class="header__cart-item-name">{{$cartList[$i]->product_name}}</h5>
+                                                        <span class="header__cart-item-price">{{$cartList[$i]->product_price}} x {{$cartList[$i]->product_amount}}</span>
+                                                    </a>
+                                                </li>
+                                            @endfor
+                                        @endif
+
                                     </ul>
                                     <div class="text-mini-cart">
                                         <span class="text-left">Tổng tiền</span>
