@@ -11,7 +11,7 @@
             @endif
                 >HẾT HÀNG</div>
             <div class="img">
-                <a href="" class="product__img-link">
+                <a href="{{route('user.product-detail',['id'=>$item->id])}}" class="product__img-link">
                     <img src="{{ url('template/image/product/'.$item->product_image) }}" alt="" class="product__img">
                 </a>
                 <div class="pdt_icon">
@@ -89,7 +89,7 @@
             </div>
         </div>
         <div class="product__detail">
-            <a href="" class="product__name" title="">{{$item->product_name}}</a>
+            <a href="{{route('user.product-detail',['id'=>$item->id])}}" class="product__name" title="">{{$item->product_name}}</a>
             <div class="product__price">
                 <p class="pro-price__new">{{$item->product_price}}đ</p>
                 <p class="pro-price__old">{{$item->product_price_pre}}đ</p>

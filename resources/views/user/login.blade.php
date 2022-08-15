@@ -64,8 +64,6 @@
             </from>
     </div>
 </div>
-//@if(Session::has('success'))
-//tao hop thoai 
-//@endif
+
 
 @endsection

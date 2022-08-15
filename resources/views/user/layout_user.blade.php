@@ -16,10 +16,10 @@
                     <div class="site-topbar__user @if(Session::has('loginId')){{'active'}}
                             @else {{''}}
                             @endif">
-                        <a href="information.php" class="site-topbar__user-name">Xin chào :
+                        <a href="{{route('check.infor')}}" class="site-topbar__user-name">Xin chào :
                             @if(Session::has('loginId')){{$data->user_name}}
                             @else
-                            @endif
+                            @endif 
 
                         </a>
                         <span class="sep">|</span>
@@ -38,7 +38,7 @@
             <div class="site-header-container">
                 <div class="site-header">
                     <div class="site-header__logo">
-                        <a href="{{ route('homepage') }}">
+                        <a href="{{ route('user.homepage') }}">
                             <img src="{{ url('template/user/image/icon/logo.jpg') }}" alt="" class="img-logo">
                         </a>
                     </div>
@@ -132,7 +132,7 @@
             <div class="site-nav">
                 <ul class="header__nav">
                     <li class="header__nav-item">
-                        <a href="home.php" class="header__nav-item-link">Trang chủ</a>
+                        <a href="{{route('user.homepage')}}" class="header__nav-item-link">Trang chủ</a>
                     </li>
                     <li class="header__nav-item">
                         <a href="{{route('category',['id'=>'0'])}}" class="header__nav-item-link">Sản phẩm</a>

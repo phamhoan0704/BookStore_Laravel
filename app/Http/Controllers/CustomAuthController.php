@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\checkLoginRequest;
 use App\Models\User;
+use App\Models\Cart;
 use Illuminate\Http\Request;
 use App\Http\Requests\checkRegisterRequest;
 use Illuminate\Support\Facades\Auth;
@@ -11,14 +12,19 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use phpDocumentor\Reflection\DocBlock\Tags\Uses;
 use Illuminate\Support\Facades\Session;
+use App\Http\Services\Admin\ProductService;
+use App\Http\Services\Admin\CategoryService;
 
 class CustomAuthController extends Controller
-{
-    //
-    public function logIn()
+{   
+     protected $categoryService;
+
+    public function __construct(CategoryService $categoryService)
     {
-        return view('user.login');
+        
+        $this->categoryService=$categoryService;
     }
+    
     public function checkLogin(Request $request)
     {
         $request->validate(
@@ -39,8 +45,9 @@ class CustomAuthController extends Controller
             if(Hash::check($request->input('password'),$user->user_password))
             {
                 $request->session()->put('loginId',$user->id);
+               
 
-                return redirect('user.home');
+                return redirect('user/home');
 
             }
             else{
@@ -53,10 +60,7 @@ class CustomAuthController extends Controller
         }
     }
     
-    public function register()
-    {
-        return view("user.register");
-    }
+    
     public function storeNewUser(Request $request)
     {
 
@@ -99,29 +103,59 @@ class CustomAuthController extends Controller
         $user->user_type = 1;
         $user->active=1;
         $res = $user->save();
+         ///tạo cart_id
+         $cart=new Cart();
+         $cart->user_id=$user->id;
+         $res = $cart->save();
+          dd('orewuiyoiewiy');
         if ($res) {
-            return back()->with('success', 'Tạo tài khoản thành công');
+            return redirect('user/login')->with('success', 'Tạo tài khoản thành công');
         } else {
             return back()->with('fail', 'Tài khoản không hợp lệ');
         }
+       
+      
         
     }
-    public function homepage(){
+    public function login(){
+
+        $categoryList=$this->categoryService->getCategoryList();        
+        return view('user.login',compact(['categoryList']));
+    }
+    public function register(){
+
+        $categoryList=$this->categoryService->getCategoryList();        
+        return view('user.register',compact(['categoryList']));
+    }
+   
+    public function profile(Request $request){
+        $categoryList=$this->categoryService->getCategoryList();
         $data=array();
         if(Session::has('loginId')){
 
             $data=DB::table('users')->where('id','=',Session::get('loginId'))->first();
         }
-        return view('user.home',compact('data'));
+        return view('user.user_infor',compact(['categoryList','data'])); 
        
-
+    }
+    public function updateProfile(Request $request)
+    {
+        $id=session()->get('loginId');
+        $user=User::find($id);
+        $user->name=$request->input('fullname');
+        $user->user_phone=$request->input('phone');
+        $user->email=$request->input('email');
+        $user->update();
+        return redirect()->route('check.infor');
 
     }
+
+
     public function logOut(){
         if(Session::has('loginId')){
             Session::pull('loginId');
-            redirect('noLogin');
         }
+         return redirect('user/home');
     }
     
 }

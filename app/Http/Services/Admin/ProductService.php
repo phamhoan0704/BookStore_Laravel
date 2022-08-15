@@ -171,5 +171,6 @@ class ProductService{
         $search_list=$search_list->paginate(16);
         return $search_list; 
     }
+   
 
 }
