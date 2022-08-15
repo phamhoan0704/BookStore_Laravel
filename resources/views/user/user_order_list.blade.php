@@ -7,46 +7,51 @@
     <div class="box_infor">
         <div class="box_inforx">
             <div class="order_list_box">
-                <div class="inherit_home-tabs">
-                    <div class="inherit_home-tab-title">
-                        <div class="inherit_home-tab-item active">
+                <div class="home-tabs">
+                    <div class="home-tab-title orderlistTab">
+                    <div class="home-tab-item active">
                             <div class="icon_order">
-                                <img src="../img/icon/order.png" alt="">
-                            </div>
+                                <img src="{{url('template/user/image/icon/order.png')}}" alt="">
+                          
+                        </div>
                             <div class="status_order">
                                 <span>Đặt hàng</span>
                             </div>
                         </div>
-                        <div class="inherit_home-tab-item">
+                        <div class="home-tab-item">
 
                             <div class="icon_order">
-                                <img src="../img/icon/pack.png" alt="">
-                            </div>
+                                <img src="{{url('template/user/image/icon/pack.png')}}" alt="">
+                          
+                        </div>
                             <div class="status_order">
                                 <span>Chuẩn bị hàng</span>
                             </div>
 
                         </div>
-                        <div class="inherit_home-tab-item">
+                        <div class="home-tab-item">
                             <div class="icon_order">
-                                <img src="../img/icon/delivery.png" alt="">
-                            </div>
+                                <img src="{{url('template/user/image/icon/delivery.png')}}" alt="">
+                          
+                        </div>
                             <div class="status_order">
                                 <span>Đang giao</span>
                             </div>
                         </div>
-                        <div class="inherit_home-tab-item">
+                        <div class="home-tab-item">
                             <div class="icon_order">
-                                <img src="../img/icon/delivery_success.png" alt="">
-                            </div>
+                                <img src="{{url('template/user/image/icon/delivery_success.png')}}" alt="">
+                          
+                        </div>
                             <div class="status_order">
                                 <span>Giao hàng thành công</span>
                             </div>
                         </div>
-                        <div class="inherit_home-tab-item">
+                        <div class="home-tab-item">
                             <div class="icon_order">
-                                <img src="../img/icon/order.png" alt="">
-                            </div>
+                                <img src="{{url('template/user/image/icon/order.png')}}" alt="">
+                          
+                        </div>
                             <div class="status_order">
                                 <span>Đã hủy</span>
                             </div>
@@ -54,8 +59,8 @@
                         <div class="line">
                         </div>
                     </div>
-                    <div class="inherit_home-tab-content">
-                        <div class="inherit_home-tab-pane active">
+                    <div class="home-tab-content">
+                        <div class="home-tab-pane active">
                             <table id="tb1">
                                 <tr class="br">
                                     <th>Đơn hàng</th>
@@ -63,31 +68,27 @@
                                     <th>Ngày đặt</th>
                                     <th>Tổng tiền</th>
                                     <th></th>
-                                    <th></th>
+                                  
 
                                 </tr>
-                                <?php if (sizeof($order_list) != null)
-                                    foreach ($order_list as $item) :
-                                ?>
+                                @if ($orderList0->count() != null)
+                                    @foreach ($orderList0 as $item) 
+                               
                                     <tr class="br">
-                                        <?php
-                                        // while ($row = mysqli_fetch_assoc(mysqli_query($conn,"SELECT product_name FROM tbl_product
-                                        //  INNER join tbl_order_detail on tbl_product.product_id =tbl_order_detail.product_id
-                                        //   WHERE tbl_order_detail.order_id='$orderid;"))) {
-                                        //     $list_product_name[] = $row;
-                                        // } 
-                                        ?>
-                                        {{$userOrderList->id}}
-                                         {{$userOrderList->order_name}}
-                                        {{$userOrderList->order_date}}
-                                        {{}} number_format($item['order_total'], 0, '.', ',') . 'đ ' ?></td>
-                                        <td style="width:50px;"><a href="./order_detail.php?id=<?php echo $item['order_id'] ?>"><button class="btn">Xem chi tiết</button></a></td>
+                                        
+                                        <td>{{$item->id}}</td>
+                                        <td> {{$item->name}}</td>
+                                        <td> {{$item->order_date}}</td>
+                                        <td> {{ number_format($item->total_money)}}đ </td>
+                                        <td style="width:50px;"><a href="{{route('user.order.orderDetail',['id'=>$item->id])}}"><button class="btn">Xem chi tiết</button></a></td>
 
 
-                                    </tr><?php endforeach ?>
+                                    </tr>
+                                     @endforeach
+                                     @endif
                             </table>
                         </div>
-                        <div class="inherit_home-tab-pane">
+                        <div class="home-tab-pane">
 
                             <table id="tb1">
                                 <tr class="br">
@@ -96,36 +97,26 @@
                                     <th>Ngày đặt</th>
                                     <th>Tổng tiền</th>
                                     <th></th>
-                                    <th></th>
-
+                                    
                                 </tr>
-                                <?php if (sizeof($order_list1) != null)
-                                    foreach ($order_list1 as $item) :
-                                ?>
+                                @if ($orderList1->count() != null)
+                                    @foreach ($orderList1 as $item) 
+                               
                                     <tr class="br">
-                                        <?php
-                                        // while ($row = mysqli_fetch_assoc(mysqli_query($conn,"SELECT product_name FROM tbl_product
-                                        //  INNER join tbl_order_detail on tbl_product.product_id =tbl_order_detail.product_id
-                                        //   WHERE tbl_order_detail.order_id='$orderid;"))) {
-                                        //     $list_product_name[] = $row;
-                                        // } 
-                                        ?>
-                                        <td><?php echo $item['order_id'] ?></td>
-                                        <td><?php echo $item['order_name'] ?></td>
-                                        <td><?php echo $item['order_date'] ?></td>
-                                        <td><?php echo number_format($item['order_total'], 0, '.', ',') . 'đ ' ?></td>
-                                        <td style="width:50px;"><a href="./order_detail.php?id=<?php echo $item['order_id'] ?>"><button class="btn">Xem chi tiết</button></a></td>
-                                        <td style="width:50px">
-                                            <form method="POST">
-                                                <input type="hidden" name="order_del_id" value="<?php echo $item['order_id'] ?>">
-                                                <button class="btnhuy" type="submit" name="order_delete">Hủy đơn</button>
-                                            </form>
-                                        </td>
-                                    </tr><?php endforeach ?>
+                                        
+                                        <td>{{$item->id}}</td>
+                                        <td> {{$item->name}}</td>
+                                        <td> {{$item->order_date}}</td>
+                                        <td> {{ number_format($item->total_money)}}đ </td>
+                                        <td style="width:50px;"><a href="{{route('user.order.orderDetail',['id'=>$item->id])}}"><button class="btn">Xem chi tiết</button></a></td>
+
+                                    </tr>
+                                     @endforeach
+                                     @endif
                             </table>
 
                         </div>
-                        <div class="inherit_home-tab-pane">
+                        <div class="home-tab-pane">
                             <table id="tb1">
                                 <tr class="br">
                                     <th>Đơn hàng</th>
@@ -136,28 +127,24 @@
 
 
                                 </tr>
-                                <?php if (sizeof($order_list2) != null)
-                                    foreach ($order_list2 as $item) :
-                                ?>
+                                @if ($orderList2->count() != null)
+                                    @foreach ($orderList2 as $item) 
+                               
                                     <tr class="br">
-                                        <?php
-                                        // while ($row = mysqli_fetch_assoc(mysqli_query($conn,"SELECT product_name FROM tbl_product
-                                        //  INNER join tbl_order_detail on tbl_product.product_id =tbl_order_detail.product_id
-                                        //   WHERE tbl_order_detail.order_id='$orderid;"))) {
-                                        //     $list_product_name[] = $row;
-                                        // } 
-                                        ?>
-                                        <td><?php echo $item['order_id'] ?></td>
-                                        <td><?php echo $item['order_name'] ?></td>
-                                        <td><?php echo $item['order_date'] ?></td>
-                                        <td><?php echo number_format($item['order_total'], 0, '.', ',') . 'đ ' ?></td>
-                                        <td style="width:50px;"><a href="./order_detail.php?id=<?php echo $item['order_id'] ?>"><button class="btn">Xem chi tiết</button></a></td>
+                                        
+                                        <td>{{$item->id}}</td>
+                                        <td> {{$item->name}}</td>
+                                        <td> {{$item->order_date}}</td>
+                                        <td> {{ number_format($item->total_money) }}đ</td>
+                                        <td style="width:50px;"><a href="{{route('user.order.orderDetail',['id'=>$item->id])}}"><button class="btn">Xem chi tiết</button></a></td>
 
 
-                                    </tr><?php endforeach ?>
+                                    </tr>
+                                     @endforeach
+                                     @endif
                             </table>
                         </div>
-                        <div class="inherit_home-tab-pane">
+                        <div class="home-tab-pane">
                             <table id="tb1">
                                 <tr class="br">
                                     <th>Đơn hàng</th>
@@ -168,28 +155,24 @@
 
 
                                 </tr>
-                                <?php if (sizeof($order_list3) != null)
-                                    foreach ($order_list3 as $item) :
-                                ?>
+                                @if ($orderList3->count() != null)
+                                    @foreach ($orderList3 as $item) 
+                               
                                     <tr class="br">
-                                        <?php
-                                        // while ($row = mysqli_fetch_assoc(mysqli_query($conn,"SELECT product_name FROM tbl_product
-                                        //  INNER join tbl_order_detail on tbl_product.product_id =tbl_order_detail.product_id
-                                        //   WHERE tbl_order_detail.order_id='$orderid;"))) {
-                                        //     $list_product_name[] = $row;
-                                        // } 
-                                        ?>
-                                        <td><?php echo $item['order_id'] ?></td>
-                                        <td><?php echo $item['order_name'] ?></td>
-                                        <td><?php echo $item['order_date'] ?></td>
-                                        <td><?php echo number_format($item['order_total'], 0, '.', ',') . 'đ ' ?></td>
-                                        <td style="width:50px;"><a href="./order_detail.php?id=<?php echo $item['order_id'] ?>"><button class="btn">Xem chi tiết</button></a></td>
+                                        
+                                        <td>{{$item->id}}</td>
+                                        <td> {{$item->name}}</td>
+                                        <td> {{$item->order_date}}</td>
+                                        <td> {{ number_format($item->total_money) }}đ</td>
+                                        <td style="width:50px;"><a href="{{route('user.order.orderDetail',['id'=>$item->id])}}"><button class="btn">Xem chi tiết</button></a></td>
 
 
-                                    </tr><?php endforeach ?>
+                                    </tr>
+                                     @endforeach
+                                     @endif
                             </table>
                         </div>
-                        <div class="inherit_home-tab-pane">
+                        <div class="home-tab-pane">
                             <table id="tb1">
                                 <form>
                                     <tr class="br">
@@ -199,24 +182,21 @@
                                         <th>Tổng tiền</th>
                                         <th></th>
                                     </tr>
-                                    <?php if (sizeof($order_list4) != null)
-                                        foreach ($order_list4 as $item) : ?>
+                                    @if ($orderList4->count() != null)
+                                    @foreach ($orderList4 as $item) 
+                               
+                                    <tr class="br">
+                                        
+                                        <td>{{$item->id}}</td>
+                                        <td> {{$item->name}}</td>
+                                        <td> {{$item->order_date}}</td>
+                                        <td> {{ number_format($item->total_money) }}đ </td>
+                                        <td style="width:50px;"><a href="{{route('user.order.orderDetail',['id'=>$item->id])}}"><button class="btn">Xem chi tiết</button></a></td>
 
-                                        <tr class="br">
-                                            <?php
-                                            // while ($row = mysqli_fetch_assoc(mysqli_query($conn,"SELECT product_name FROM tbl_product
-                                            //  INNER join tbl_order_detail on tbl_product.product_id =tbl_order_detail.product_id
-                                            //   WHERE tbl_order_detail.order_id='$orderid;"))) {
-                                            //     $list_product_name[] = $row;
-                                            // } 
-                                            ?>
-                                            <td><?php echo $item['order_id'] ?></td>
-                                            <td><?php echo $item['order_name'] ?></td>
-                                            <td><?php echo $item['order_date'] ?></td>
-                                            <td><?php echo number_format($item['order_total'], 0, '.', ',') . 'đ ' ?></td>
-                                            <td style="width:50px;"><a href="./order_detail.php?id=<?php echo $item['order_id'] ?>"><button class="btn">Xem chi tiết</button></a></td>
 
-                                        </tr><?php endforeach ?>
+                                    </tr>
+                                     @endforeach
+                                     @endif
                                     <form>
                             </table>
 
@@ -227,7 +207,7 @@
         </div>
     </div>
 </div>
-<script src="../js/inherit_home-tab.js"></script>
-</body>
+<script src="{{asset('template/user/js/home_tab.js')}}"></script>
+
 
 @endsection

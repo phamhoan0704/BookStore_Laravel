@@ -2,3 +2,4 @@
 
 <script src="{{asset('template/user/js/register.js')}}"></script>
 
+

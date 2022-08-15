@@ -71,9 +71,26 @@ class OrderController extends Controller
     public function getOrderList(){
         $categoryList=$this->categoryService->getCategoryList();
         $data=$this->userService->getUser();
+
+        $orderList=$this->orderService->getOrderList();
+       
+        return view('user.user_order_list',compact(['categoryList','orderList','data']));
+
+    }
+    public function OrderListActive(){
+       
+        $categoryList=$this->categoryService->getCategoryList();
+        $data=$this->userService->getUser();
         $cartList=$this->cartService->getCartList();
-        $userOrderList=$this->orderService->getOrderList();
-        return view('user.user_order_list',compact(['categoryList','userOrderList','data','cartList']));
+        $orderList0=$this->orderService->getOrderListActive('0');
+        $orderList1=$this->orderService->getOrderListActive('1');
+        $orderList2=$this->orderService->getOrderListActive('2');
+        $orderList3=$this->orderService->getOrderListActive('3');
+        $orderList4=$this->orderService->getOrderListActive('4');
+        return view('user.user_order_list',compact(['categoryList','orderList0','orderList1','orderList2','orderList3','orderList4','data','cartList']));
+
+       
+      
 
     }
 }

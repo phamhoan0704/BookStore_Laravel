@@ -53,7 +53,7 @@
                 </div>
                 <div class="stardust-dropdown">
                     <div class="stardust-dropdown-header">
-                        <a href="{{route('user.order.user-order-list')}}">
+                        <a href="{{route('user.order.orderList')}}">
                             <div class="imgPurchase">
                                 <img src="../img/purchase.png" alt="">
                             </div>

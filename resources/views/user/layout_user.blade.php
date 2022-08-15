@@ -89,6 +89,7 @@
                                         <span>Sản Phẩm Mới Thêm</span>
                                     </div>
                                     <ul class="header__cart-list-item">
+
                                         <!-- Cart item -->
                                         @if($cartList->count() > 0)
                                             @for($i=0;$i<$cartList->count();$i++)
@@ -103,6 +104,7 @@
                                                 </li>
                                             @endfor
                                         @endif
+
                                     </ul>
                                     <div class="text-mini-cart">
                                         <span class="text-left">Tổng tiền</span>
