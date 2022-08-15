@@ -1,0 +1,100 @@
+.user_order_container {
+    position: relative;
+    display: flex;
+    padding: 3.5rem 5rem 1.25rem;
+    margin-right: auto;
+    margin-left: auto;
+    width: 90%;
+    width: 90%;
+}
+
+.left_menu {
+    padding-left: 5px;
+    display: block;
+    width: 180px;
+    flex-shrink: 0;
+}
+
+.box_infor {
+    width: 85%;
+    box-sizing: border-box;
+    margin-left: 16px;
+    min-width: 0;
+    background: #fff;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 13%);
+    border-radius: 0.125rem;
+}
+
+.box_inforx {
+    padding: 0 30px 10px;
+    position: relative;
+    min-height: 100%;
+    position: relative;
+    min-height: 100%;
+}
+
+.order_list_box {
+    width: 100%;
+}
+
+#tb1 {
+    width: 95%;
+    margin: auto;
+    border-spacing: 0;
+}
+
+#tb1 th {
+    padding: 20px;
+    text-align: left;
+    background-color: rgb(217 218 214 / 49%);
+}
+
+tr {
+    width: 100%;
+    padding: 10px;
+    border-bottom: 1px
+}
+
+#tb1 {
+    border: 1px;
+    width: 100%;
+}
+
+#tb1 td {
+    padding: 10px 25px 10px;
+    text-align: left;
+    height: 60px;
+    border-bottom: 0.6px #e0d8d8 solid;
+}
+
+.btn {
+    color: #ffff;
+    padding: 5px;
+    background-color: #009234;
+}
+
+.btnhuy {
+    border-radius: 2px;
+    border: none;
+    color: rgb(243, 19, 19);
+    padding: 5px 8px;
+    background: none;
+}
+
+.btnhuy:hover {
+    color: #050505;
+    background: rgb(243, 19, 19);
+}
+
+.icon_order img {
+    width: 30px;
+    height: 30px;
+}
+
+.status_order span {
+    font-size: 14px;
+}
+
+.inherit_home-tab-content {
+    margin-top: 24px;
+}

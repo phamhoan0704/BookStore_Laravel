@@ -49,6 +49,13 @@ class OrderService{
         ->get();
         return $orderDetail;
     }
+    public function getOrderList()
+    {
+        $user_id=session()->get('loginId');
+        $orderList=DB::table($this->table)->where('user_id',$user_id)->get();
+        return $orderList;
+        
+    }
 
 
 

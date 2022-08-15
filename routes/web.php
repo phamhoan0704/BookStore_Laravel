@@ -130,15 +130,19 @@ Route::prefix('/admin')->name('admin.')->group(function(){
 
 
 });
-Route::prefix('/user')->name('user.')->group(function(){
-    Route::get('/homepage', [App\Http\Controllers\user\ProductController::class,'index'])->name('homepage');
-    Route::get('/login',[CustomAuthController::class,'logIn'])->name('login');
-    Route::post('/checkAcount',[CustomAuthController::class,'checkLogin'])->name('check-login');
+// Route::prefix('/user')->name('user.')->group(function(){
+//     Route::get('/home', [App\Http\Controllers\user\ProductController::class,'index'])->name('homepage');
+//     Route::get('/login',[CustomAuthController::class,'logIn'])->name('login');
+//     Route::post('/checkAcount',[CustomAuthController::class,'checkLogin'])->name('check-login');
 
 
-});
+// });
 Route::middleware(['isLogIn'])->group(function(){
     Route::prefix('/user/auth')->name('user.')->group(function(){
+        Route::get('/profile', [CustomAuthController::class,'profile'])->name('infor');
+        Route::post('/change-Profile',[CustomAuthController::class,'updateProfile'])->name('changeProfile');
+        
+
     Route::prefix('/cart')->name('cart.')->group(function(){
         Route::get('/index',[CartController::class,'index'])->name('index');
         Route::get('/delete/{id}',[CartController::class,'delete'])->name('delete');
@@ -150,6 +154,7 @@ Route::middleware(['isLogIn'])->group(function(){
         Route::get('/index',[OrderController::class,'index'])->name('index');
         Route::post('/add',[OrderController::class,'add'])->name('add');
         Route::get('/order-detail/{id}',[OrderController::class,'getOrderDetail'])->name('orderDetail');
+        route::get('/orderList',[OrderController::class,'getOrderList'])->name('user-order-list');
     });
 
     });
@@ -170,19 +175,6 @@ Route::prefix('/user')->name('user.')->group(function(){
    
 
 });
-route::middleware('isLogIn')->group(function(){
-
-route::prefix('/user')->name('check.')->group(function(){
-
-    Route::get('/profile', [CustomAuthController::class,'profile'])->name('infor');
-    Route::post('/change-Profile',[CustomAuthController::class,'updateProfile'])->name('changeProfile');
-   
-});
-});
-
-
-
-
 
 Route::get('/category/{id}', [App\Http\Controllers\user\ProductController::class,'getProductByCategory'])->name('category');
 Route::get('/search/{name?}', [App\Http\Controllers\user\ProductController::class,'searchProduct'])->name('search');

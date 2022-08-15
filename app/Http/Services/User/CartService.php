@@ -5,6 +5,7 @@ use App\Models\Author;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use app\Models\Cart;
 class CartService{
     protected $table='cart_product';
 
@@ -13,12 +14,16 @@ class CartService{
         ->get();
         return $author;
     }
+    
    public function getCartList(){
 //     if(Session::has('loginId')){
 //     print(Session::get('loginId'));
   
 //    }
-    $id=session()->get('loginId');
+   
+    $user_id=session()->get('loginId');
+    $id=DB::table('carts')->select('cart_id')->where('user_id',$user_id)->first();
+    $id=$id->cart_id;
     $cartList=DB::table($this->table)
     ->join('products', 'cart_product.product_id', '=', 'products.id')
     ->where('cart_id',$id)
@@ -28,7 +33,9 @@ class CartService{
   
     }
     public function add($dataInsert){
-        $id=session()->get('loginId');
+        $user_id=session()->get('loginId');
+        $id=DB::table('carts')->select('cart_id')->where('user_id',$user_id)->first();
+        $id=$id->cart_id;
         $productItem=DB::table($this->table)
         ->where('cart_id',$id)
         ->where('product_id',$dataInsert->id)
@@ -56,9 +63,11 @@ class CartService{
     public function delete($id)
     {
         $user_id=session()->get('loginId');
+        $cart_id=DB::table('carts')->select('cart_id')->where('user_id',$user_id)->first();
+        $cart_id=$cart_id->cart_id;
         try{
            $cartItem= DB::table($this->table)
-            ->where('cart_id',$user_id)
+            ->where('cart_id',$cart_id)
             ->where('product_id',$id)
             ->delete();
          
@@ -70,9 +79,11 @@ class CartService{
     public function deleteCart()
     {
         $user_id=session()->get('loginId');
+        $id=DB::table('carts')->select('cart_id')->where('user_id',$user_id)->first();
+        $id=$id->cart_id;
         try{
            $cartItem= DB::table($this->table)
-            ->where('cart_id',$user_id)
+            ->where('cart_id',$id)
             ->delete();
         }catch(Exception $err){
             session()->flash('error','Có lỗi xảy ra. Vui lòng thử lại!');
