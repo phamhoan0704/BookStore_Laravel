@@ -154,7 +154,7 @@ Route::middleware(['isLogIn'])->group(function(){
         Route::get('/index',[OrderController::class,'index'])->name('index');
         Route::post('/add',[OrderController::class,'add'])->name('add');
         Route::get('/order-detail/{id}',[OrderController::class,'getOrderDetail'])->name('orderDetail');
-        route::get('/orderList',[OrderController::class,'getOrderList'])->name('user-order-list');
+        route::get('/orderList/{status?}',[OrderController::class,'OrderListActive'])->name('orderList');
     });
 
     });

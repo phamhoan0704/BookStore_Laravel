@@ -98,3 +98,6 @@ tr {
 .inherit_home-tab-content {
     margin-top: 24px;
 }
+.home-tab-title.orderlistTab{
+    width:100%;
+}

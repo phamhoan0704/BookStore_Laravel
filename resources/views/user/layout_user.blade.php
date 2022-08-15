@@ -100,7 +100,8 @@
                                         <span>Sản Phẩm Mới Thêm</span>
                                     </div>
                                     <ul class="header__cart-list-item">
-                                        <!-- Cart item -->
+                                        Cart item
+                                        
                                         <?php
                                         // if($total > 0) 
                                         // {

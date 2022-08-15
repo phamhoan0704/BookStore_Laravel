@@ -56,6 +56,13 @@ class OrderService{
         return $orderList;
         
     }
+    public function getOrderListActive($filters=[]){
+        $user_id=session()->get('loginId');
+        $orderListActive=DB::table($this->table)->where('user_id',$user_id)
+        ->where('order_status',$filters)
+        ->get();
+        return $orderListActive;
+    }
 
 
 
