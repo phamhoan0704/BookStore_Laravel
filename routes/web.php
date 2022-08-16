@@ -141,7 +141,8 @@ Route::middleware(['isLogIn'])->group(function(){
     Route::prefix('/user/auth')->name('user.')->group(function(){
         Route::get('/profile', [CustomAuthController::class,'profile'])->name('infor');
         Route::post('/change-Profile',[CustomAuthController::class,'updateProfile'])->name('changeProfile');
-        
+        route::get('/changepass',[CustomAuthController::class,'newPass'])->name('changepass');
+        route::post('/storenewpass',[CustomAuthController::class,'changePass'])->name('storeNewPass');
 
     Route::prefix('/cart')->name('cart.')->group(function(){
         Route::get('/index',[CartController::class,'index'])->name('index');

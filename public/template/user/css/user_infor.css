@@ -179,6 +179,7 @@
 }
 
 .infor_avatar-img2>i {
+    color:#868585;
     position: absolute;
     font-size: 2em;
     font-weight: 560;
@@ -186,7 +187,7 @@
     left: 50%;
     transform: translate(-13px, -17px);
     translate: (-50px, -50px);
-    line-height: 2rem;
+    
 }
 
 .infor_imgPurchase2>img {
@@ -202,7 +203,7 @@
 }
 
 .infor_btn2 input {
-    width: 28%;
+    width: 26%;
     display: inline-block;
 }
 

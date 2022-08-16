@@ -1,9 +1,5 @@
 
-<!DOCTYPE html>
 
-<link rel="stylesheet" href="{{asset('template/user/css/user_infor.css')}}">
-  <link rel="stylesheet" href="{{asset('template/user/css/menuleft_infor.css')}}">
-<body>
 <div class="left_menu">
             <div class="profile">
                 <div class="imgbox">
@@ -11,7 +7,7 @@
                         <div class="frame-avatar">
                            
                             <div class="avatar-img">
-                           <img src="../img/product/<?php ?>" alt="">
+                           <img src="{{url('template/user/img/avata/'.$data->user_image)}}" alt="">
                                 <i class="fa fa-regular fa-user"></i>
                             </div>
                         </div>
@@ -22,7 +18,7 @@
                         <!-- <?php ?> -->
                     </div>
                     <div class="altterInfor">
-                        <a href="profile.php" class="altter">
+                        <a href="{{route('user.infor')}}" class="altter">
                             <i class="fa fa-solid fa-pen"></i> Sửa hồ sơ
                         </a>
                     </div>
@@ -33,7 +29,7 @@
                     <div class="stardust-dropdown-header">
                         <a href="">
                             <div class="imgPurchase">
-                                <img src="../img/user.png" alt="">
+                                <img src="{{url('template/user/image/icon/user.png')}}" alt="">
                             </div>
                             <div>
                                 <span>Tài khoản của tôi</span>
@@ -42,10 +38,10 @@
                     </div>
                     <div class="stardust-dropdown-itembody stardust-dropdown-itembody-open">
                         <div class="frame_box">
-                            <a href="information.php">Hồ sơ</a>
+                            <a href="{{route('user.infor')}}">Hồ sơ</a>
                             <a href="">Ngân Hàng</a>
                             <a href="">Địa chỉ</a>
-                            <a href="./newpass.php">Đổi mật khẩu</a>
+                            <a href="{{route('user.changepass')}}">Đổi mật khẩu</a>
 
                         </div>
                     </div>
@@ -55,7 +51,7 @@
                     <div class="stardust-dropdown-header">
                         <a href="{{route('user.order.orderList')}}">
                             <div class="imgPurchase">
-                                <img src="../img/purchase.png" alt="">
+                                <img src="{{url('template/user/image/icon/purchase.png')}}" alt="">
                             </div>
                             <div>
                                 <span>Đơn mua</span>
@@ -87,5 +83,3 @@
             </div>
 
         </div>
-</body>
-</html>

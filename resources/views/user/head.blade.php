@@ -29,6 +29,7 @@
   <link rel="stylesheet" href="{{asset('template/user/css/order.css')}}">
   <link rel="stylesheet" href="{{asset('template/user/css/orderDetail.css')}}">
   <link rel="stylesheet" href="{{asset('template/user/css/user_order_list.css')}}">
+  <link rel="stylesheet" href="{{asset('template/user/css/changepassword.css')}}">
   
 
 
