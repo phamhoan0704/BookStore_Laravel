@@ -5,7 +5,7 @@
 }
 
 .sale_management_main {
-    margin: 0 40px;
+    margin: 0 4px;
     flex: 1;
     background-color: white;
     padding: 24px 48px;
@@ -31,8 +31,8 @@
 }
 
 .sale_management-filter button {
-    padding: 4px 16px;
-    border: 1px solid black;
+    /* padding: 4px 16px;
+    border: 1px solid black; */
 }
 
 .sale_management-filter input {
@@ -54,7 +54,8 @@
 
 .sale_management-table {
     width: 100%;
-    margin-bottom: 48px;
+    margin-bottom: 24px;
+    margin-top: 12px;
 }
 
 .sale_management-table thead td {
@@ -63,22 +64,23 @@
 }
 
 .sale_management-table tr {
-    background-color: inherit;
+    height: auto;
 }
 
 .sale_management-table td {
-    padding: 6px 8px;
+    padding: 8px 8px;
 }
 
 .float-right {
-    float: right;
+    text-align: right;
 }
 
-.btn.btn-success {
-    text-decoration: none;
-    background-color: green;
-    display: block;
-    padding: 4px 8px;
-    margin-bottom: 12px;
-    color: #fff;
+.sale_management-total {
+    font-size: 15px;
+    text-align: right;
+    margin-right: 8px;
+}
+
+.sale_management-total span {
+    margin-left: 32px;
 }
