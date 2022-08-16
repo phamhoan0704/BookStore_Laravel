@@ -111,7 +111,7 @@
 </div>
     
     @if(Session::has('success'))
-   {{script}}
+ 
     
      @endif
 @endsection

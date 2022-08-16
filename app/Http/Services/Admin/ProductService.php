@@ -179,6 +179,16 @@ class ProductService{
         return $productDetail;
 
     }
+    public function updateQuantity($product_id,$quantity)
+    {
+        $num=DB::table($this->talbe)
+        ->select('product_quantity')
+        ->where('id',$product_id)->first();
+        $total=$num+$quantity;
+        DB::table($this->talbe)
+        ->where('id',$product_id)
+        ->update(['product_quantity',$total]);
+    }
 
 
 }

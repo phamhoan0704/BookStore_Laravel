@@ -47,7 +47,7 @@
                 <li><a id="header-author" href="{{route('admin.author.index')}}">Quản lí tác giả</a></li>
                 <li><a id="header-supply" href="{{route('admin.supplier.index')}}">Quản lí nhà cung cấp</a></li>
                 <li><a id="header-user" href="../admin/user_management_ad.php">Quản lí tài khoản</a></li>
-                <li><a id="header-order" href="../admin/order_management_ad.php">Quản lí đơn hàng</a></li>
+                <li><a id="header-order" href="{{route('admin.order.index',['status'=>'6'])}}">Quản lí đơn hàng</a></li>
                 <li><a id="header-report" href="{{route('admin.report')}}">Quản lí doanh thu</a></li>
             </ul>
         </div>
@@ -110,6 +110,11 @@
     @case('supplier')
     <script>
         setColorForMenu('header-supply');
+    </script>
+    @break
+    @case('order')
+    <script>
+        setColorForMenu('header-order');
     </script>
     @break
 
