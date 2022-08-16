@@ -162,7 +162,7 @@
                                                         </svg>                         
                                                     </i>
                                                 </a>
-                                                <a class="btn-add-to-cart" title="Thêm vào giỏ" href="{{route('user.cart.add',['id'=>$item->id])}}">
+                                                <a class="btn-add-to-cart" id="{{$item->id}}" onclick="checkSoldOut('{{$item->product_quantity}}')" title="Thêm vào giỏ" href="{{route('user.cart.add',['id'=>$item->id])}}">
                                                     <i class="icon_list">
                                                         <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                                         width="446.843px" height="446.843px" viewBox="0 0 446.843 446.843" style="enable-background:new 0 0 446.843 446.843;"
@@ -248,6 +248,30 @@
             </div>
         </div>
     </div>
+
+    <script>
+        @foreach ($productList as $item)
+            @if($item->product_quantity == 0) 
+                document.getElementById({{$item->id}}).removeAttribute("href");
+            @endif
+        @endforeach
+
+        function checkSoldOut(id) {
+            if(id == '0') 
+            {
+                document.getElementById('notice').style.display = 'block';
+                document.getElementById("showSoldOutNotice").innerHTML = "Sản Phẩm Đã Hết Hàng";
+
+            }
+
+        }
+        
+        function logOut()
+        {
+            console.log('close');
+            document.getElementById("notice").style.display = "none"; 
+        }   
+    </script>
 
     <script src="{{asset('template/user/js/home_tab.js')}}"></script>
 
