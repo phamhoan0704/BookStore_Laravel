@@ -117,6 +117,32 @@ class ProductService{
         ]);
         
     }
+    public function updateQuantity($cartList){
+ 
+            
+        try{
+            foreach($cartList as $key=>$item){
+              
+                // dd($item[$key]->product_id);
+                $product_quantity=DB::table($this->table)
+                ->select('product_quantity')
+                ->where('id',$item->product_id)
+                ->first();
+              $product_quantity=$product_quantity->product_quantity;
+              $product_quantity-=$item->product_amount;
+                DB::table($this->table)
+                ->where('id',$item->product_id)
+                ->update([
+                    'product_quantity'=>(int)$product_quantity,
+                ]);
+            }
+        }catch(Exception $err){
+            dd($err);
+            return false;
+        }  
+        return true;
+
+    }
     public function deleteProduct($id)
     {
         try{

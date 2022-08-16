@@ -11,7 +11,7 @@
                     <button type="button" class="close" data-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" name="delete_id" id="category_id">
+                    <input type="hidden" name="delete_id" id="supplier_id">
                     <h5>Bạn có chắc chắn xóa nhà cung cấp này không? </h5>
                 </div>
                 <div class="modal-footer">

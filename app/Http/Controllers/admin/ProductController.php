@@ -9,6 +9,7 @@ use App\Http\Services\Admin\CategoryService;
 use App\Http\Services\Admin\SupplierService;
 use App\Http\Requests\admin\CategoryRequest;
 use App\Http\Requests\admin\ProductRequest;
+use App\Models\Product;
 
 class ProductController extends Controller
 {

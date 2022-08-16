@@ -16,12 +16,6 @@ class CartController extends Controller
     protected $categoryService;
     protected $productService;
     protected $userService;
-    
-    
-
-
-
-    
     public function __construct(CartService $cartService,CategoryService $categoryService,ProductService $productService,UserService $userService)
     {
         $this->cartService=$cartService;
@@ -59,7 +53,7 @@ class CartController extends Controller
         if($dataInsert->product_quantity>0){
             $this->cartService->add($dataInsert,$numproduct);
         }else{
-            
+            return redirect()->back();
         }
 
         return redirect()->route('user.cart.index');
