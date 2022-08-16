@@ -124,7 +124,20 @@ Route::prefix('/admin')->name('admin.')->group(function(){
         Route::post('/delete',[AuthorController::class,'destroy'])->name('delete');
         // Route::post('/deleteall/{id?}',[SupplierController::class,'destroyAll'])->name('deleteall');
     }); 
+    Route::prefix('/order')->name('order.')->group(function(){
+        
+        Route::get('/index/{status?}',[App\Http\Controllers\admin\OrderController::class,'getOrderList'])->name('index');
+        Route::get('/show-detail/{id}',[App\Http\Controllers\Admin\OrderController::class,'getDetail'])->name('orderDetail')->name('detail');
+    //     Route::post('/edit/{id}',[AuthorController::class,'postEdit'])->name('post-edit');
+    //    // Route::post('/update',[AuthorController::class,'postEdit'])->name('post-edit');
 
+    //    //Hide,show
+    //     Route::post('/activecategory/{name?}/{id?}',[AuthorController::class,'postActive'])->name('active-author');
+
+    //     //Delete
+    //     Route::post('/delete',[AuthorController::class,'destroy'])->name('delete'); Rou
+        // Route::post('/deleteall/{id?}',[SupplierController::class,'destroyAll'])->name('deleteall');
+    }); 
     //SALE REPORT
     Route::get('/report/index',[ReportController::class,'index'])->name('report');
 
