@@ -3,6 +3,7 @@
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\Admin\SupplierController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\admin\AuthorController;
 use App\Http\Controllers\user\CartController;
 use App\Http\Controllers\user\OrderController;
@@ -138,9 +139,9 @@ Route::prefix('/admin')->name('admin.')->group(function(){
         // Route::post('/deleteall/{id?}',[SupplierController::class,'destroyAll'])->name('deleteall');
     }); 
     //SALE REPORT
-    Route::get('/report',[ReportController::class,'create'])->name('report');
+    Route::get('/report/index',[ReportController::class,'index'])->name('report');
 
-
+    Route::get('/homepage/index',[ReportController::class,'homepage'])->name('homepage');   
 
 });
 // Route::prefix('/user')->name('user.')->group(function(){

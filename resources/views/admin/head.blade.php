@@ -13,8 +13,12 @@
   <link rel="stylesheet" href="{{asset('template/admin/css/layout_list.css')}}">
   <link rel="stylesheet" href="{{asset('template/admin/css/tab.css')}}">
   <link rel="stylesheet" href="{{asset('template/admin/css/layout_add.css')}}">
+
   
   <link rel="stylesheet" href="{{asset('template/admin/css/orderDeatil.css')}}">
-  <!-- <link rel="stylesheet" href="{{asset('template/admin/css/sale_report.css')}}"> -->
+
+  <link rel="stylesheet" href="{{asset('template/admin/css/sale_report.css')}}">
+  <link rel="stylesheet" href="{{asset('template/admin/css/homepage.css')}}">
+
 
   @yield('head')

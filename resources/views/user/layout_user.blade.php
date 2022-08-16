@@ -238,6 +238,27 @@
             </div>
         </div>
     </div>
+    <div id="notice" style="display: none">
+        <div class="modal" tabindex="-1" role="dialog" style="display: block">
+            <div id="popup" class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">IPM thông báo</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p id="showSoldOutNotice"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="logOut()">
+                                Close
+                            </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
 
     @include('user.footer')
 </body>
