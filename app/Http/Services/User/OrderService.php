@@ -11,7 +11,6 @@ class OrderService{
     {
         $user_id=session()->get('loginId');
         try{
-            print("1");
             DB::table($this->table)->insert([
                 'name'=>(String)$dataInsert['name'],
                 'phone'=>(Int)$dataInsert['phone'],

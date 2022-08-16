@@ -46,24 +46,6 @@
                     </div>
                 </div>
                 @endforeach
-                
-                <!-- <div class="cart_item">
-                <div class="cart_img">
-                    <a href=""><img src="../Image/product_image/pdt2.png" alt=""></a>
-                </div>
-                <div class="cart_name">
-                    <a href="">Re: Zero - Bắt Đầu Lại Ở Thế Giới Khác - 12</a>
-                </div>
-                <div class="cart_qty">
-                    <p><input type="number" value="1" min=1></p>   
-                </div>
-                <div class="cart_price">
-                    <p>VND 102.000</p>
-                </div>
-                <div class="cart_remove">
-                    <a href="">Xóa</a>
-                </div>
-            </div> -->
         </div>
         <div class="cart_total">
             <div class="cart_img"></div>

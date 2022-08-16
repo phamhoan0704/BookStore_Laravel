@@ -51,7 +51,6 @@ class OrderController extends Controller
             'payment_method'=>$request->payment,
             'created_at'=>date('y-m-d'),
         ];
-        
         $order_id=$this->orderService->add($dataInsert);
         $cartList=$this->cartService->getCartList();
         $this->orderProductService->add($cartList,$order_id);

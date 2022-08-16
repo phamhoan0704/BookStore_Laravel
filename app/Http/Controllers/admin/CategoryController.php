@@ -58,12 +58,10 @@ class CategoryController extends Controller
         $this->categoryService->addcategory($dataInsert);
         return redirect()->route('admin.category.index');
     }
-
     public function getEdit(Category $id){
         $categoryDetail=$id;
         return view('admin.category.categoryEdit',compact(['categoryDetail']));
     }
-
     public function postEdit(CategoryRequest $request,$id){
         $data=[
             'category_name'=>$request->category_name,
@@ -72,7 +70,6 @@ class CategoryController extends Controller
         $this->categoryService->updateCategory($data,$id);
         return redirect()->route('admin.category.index');
     }
-
     public function postActive(Request $request){
         $ids=$request->ids;  
         $id=$request->id;

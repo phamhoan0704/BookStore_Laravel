@@ -1,16 +1,8 @@
 <head>
     @include('user.head')
 </head>
-{{-- @if (Auth::check()) 
- {{
-    print(Auth::user()->name)}}
+
  
- @else
-    {{print("iii")}} 
- @endif --}}
- @if(Session::has('loginId'))
- {{print(Session::get('loginId'))}}
- @endif
 
 <body>
    
