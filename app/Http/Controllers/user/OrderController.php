@@ -10,6 +10,7 @@ use App\Http\Services\User\OrderService;
 use App\Http\Services\User\OrderProductService;
 
 use App\Http\Requests\user\OrderRequest;
+use App\Http\Services\Admin\ProductService;
 use App\Http\Services\User\UserService;
 
 class OrderController extends Controller
@@ -19,17 +20,17 @@ class OrderController extends Controller
     protected $orderService;
     protected $orderProductService;
     protected $userService;
-   
+    protected $productService;
 
 
-
-    public function __construct(CartService $cartService,CategoryService $categoryService,OrderService $orderService,OrderProductService $orderProductService,UserService $userService)
+    public function __construct(CartService $cartService,CategoryService $categoryService,OrderService $orderService,OrderProductService $orderProductService,UserService $userService,ProductService $productService)
     {
         $this->cartService=$cartService;
         $this->categoryService=$categoryService;
         $this->orderService=$orderService;
         $this->orderProductService=$orderProductService;
         $this->userService=$userService;
+        $this->productService=$productService;
     }
     public function index(){
         $cartList=$this->cartService->getCartList();
@@ -54,9 +55,10 @@ class OrderController extends Controller
         
         $order_id=$this->orderService->add($dataInsert);
         $cartList=$this->cartService->getCartList();
+        $this->productService->updateQuantity($cartList);
         $this->orderProductService->add($cartList,$order_id);
-
         $this->cartService->deleteCart();
+        
         return redirect()->route('user.homepage');
     }
     public function getOrderDetail(Request $request){

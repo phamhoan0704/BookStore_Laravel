@@ -23,7 +23,7 @@
                     @endif
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
                     {{-- <button type="submit" class="btn btn-danger">Xóa</button> --}}
                 </div>
                 </form>
