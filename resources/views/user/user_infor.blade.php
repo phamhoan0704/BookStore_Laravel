@@ -99,8 +99,8 @@
                             <a href="" class="infor_avatar">
                                 <div class="infor_frame-avatar2">
                                     <div class="infor_avatar-img2">
-                                        <i class="infor_fa fa-regular fa-user">
-                                            <img src="../img/user/<?php  ?>" alt="">
+                                        <i class="infor_fa fa fa-regular fa-user">
+                                            <img src="{{url('template/user/img/avata/'.$data->user_image)}}" alt="">
                                         </i>
                                     </div>
                                 </div>

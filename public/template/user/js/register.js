@@ -2,7 +2,7 @@ const ipnPass1=document.querySelector('#ipnPassword')
 const btnPass=document.querySelector('#btnPassword')
 const ipnPass2=document.querySelector('#ipnPasswordAgain')
 const btnPassAgain=document.querySelector('#btnPasswordAgain')
-const eyeElement=document.querySelector('#btnEye')
+
 
 
 

@@ -15,17 +15,20 @@ use Illuminate\Support\Facades\Session;
 use App\Http\Services\User\CartService;
 
 use App\Http\Services\Admin\CategoryService;
+use App\Http\Services\User\UserService;
 use Exception;
 
 class CustomAuthController extends Controller
 {
     protected $categoryService;
     protected $cartService;
+    protected $userService;
 
-    public function __construct( CategoryService $categoryService, CartService $cartService)
+    public function __construct( CategoryService $categoryService, CartService $cartService,UserService $userService)
     {
         $this->categoryService=$categoryService;
         $this->cartService=$cartService;
+        $this->userService=$userService;
     }
     //
     public function logIn()
@@ -115,10 +118,11 @@ class CustomAuthController extends Controller
             ],
             [
                 'name.required' => 'Tên đăng nhập không được để trống',
+                'name.unique'=>'Tên đăng nhập đã tồn tại',
                 // 'name.min' => 'Tên đăng nhập tối thiểu phải có :min kí tự',
                 // 'name.max' => 'Tên đăng nhập tối đa :max kí tự',
                 // 'name.regex' => 'Tên đăng nhập không hợp lệ',
-                'name.unique'=>'Tên đăng nhập đã tồn tại',
+               
                 'password.required' => 'Mật khẩu không được để trống',
                 'password.min' => 'Mật khẩu tối thiểu phải có :min kí tự',
                 'password.max' => 'Mật khẩu tối đa :max kí tự',
@@ -184,7 +188,55 @@ class CustomAuthController extends Controller
         return redirect()->route('user.infor');
 
     }
+    public function newPass()
+    
+    {
+        
+        $categoryList=$this->categoryService->getCategoryList();
+        $data=$this->userService->getUser();
+        $cartList=$this->cartService ->getCartList();
+        return view('user.changepassword',compact(['categoryList','data','cartList']));
+    }
+    public function changePass(Request $request){
+       
+        $data=$this->userService->getUser();
+       
+        $user=new User();
+        $request->validate(
+            [
+                
+                'pass' => 'required|min:5 ',
+            ],
+            [
+                'pass.required' => 'Mật khẩu không được để trống',
+                'pass.min'=>'Mật khẩu tối thiểu 5 kí tự',
+                'pass.confirm'=>'Mật khẩu không trùng khớp',
+            ]
+            );
+        if(Hash::check($request->input('pass'),$data->user_password))
+         {
+            if($request->input('newpass')!=$request->input('newpassconfirm'))
+            {
+                
+           
+                return back()->with('fail2','Mật khẩu mới không trùng khớp!');
+            }
+            else{
+                $password=Hash::make($request->input('newpass'));
+               
+                DB::table('users')->where('id',$data->id)->update(['user_password'=>$password]);
+                return redirect()->route('user.changepass')->with('success','Đổi mật khẩu thành công !');
 
+            }
+           
+         }
+         else
+         return back()->with('fail1',"Mật khẩu không đúng!");
+
+
+
+
+    }
 
     public function logOut(){
         $cartList=$this->cartService->getCartList();
