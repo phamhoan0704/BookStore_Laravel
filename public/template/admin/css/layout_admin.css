@@ -8,6 +8,10 @@ h1 {
     color: rgb(1 161 75);
 }
 
+a:hover {
+    text-decoration: none;
+}
+
 .main_header {
     width: 100%;
     height: 120px;
@@ -18,20 +22,24 @@ h1 {
     /* display: flex;
     align-items: center; */
 }
-.main_content{
-   display: flex;
+
+.main_content {
+    display: flex;
 }
+
 .main_menu {
     display: inline-block;
-    width:20%;
+    width: 20%;
     background-color: white;
     height: 600px;
     margin-bottom: 50px;
 }
-.content{
+
+.content {
     flex: 1;
     margin: 0 2%;
 }
+
 .main_menu ul {
     list-style: none;
     width: 100%;
@@ -43,7 +51,7 @@ h1 {
     display: block;
 }
 
-.main_menu>ul>li{
+.main_menu>ul>li {
     border-bottom: 1px solid #ccc;
 }
 
@@ -67,13 +75,11 @@ h1 {
 
 .main_menu li:first-child {
     padding: 4px 0;
-    background-color:#5cb85c;
+    background-color: #5cb85c;
     border-bottom: none;
-
 }
 
 input[type=checkbox] {
-    
     width: 16px;
-    height: 16px;   
+    height: 16px;
 }

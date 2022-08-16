@@ -41,7 +41,7 @@
             <ul>
                 <li><a href="" style="font-weight:bold;font-size:20px;color:white">
                         Danh mục quản lí</a></li>
-                <li><a id="homepage" href="">Trang Chủ</a></li>
+                <li><a id="homepage" href="{{route('admin.homepage')}}">Trang Chủ</a></li>
                 <li><a id="header-category" href="{{route('admin.category.index')}}">Quản lí danh mục</a></li>
                 <li><a id="header-product" href="{{route('admin.product.index')}}">Quản lí sản phẩm</a></li>
                 <li><a id="header-author" href="{{route('admin.author.index')}}">Quản lí tác giả</a></li>
@@ -110,6 +110,18 @@
     @case('supplier')
     <script>
         setColorForMenu('header-supply');
+    </script>
+    @break
+
+    @case('report')
+    <script>
+        setColorForMenu('header-report');
+    </script>
+    @break
+
+    @case('homepage')
+    <script>
+        setColorForMenu('homepage');
     </script>
     @break
 
