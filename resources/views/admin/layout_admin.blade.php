@@ -30,10 +30,9 @@
             </div>
         </div>
     </div>
-    <div class="main_header">
-        <a href="homepage.php">
-            <img src="" alt="" style="margin: 0 50px">
-        </a>
+    <div class="main_header" style="display: flex; align-items: center">
+        <a href="homepage.php"><img src="{{ url('template/user/image/icon/logo.jpg') }}" alt="" class="img-logo"></a>
+        
         <h1 style="padding-left: 16px;">NHÀ SÁCH IPM</h1>
     </div>
     <div class="main_content">

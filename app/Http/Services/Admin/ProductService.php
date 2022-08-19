@@ -117,7 +117,7 @@ class ProductService{
         ]);
         
     }
-    public function updateQuantity($cartList){
+    public function updateQuantityOrder($cartList){
  
             
         try{
@@ -169,6 +169,16 @@ class ProductService{
         ->get();
         //dd($category);
         return $category;
+    }
+
+    public function getListProductBestSeller($filters=[]){
+        $reportList=DB::table('order_product')
+        ->select('products.id','products.product_name','products.product_price','products.product_price_pre','products.product_quantity','products.product_image', DB::raw('SUM(order_product.product_amount) AS sale_amount'))
+        ->join('products', 'order_product.product_id', '=', 'products.id')
+        ->groupBy('products.id','products.product_name','products.product_price','products.product_price_pre','products.product_quantity','products.product_image')
+        ->orderBy('sale_amount','desc') 
+        ->get();
+        return $reportList;
     }
 
     public function getProductByCategory($category_id,$filters=[]){

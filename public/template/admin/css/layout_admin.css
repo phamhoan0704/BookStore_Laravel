@@ -77,6 +77,7 @@ a:hover {
     padding: 4px 0;
     background-color: #5cb85c;
     border-bottom: none;
+    margin-bottom: 1px;
 }
 
 input[type=checkbox] {

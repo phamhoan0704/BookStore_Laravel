@@ -86,15 +86,15 @@
                 <p>Những việc bạn sẽ phải làm</p>
             </div>
             <div class="to-do-list">
-                <a href="order_management_ad.php" class="to-do-item">
+                <a href="{{route('admin.order.index',['status'=>'0'])}}" class="to-do-item">
                     <p class="item-title">{{$orderStatus0->count()}}</p>
                     <p class="item-desc">Chờ xác nhận</p>
                 </a>
-                <a href="order_management_ad.php" class="to-do-item">
+                <a href="{{route('admin.order.index',['status'=>'1'])}}" class="to-do-item">
                     <p class="item-title">{{$orderStatus1->count()}}</p>
                     <p class="item-desc">Chờ lấy hàng</p>
                 </a>
-                <a href="order_management_ad.php" class="to-do-item">
+                <a href="{{route('admin.order.index',['status'=>'2'])}}" class="to-do-item">
                     <p class="item-title">{{$orderStatus2->count()}}</p>
                     <p class="item-desc">Đã xử lý</p>
                 </a>

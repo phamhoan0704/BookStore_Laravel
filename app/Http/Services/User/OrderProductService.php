@@ -30,9 +30,7 @@ class OrderProductService{
             return false;
         }  
         return true;
-
     }
-
     public function getOrderProductList($order_id){
         $orderProductList=DB::table($this->table)
         ->join('products', 'order_product.product_id', '=', 'products.id')
