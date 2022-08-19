@@ -36,9 +36,10 @@ class ReportService{
 
     public function getListProductBestSeller($filters=[]){
         $reportList=DB::table('order_product')
-        ->select('order_product.product_id','products.product_name','products.product_price', DB::raw('SUM(order_product.product_amount) AS sale_amount'))
+        ->select('order_product.product_id','products.product_name','products.product_price', 'categories.category_name', DB::raw('SUM(order_product.product_amount) AS sale_amount'))
         ->join('products', 'order_product.product_id', '=', 'products.id')
-        ->groupBy('order_product.product_id','products.product_name','products.product_price')
+        ->join('categories', 'categories.id', '=', 'products.category_id')
+        ->groupBy('order_product.product_id','products.product_name','products.product_price', 'categories.category_name')
         ->orderBy('sale_amount','desc') 
         ->get();
         return $reportList;
