@@ -38,8 +38,8 @@ class ProductController extends Controller
 
         $categoryList=$this->categoryService->getCategoryList();   
         $data=array();
+        $cartList=$this->cartService->getCartList();
         if(Session::has('loginId')){
-            $cartList=$this->cartService->getCartList();
             $data=DB::table('users')->where('id','=',Session::get('loginId'))->first();
         } else $cartList=array();
         return view('user.home',compact(['productList','categoryList','data','cartList']));
@@ -53,8 +53,8 @@ class ProductController extends Controller
         // dd($categoryList);
         // dd($productList);
         $data=array();
+        $cartList=$this->cartService->getCartList();
         if(Session::has('loginId')){
-            $cartList=$this->cartService->getCartList();
             $data=DB::table('users')->where('id','=',Session::get('loginId'))->first();
         }
         return view('user.productCategory',compact(['productList','categoryList','data','cartList']));
@@ -65,9 +65,9 @@ class ProductController extends Controller
         $categoryList=$this->categoryService->getCategoryList();
         $searchList=$this->productService->searchProduct($search);
         $searchInfo = $search;
+        $cartList=$this->cartService->getCartList();
         $data=array();
         if(Session::has('loginId')){
-            $cartList=$this->cartService->getCartList();
             $data=DB::table('users')->where('id','=',Session::get('loginId'))->first();
         }
         return view('user.search',compact(['searchList','searchInfo','categoryList','data','cartList']));

@@ -117,6 +117,7 @@
                             <td>Tên sản phẩm</td>
                             <td>Giá Bán</td>
                             <td>Số lượng đã bán</td>
+                            <td>Danh mục</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -127,6 +128,7 @@
                                 <td>{{$item->product_name}}</td>
                                 <td style="text-align: right;">{{number_format($item->product_price)}}</td>
                                 <td style="text-align: right;">{{$item->sale_amount}}</td>
+                                <td>{{$item->category_name}}</td>
                             </tr>
                         @endforeach
                     </tbody>
