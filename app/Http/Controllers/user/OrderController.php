@@ -55,7 +55,7 @@ class OrderController extends Controller
         
         $order_id=$this->orderService->add($dataInsert);
         $cartList=$this->cartService->getCartList();
-        $this->productService->updateQuantity($cartList);
+        $this->productService->updateQuantityOrder($cartList);
         $this->orderProductService->add($cartList,$order_id);
         $this->cartService->deleteCart();
         

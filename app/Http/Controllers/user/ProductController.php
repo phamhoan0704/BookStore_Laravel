@@ -34,15 +34,15 @@ class ProductController extends Controller
     public function index(){
 
         $productList=$this->productService->getNewProduct();
+        $productListBestSeller=$this->productService->getListProductBestSeller();
         $categoryList=$this->categoryService->getCategoryList();
-
-        $categoryList=$this->categoryService->getCategoryList();   
+        
         $data=array();
         if(Session::has('loginId')){
             $cartList=$this->cartService->getCartList();
             $data=DB::table('users')->where('id','=',Session::get('loginId'))->first();
         } else $cartList=array();
-        return view('user.home',compact(['productList','categoryList','data','cartList']));
+        return view('user.home',compact(['productList','categoryList','data','cartList','productListBestSeller']));
 
     }
 
