@@ -35,7 +35,13 @@
             </div>
             <div class="product-category-main-content">
                 <div class="main-content-heading">
-                    <h1 style="border:none;">Tất cả sản phẩm</h1>
+                    <h1 style="border:none;">
+                    @foreach ($categoryList as $item) 
+                        @if(request()->segment(2) == $item->id) 
+                            {{$item->category_name}}
+                        @endif
+                    @endforeach
+                    </h1>
                     <div class="browse-tags">
                         <span>Sắp xếp theo:</span>
                         <span class="custom-dropdown">

@@ -51,7 +51,7 @@
 //         //header('location:user_order_list.php');
 //         echo "<script> window.location.href='./user_order_list.php'</script>";
 //     }
-} ?>
+// } ?>
 
 <div class="user_order_container">
     <div class="left_menu">

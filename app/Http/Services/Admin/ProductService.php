@@ -168,7 +168,7 @@ class ProductService{
         $category=DB::table($this->table)
         ->select('*')
         ->where('active','1')
-        ->orderByDesc('product_year')
+        ->orderByDesc('product_year')->skip(0)->take(10)
         ->get();
         //dd($category);
         return $category;
@@ -179,7 +179,17 @@ class ProductService{
         ->select('products.id','products.product_name','products.product_price','products.product_price_pre','products.product_quantity','products.product_image', DB::raw('SUM(order_product.product_amount) AS sale_amount'))
         ->join('products', 'order_product.product_id', '=', 'products.id')
         ->groupBy('products.id','products.product_name','products.product_price','products.product_price_pre','products.product_quantity','products.product_image')
-        ->orderBy('sale_amount','desc') 
+        ->orderBy('sale_amount','desc')->skip(0)->take(10)
+        ->get();
+        return $reportList;
+    }
+
+    public function getListProductHotDeals($filters=[]){
+        $reportList=DB::table('order_product')
+        ->select('products.id','products.product_name','products.product_price','products.product_price_pre','products.product_quantity','products.product_image', DB::raw('(products.product_price / products.product_price_pre) AS discount'))
+        ->join('products', 'order_product.product_id', '=', 'products.id')
+        ->groupBy('products.id','products.product_name','products.product_price','products.product_price_pre','products.product_quantity','products.product_image')
+        ->orderBy('discount')->skip(0)->take(10)
         ->get();
         return $reportList;
     }
