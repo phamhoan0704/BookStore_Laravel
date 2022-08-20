@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ExportFile;
+
 use App\Http\Services\Admin\CategoryService;
 use App\Http\Services\Admin\SupplierService;
 use App\Http\Services\Admin\ProductService;
@@ -31,7 +34,7 @@ class ReportController extends Controller
         $reportList=$this->reportService->getData($currentDate, $previousDate);
         $total = 0;
         foreach($reportList as $item)
-            $total += $item->product_price;
+            $total += $item->total;
         // dd($currentDate, $previousDate, $reportList);
         return view('admin.report.index',compact(['reportList','currentDate','previousDate','homepageList','total']));
     }
@@ -45,5 +48,24 @@ class ReportController extends Controller
         $orderStatus2=$this->reportService->ordersStatus(2);
         $productSoldOut=$this->reportService->productSoldOut();
         return view('admin.homepage.index',compact(['homepageList','listProductBestSeller','orderStatus0','orderStatus1','orderStatus2','productSoldOut']));
+    }
+    public function export(Request $request) 
+    {
+        $currentDate = Carbon::now()->format('Y-m-d');
+        $previousDate = Carbon::now()->subDays(30)->format('Y-m-d');
+        if(!empty($request->currentDate)) $currentDate=$request->currentDate;
+        if(!empty($request->previousDate)) $previousDate=$request->previousDate;
+        // dd($previousDay);        
+        $reportList=$this->reportService->getData($currentDate, $previousDate);
+// dd($reportList);
+        ob_end_clean();
+
+        ob_start(); //At the very top of your program (first line)
+        return Excel::download(new ExportFile($currentDate,$previousDate),"TKBC Tu $previousDate Den $currentDate.xlsx");
+        // return Excel::download(new ExportFile($currentDay,$currentMonth,$currentYear,$previousDay,$previousMonth,$previousYear),'report.xlsx');
+
+        // return Excel::download(new ExportFile([$reportList]), 'report.xlsx');
+        ob_flush();
+
     }
 }

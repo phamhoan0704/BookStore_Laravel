@@ -138,7 +138,7 @@
                         <a href="{{route('user.homepage')}}" class="header__nav-item-link">Trang chủ</a>
                     </li>
                     <li class="header__nav-item">
-                        <a href="{{route('category',['id'=>'0'])}}" class="header__nav-item-link">Sản phẩm</a>
+                        <a href="{{route('category')}}" class="header__nav-item-link">Sản phẩm</a>
                         <ul class="header__secondary-nav">
                             @foreach ($categoryList as $item)
                                 <li class="secondary-nav-item">
@@ -249,7 +249,7 @@
                         <p id="showSoldOutNotice"></p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="logOut()">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closePopup()">
                                 Close
                             </button>
                     </div>

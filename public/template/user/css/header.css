@@ -106,6 +106,7 @@ a:hover {
 .site-header__logo {
     width: 200px;
     flex-grow: 1;
+    margin-right: 42px;
 }
 
 .site-header__search-wrap {

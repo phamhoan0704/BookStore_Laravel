@@ -6,7 +6,7 @@
         <div class="breadcrumb">
             <ol class="breadcrumb-arrow">
                 <li><a href="home.php" target="_self">Trang chủ</a></li>
-                <li><a href="" target="_self">Danh mục</a></li>
+                <li><a href="{{route('category',['id'=>'0'])}}" target="_self">Danh mục</a></li>
                 <li>
                     <span>
                     @foreach ($categoryList as $item) 
@@ -39,11 +39,29 @@
                     <div class="browse-tags">
                         <span>Sắp xếp theo:</span>
                         <span class="custom-dropdown">
-                                <select id="selectBox" class="custom-dropdown__select" name="custom-dropdown__select">
-                                    <option value="">Giá: Tăng dần</option>
-                                    <option value="">Giá: Giam dần</option>
-                                    <option value="">Giá: Tăng dần</option>
-                                </select>
+                            <select id="selectBox" class="custom-dropdown__select" name="custom-dropdown__select" onchange="dropdownOption(value,{{$category_id}})">
+                                <option value="manual">Sản phẩm nổi bật</option>
+                                <option value="price-asc"
+                                    @if(str_contains(url()->full(),'price-asc')) 
+                                        {{'selected'}} 
+                                    @endif
+                                    >Giá: Tăng dần</option>
+                                <option value="price-desc"
+                                    @if(str_contains(url()->full(),'price-desc'))
+                                        {{'selected'}} 
+                                    @endif
+                                    >Giá: Giảm dần</option>
+                                <option value="title-asc"
+                                    @if(str_contains(url()->full(),'title-asc')) 
+                                        {{'selected'}} 
+                                    @endif
+                                    >Tên: A-Z</option>
+                                <option value="title-desc"
+                                    @if(str_contains(url()->full(),'title-desc'))
+                                        {{'selected'}} 
+                                    @endif
+                                    >Tên: Z-A</option>
+                            </select>
                         </span>
                     </div> 
                 </div>
@@ -71,32 +89,30 @@
                                     <div class="pdt_icon">
                                         <a class="btn-quickview" href="" title="Xem nhanh">
                                             <i class="icon_list">
-                                                <?xml version="1.0" encoding="iso-8859-1"?>
-                                                    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                                        viewBox="0 0 511.992 511.992" style="enable-background:new 0 0 511.992 511.992;" xml:space="preserve">
+                                                <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                    viewBox="0 0 511.992 511.992" style="enable-background:new 0 0 511.992 511.992;" xml:space="preserve">
+                                                    <g>
                                                         <g>
-                                                            <g>
-                                                                <path d="M510.096,249.937c-4.032-5.867-100.928-143.275-254.101-143.275C124.56,106.662,7.44,243.281,2.512,249.105
-                                                                    c-3.349,3.968-3.349,9.792,0,13.781C7.44,268.71,124.56,405.329,255.995,405.329S504.549,268.71,509.477,262.886
-                                                                    C512.571,259.217,512.848,253.905,510.096,249.937z M255.995,383.996c-105.365,0-205.547-100.48-230.997-128
-                                                                    c25.408-27.541,125.483-128,230.997-128c123.285,0,210.304,100.331,231.552,127.424
-                                                                    C463.013,282.065,362.256,383.996,255.995,383.996z"/>
-                                                            </g>
+                                                            <path d="M510.096,249.937c-4.032-5.867-100.928-143.275-254.101-143.275C124.56,106.662,7.44,243.281,2.512,249.105
+                                                                c-3.349,3.968-3.349,9.792,0,13.781C7.44,268.71,124.56,405.329,255.995,405.329S504.549,268.71,509.477,262.886
+                                                                C512.571,259.217,512.848,253.905,510.096,249.937z M255.995,383.996c-105.365,0-205.547-100.48-230.997-128
+                                                                c25.408-27.541,125.483-128,230.997-128c123.285,0,210.304,100.331,231.552,127.424
+                                                                C463.013,282.065,362.256,383.996,255.995,383.996z"/>
                                                         </g>
+                                                    </g>
+                                                    <g>
                                                         <g>
-                                                            <g>
-                                                                <path d="M255.995,170.662c-47.061,0-85.333,38.272-85.333,85.333s38.272,85.333,85.333,85.333s85.333-38.272,85.333-85.333
-                                                                    S303.056,170.662,255.995,170.662z M255.995,319.996c-35.285,0-64-28.715-64-64s28.715-64,64-64s64,28.715,64,64
-                                                                    S291.28,319.996,255.995,319.996z"/>
-                                                            </g>
+                                                            <path d="M255.995,170.662c-47.061,0-85.333,38.272-85.333,85.333s38.272,85.333,85.333,85.333s85.333-38.272,85.333-85.333
+                                                                S303.056,170.662,255.995,170.662z M255.995,319.996c-35.285,0-64-28.715-64-64s28.715-64,64-64s64,28.715,64,64
+                                                                S291.28,319.996,255.995,319.996z"/>
                                                         </g>
-                                                    </svg>
+                                                    </g>
+                                                </svg>
                         
                                             </i>
                                         </a>
                                         <a class="btn-buynow" title=" Mua ngay">
                                             <i class="icon_list">
-                                                <?xml version="1.0" encoding="iso-8859-1"?>
                                                 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                                     viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
                                                     <g>
@@ -145,8 +161,8 @@
                             <div class="product__detail">
                                 <a href="" class="product__name" title="">{{$item->product_name}}</a>
                                 <div class="product__price">
-                                    <p class="pro-price__new">{{$item->product_price}}đ</p>
-                                    <p class="pro-price__old">{{$item->product_price_pre}}đ</p>
+                                    <p class="pro-price__new">{{number_format($item->product_price)}}đ</p>
+                                    <p class="pro-price__old">{{number_format($item->product_price_pre)}}đ</p>
                                 </div>
                             </div>
                         </div>
@@ -156,6 +172,7 @@
             </div>
         </div>
     </div>
+    
     <script>
         @foreach ($productList as $item)
             @if($item->product_quantity == 0) 
@@ -173,11 +190,19 @@
 
         }
         
-        function logOut()
+        function closePopup()
         {
             console.log('close');
             document.getElementById("notice").style.display = "none"; 
         }   
+
+        function dropdownOption(value, id)
+        {
+            if(id == undefined) var url = "http://127.0.0.1:8000/category?sort_by=" + value;
+            else var url = "http://127.0.0.1:8000/category/" + id + "?sort_by=" + value;
+            window.location.href = url;
+        }
     </script>
+    
 @endsection
 <!-- @extends('user.footer') -->

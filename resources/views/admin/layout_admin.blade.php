@@ -31,7 +31,7 @@
         </div>
     </div>
     <div class="main_header" style="display: flex; align-items: center">
-        <a href="homepage.php"><img src="{{ url('template/user/image/icon/logo.jpg') }}" alt="" class="img-logo"></a>
+        <a href="{{route('admin.homepage')}}"><img src="{{ url('template/user/image/icon/logo.jpg') }}" alt="" class="img-logo"></a>
         
         <h1 style="padding-left: 16px;">NHÀ SÁCH IPM</h1>
     </div>

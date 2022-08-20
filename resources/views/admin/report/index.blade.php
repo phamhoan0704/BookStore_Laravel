@@ -15,26 +15,44 @@
                     </form>
                 </div>
                 <div class="sale_management-option">
-                    <select id="selectBox" class="sale_management__select" name="order_management__select">
+                    <select id="selectBox" class="sale_management__select" name="order_management__select" onchange="dropdownOption(value)">
                         <option value="productID">Mã Sản Phẩm</option>
 
-                        <option value="sale-amount-descending">Số Lượng: Giảm dần</option>
+                        <option 
+                            @if(str_contains(url()->full(),'sale-amount-desc')) 
+                                {{'selected'}} 
+                            @endif
+                            value="sale-amount-desc">Số Lượng: Giảm dần</option>
                         
-                        <option value="sale-amount-ascending">Số Lượng: Tăng dần</option>
+                        <option 
+                            @if(str_contains(url()->full(),'sale-amount-asc')) 
+                                {{'selected'}} 
+                            @endif
+                            value="sale-amount-asc">Số Lượng: Tăng dần</option>
 
-                        <option value="price-descending">Doanh Thu: Giảm dần</option>
-                        <option value="price-ascending">Doanh Thu: Tăng dần</option>
+                        <option 
+                            @if(str_contains(url()->full(),'revenue-desc')) 
+                                {{'selected'}} 
+                            @endif
+                            value="revenue-desc">Doanh Thu: Giảm dần</option>
+                        <option 
+                            @if(str_contains(url()->full(),'revenue-asc')) 
+                                {{'selected'}} 
+                            @endif
+                            value="revenue-asc">Doanh Thu: Tăng dần</option>
                     </select>
                 </div>
             </div>
             <div class="sale_management-info">
                 <div class="float-right">
-                    <!-- <form action="" method="post">
-                        <input type="submit" name="export_excel" value="Export">
-                    </form> -->
-                    <div class="float-right">
-                        <a href="" class="btn btn-success">Export</a>
-                    </div>
+                    <form action="{{ route('admin.export') }}" method="get">
+                        <input type="hidden" value="{{ $previousDate }}" name="previousDate">
+                        <input type="hidden" value="{{ $currentDate }}" name="currentDate">
+                        <input class="btn btn-success" type="submit" value="Export">
+                    </form>
+                    <!-- <div class="float-right">
+                        <a href="http://127.0.0.1:8000/admin/report/export?previousDate={{ $previousDate }}&&currentDate={{ $currentDate }}" class="btn btn-success">Export</a>
+                    </div> -->
                 </div>
                 <table class="sale_management-table">
                     <thead>
@@ -108,6 +126,12 @@
 
             chart.draw(data, google.charts.Line.convertOptions(options));
             }
+            
+        function dropdownOption(value)
+        {
+            var url = "http://127.0.0.1:8000/admin/report/index?sort_by=" + value;
+            window.location.href = url;
+        }
             
     </script>
 

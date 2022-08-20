@@ -12,15 +12,36 @@ class ReportService{
 
     public function getData($currentDate, $previousDate, $filters=[]){
         $reportList=DB::table('order_product')
-        ->select('order_product.product_id','products.product_name','products.product_price', DB::raw('SUM(order_product.product_amount) AS sale_amount'),)
+        ->select('order_product.product_id','products.product_name','products.product_price', DB::raw('SUM(order_product.product_amount) AS sale_amount'),DB::raw('SUM(order_product.product_amount*products.product_price) AS total'))
         ->join('products', 'order_product.product_id', '=', 'products.id')
         ->join('orders', 'orders.id', '=', 'order_product.order_id')
         ->where('orders.order_date','<',$currentDate)
         ->where('orders.order_date','>', $previousDate)
-        ->groupBy('order_product.product_id','products.product_name','products.product_price')
-        ->get();
+        ->groupBy('order_product.product_id','products.product_name','products.product_price');
+        
+        if( str_contains(url()->full(),'sale-amount-asc') ) {
+            $reportList=$reportList->orderBy('sale_amount')->get();
+        } else
+
+        if( str_contains(url()->full(),'sale-amount-desc') ){
+            $reportList=$reportList->orderByDesc('sale_amount')->get();
+        } else
+        
+
+        if( str_contains(url()->full(),'revenue-asc') ) {
+            $reportList=$reportList->orderBy('total')->get();
+        } else
+
+        if( str_contains(url()->full(),'revenue-desc') ) {
+            $reportList=$reportList->orderByDesc('total')->get();
+        }
+        else {
+            $reportList=$reportList->get();
+        }
+
         return $reportList;
    }
+//    select order_product.product_id, products.product_name, products.product_price, SUM(order_product.product_amount) AS sale_amount from order_product inner join products on order_product.product_id = products.id inner join orders on orders.id = order_product.order_id where orders.order_date < 2022-08-19 and orders.ordxer_date > 2022-07-20 group by order_product.product_id, products.product_name, products.product_price
 
     public function getDataForHomepage($filters=[]){
         $reportList=DB::table('order_product')
@@ -30,6 +51,7 @@ class ReportService{
         ->groupBy('sale_amount')
         ->orderBy('sale_amount')
         ->get();
+        
         // dd($reportList);
         return $reportList;
     }

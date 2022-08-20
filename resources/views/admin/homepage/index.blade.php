@@ -106,7 +106,7 @@
             </div>
         </div>
         <div class="homepage__box">
-            <div class="title-box">Sản Phẩm Bán Chạy</div>    
+            <div class="title-box">Sản phẩm bán chạy</div>    
             
             <div class="sale_management-info">
                 

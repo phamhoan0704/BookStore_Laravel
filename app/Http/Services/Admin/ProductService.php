@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Session;
 
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
+
+
 class ProductService{
     protected $table='products';
     public function getAllCategories($filters=[]){
@@ -181,23 +184,35 @@ class ProductService{
         return $reportList;
     }
 
-    public function getProductByCategory($category_id,$filters=[]){
-        if($category_id==0)
-        {
-            $category_list=DB::table($this->table)
-            ->select('*')
-            ->where('active','1')
-            ->orderByDesc('product_year');
-        } else {
-            $category_list=DB::table($this->table)
-            ->select('*')
-            ->where('active','1')
-            ->where('category_id',$category_id)
-            ->orderByDesc('product_year');
+    public function getProductByCategory($id){
+        // dd($id);
+        // dd(url()->full());
+        // dd(url()->current());
+        $product_list=DB::table('products')
+        ->select('*')
+        ->where('active','1');
+        
+        if($id != ''){       
+            $product_list=$product_list->where('category_id','=',$id);
         }
-        $category_list=$category_list->paginate(16);
-        // dd($category_list);
-        return $category_list;
+        if( str_contains(url()->full(),'price-asc') ) {
+            $product_list=$product_list->orderBy('product_price');
+        }
+
+        if( str_contains(url()->full(),'price-desc') ) {
+            $product_list=$product_list->orderByDesc('product_price');
+        }
+        if( str_contains(url()->full(),'title-asc') ){
+            $product_list=$product_list->orderBy('product_name');
+        }
+
+        if( str_contains(url()->full(),'title-desc') ){
+            $product_list=$product_list->orderByDesc('product_name');
+        }
+
+        $product_list=$product_list->paginate(16);
+        // dd($product_list);
+        return $product_list;
     }
 
     public function searchProduct($search){
