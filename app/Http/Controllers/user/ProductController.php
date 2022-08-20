@@ -46,18 +46,24 @@ class ProductController extends Controller
 
     }
 
-    public function getProductByCategory($id){
-
-        $productList=$this->productService->getProductByCategory($id);
+    public function getProductByCategory(){
         $categoryList=$this->categoryService->getCategoryList();
-        // dd($categoryList);
-        // dd($productList);
+        $category_id='';
+        if(!empty(request()->segment(2)))
+        {
+            $category_id = request()->segment(2);
+        }
+        $productList=$this->productService->getProductByCategory($category_id);
+        
         $data=array();
         $cartList=$this->cartService->getCartList();
+        // dd($category_id);
+        
         if(Session::has('loginId')){
             $data=DB::table('users')->where('id','=',Session::get('loginId'))->first();
         }
-        return view('user.productCategory',compact(['productList','categoryList','data','cartList']));
+        // dd($category_id);
+        return view('user.productCategory',compact(['productList','categoryList','data','cartList','category_id']));
     }
 
     public function searchProduct(Request $request){

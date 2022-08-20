@@ -140,6 +140,7 @@ Route::prefix('/admin')->name('admin.')->group(function(){
     }); 
     //SALE REPORT
     Route::get('/report/index',[ReportController::class,'index'])->name('report');
+    Route::get('/report/export',[ReportController::class,'export'])->name('export');
 
     Route::get('/homepage/index',[ReportController::class,'homepage'])->name('homepage');   
 
@@ -189,8 +190,12 @@ Route::prefix('/user')->name('user.')->group(function(){
 
 });
 
-Route::get('/category/{id}', [App\Http\Controllers\user\ProductController::class,'getProductByCategory'])->name('category');
-Route::get('/search/{name?}', [App\Http\Controllers\user\ProductController::class,'searchProduct'])->name('search');
+Route::prefix('/category')->name('category.')->group(function(){
+    Route::get('/{id?}',[CategoryController::class,'getProductByCategory'])->name('index');
+});
+
+Route::get('/category/{id?}', [App\Http\Controllers\user\ProductController::class,'getProductByCategory'])->name('category');
+Route::get('/search', [App\Http\Controllers\user\ProductController::class,'searchProduct'])->name('search');
 route::get('/header',function(){
     return view('header');
 });
