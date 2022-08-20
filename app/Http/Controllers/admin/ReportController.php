@@ -29,25 +29,25 @@ class ReportController extends Controller
         $previousDate = Carbon::now()->subDays(30)->format('Y-m-d');
         if(!empty($request->currentDate)) $currentDate=$request->currentDate;
         if(!empty($request->previousDate)) $previousDate=$request->previousDate;
-        $homepageList=$this->reportService->getDataForHomepage();
+        $lineChart=$this->reportService->getDataForLineChart();
         
         $reportList=$this->reportService->getData($currentDate, $previousDate);
         $total = 0;
         foreach($reportList as $item)
             $total += $item->total;
         // dd($currentDate, $previousDate, $reportList);
-        return view('admin.report.index',compact(['reportList','currentDate','previousDate','homepageList','total']));
+        return view('admin.report.index',compact(['reportList','currentDate','previousDate','lineChart','total']));
     }
 
     public function homepage(){
 
-        $homepageList=$this->reportService->getDataForHomepage();
         $listProductBestSeller=$this->reportService->getListProductBestSeller();
+        $listCategoryBestSeller=$this->reportService->getCategoryBestSeller();
         $orderStatus0=$this->reportService->ordersStatus(0);
         $orderStatus1=$this->reportService->ordersStatus(1);
         $orderStatus2=$this->reportService->ordersStatus(2);
         $productSoldOut=$this->reportService->productSoldOut();
-        return view('admin.homepage.index',compact(['homepageList','listProductBestSeller','orderStatus0','orderStatus1','orderStatus2','productSoldOut']));
+        return view('admin.homepage.index',compact(['listProductBestSeller','listCategoryBestSeller','orderStatus0','orderStatus1','orderStatus2','productSoldOut']));
     }
     public function export(Request $request) 
     {
@@ -55,13 +55,11 @@ class ReportController extends Controller
         $previousDate = Carbon::now()->subDays(30)->format('Y-m-d');
         if(!empty($request->currentDate)) $currentDate=$request->currentDate;
         if(!empty($request->previousDate)) $previousDate=$request->previousDate;
-        // dd($previousDay);        
         $reportList=$this->reportService->getData($currentDate, $previousDate);
-// dd($reportList);
         ob_end_clean();
 
         ob_start(); //At the very top of your program (first line)
-        return Excel::download(new ExportFile($currentDate,$previousDate),"TKBC Tu $previousDate Den $currentDate.xlsx");
+        return Excel::download(new ExportFile($currentDate,$previousDate),"TKDT Tu $previousDate Den $currentDate.xlsx");
         // return Excel::download(new ExportFile($currentDay,$currentMonth,$currentYear,$previousDay,$previousMonth,$previousYear),'report.xlsx');
 
         // return Excel::download(new ExportFile([$reportList]), 'report.xlsx');

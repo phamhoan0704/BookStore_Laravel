@@ -1,56 +1,56 @@
 <?php include('./header.php');
-$order_list = [];
-$order_list1 = [];
-$order_list2 = [];
-$order_list3 = [];
-$order_list4 = [];
-$list_product_name = [];
-if (!isset($_SESSION['user'])) {
-    echo "<script>window.location.href='./log_in.php'</script>";
-} else {
-    $usernanme = $_SESSION['user'];
-    include('../database/connect.php');
-    $sql = "SELECT order_name,order_id,order_status,order_address,order_date,order_total
-    from tbl_user INNER JOIN tbl_order ON tbl_user.user_id=tbl_order.user_id 
-    WHERE user_name='$usernanme' ";
-    $result = mysqli_query($conn, $sql);
-    while ($row = mysqli_fetch_assoc($result)) {
-        $order_list[] = $row;
-    }
-    $sql1 = "SELECT order_name,order_id,order_status,order_address,order_date,order_total
-    from tbl_user INNER JOIN tbl_order ON tbl_user.user_id=tbl_order.user_id 
-    WHERE user_name='$usernanme' and order_status=2; ";
-    $result1 = mysqli_query($conn, $sql1);
-    while ($row1 = mysqli_fetch_assoc($result1)) { 
-        $order_list1[] = $row1;
-    }
-    $sql2 = "SELECT order_name,order_id,order_status,order_address,order_date,order_total
-    from tbl_user INNER JOIN tbl_order ON tbl_user.user_id=tbl_order.user_id 
-    WHERE user_name='$usernanme' and order_status=3; ";
-    $result2 = mysqli_query($conn, $sql2);
-    while ($row2 = mysqli_fetch_assoc($result2)) {
-        $order_list2[] = $row2;
-    }
-    $sql3 = "SELECT order_name,order_id,order_status,order_address,order_date,order_total
-    from tbl_user INNER JOIN tbl_order ON tbl_user.user_id=tbl_order.user_id 
-    WHERE user_name='$usernanme' and order_status=4; ";
-    $result3 = mysqli_query($conn, $sql3);
-    while ($row3 = mysqli_fetch_assoc($result3)) {
-        $order_list3[] = $row3;
-    }
-    $sql4 = "SELECT order_name,order_id,order_status,order_address,order_date,order_total
-    from tbl_user INNER JOIN tbl_order ON tbl_user.user_id=tbl_order.user_id 
-    WHERE user_name='$usernanme' and order_status=5; ";
-    $result4 = mysqli_query($conn, $sql4);
-    while ($row4 = mysqli_fetch_assoc($result4)) {
-        $order_list4[] = $row4;
-    }
-    if (isset($_POST['order_delete'])) {
-        $order_delete_id = $_POST['order_del_id'];
-        mysqli_query($conn, "UPDATE tbl_order SET order_status=5 where order_id=$order_delete_id");
-        //header('location:user_order_list.php');
-        echo "<script> window.location.href='./user_order_list.php'</script>";
-    }
+// $order_list = [];
+// $order_list1 = [];
+// $order_list2 = [];
+// $order_list3 = [];
+// $order_list4 = [];
+// $list_product_name = [];
+// if (!isset($_SESSION['user'])) {
+//     echo "<script>window.location.href='./log_in.php'</script>";
+// } else {
+//     $usernanme = $_SESSION['user'];
+//     include('../database/connect.php');
+//     $sql = "SELECT order_name,order_id,order_status,order_address,order_date,order_total
+//     from tbl_user INNER JOIN tbl_order ON tbl_user.user_id=tbl_order.user_id 
+//     WHERE user_name='$usernanme' ";
+//     $result = mysqli_query($conn, $sql);
+//     while ($row = mysqli_fetch_assoc($result)) {
+//         $order_list[] = $row;
+//     }
+//     $sql1 = "SELECT order_name,order_id,order_status,order_address,order_date,order_total
+//     from tbl_user INNER JOIN tbl_order ON tbl_user.user_id=tbl_order.user_id 
+//     WHERE user_name='$usernanme' and order_status=2; ";
+//     $result1 = mysqli_query($conn, $sql1);
+//     while ($row1 = mysqli_fetch_assoc($result1)) { 
+//         $order_list1[] = $row1;
+//     }
+//     $sql2 = "SELECT order_name,order_id,order_status,order_address,order_date,order_total
+//     from tbl_user INNER JOIN tbl_order ON tbl_user.user_id=tbl_order.user_id 
+//     WHERE user_name='$usernanme' and order_status=3; ";
+//     $result2 = mysqli_query($conn, $sql2);
+//     while ($row2 = mysqli_fetch_assoc($result2)) {
+//         $order_list2[] = $row2;
+//     }
+//     $sql3 = "SELECT order_name,order_id,order_status,order_address,order_date,order_total
+//     from tbl_user INNER JOIN tbl_order ON tbl_user.user_id=tbl_order.user_id 
+//     WHERE user_name='$usernanme' and order_status=4; ";
+//     $result3 = mysqli_query($conn, $sql3);
+//     while ($row3 = mysqli_fetch_assoc($result3)) {
+//         $order_list3[] = $row3;
+//     }
+//     $sql4 = "SELECT order_name,order_id,order_status,order_address,order_date,order_total
+//     from tbl_user INNER JOIN tbl_order ON tbl_user.user_id=tbl_order.user_id 
+//     WHERE user_name='$usernanme' and order_status=5; ";
+//     $result4 = mysqli_query($conn, $sql4);
+//     while ($row4 = mysqli_fetch_assoc($result4)) {
+//         $order_list4[] = $row4;
+//     }
+//     if (isset($_POST['order_delete'])) {
+//         $order_delete_id = $_POST['order_del_id'];
+//         mysqli_query($conn, "UPDATE tbl_order SET order_status=5 where order_id=$order_delete_id");
+//         //header('location:user_order_list.php');
+//         echo "<script> window.location.href='./user_order_list.php'</script>";
+//     }
 } ?>
 
 <div class="user_order_container">
