@@ -43,7 +43,7 @@ class ReportService{
    }
 //    select order_product.product_id, products.product_name, products.product_price, SUM(order_product.product_amount) AS sale_amount from order_product inner join products on order_product.product_id = products.id inner join orders on orders.id = order_product.order_id where orders.order_date < 2022-08-19 and orders.ordxer_date > 2022-07-20 group by order_product.product_id, products.product_name, products.product_price
 
-    public function getDataForHomepage($filters=[]){
+    public function getDataForLineChart($filters=[]){
         $reportList=DB::table('order_product')
         ->select(DB::raw('month(orders.order_date) AS sale_amount'), DB::raw('SUM(order_product.product_price*order_product.product_amount) AS total'),)
         ->join('orders', 'orders.id', '=', 'order_product.order_id')
@@ -62,6 +62,17 @@ class ReportService{
         ->join('products', 'order_product.product_id', '=', 'products.id')
         ->join('categories', 'categories.id', '=', 'products.category_id')
         ->groupBy('order_product.product_id','products.product_name','products.product_price', 'categories.category_name')
+        ->orderBy('sale_amount','desc') 
+        ->get();
+        return $reportList;
+    }
+
+    public function getCategoryBestSeller($filters=[]){
+        $reportList=DB::table('order_product')
+        ->select('categories.id','categories.category_name', DB::raw('SUM(order_product.product_amount) AS sale_amount'))
+        ->join('products', 'order_product.product_id', '=', 'products.id')
+        ->join('categories', 'categories.id', '=', 'products.category_id')
+        ->groupBy('categories.id','categories.category_name')
         ->orderBy('sale_amount','desc') 
         ->get();
         return $reportList;

@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="{{asset('template/user/css/login.css')}}">
   <link rel="stylesheet" href="{{asset('template/user/css/register.css')}}">
   <link rel="stylesheet" href="{{asset('template/user/css/home.css')}}">
+  <link rel="stylesheet" href="{{asset('template/user/css/home_tab.css')}}">
   <link rel="stylesheet" href="{{asset('template/user/css/product.css')}}">
   <link rel="stylesheet" href="{{asset('template/user/css/productCategory.css')}}">
   <link rel="stylesheet" href="{{asset('template/user/css/productSearch.css')}}">

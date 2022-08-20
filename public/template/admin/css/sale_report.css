@@ -8,7 +8,7 @@
     margin: 0 4px;
     flex: 1;
     background-color: white;
-    padding: 24px 48px;
+    padding: 24px 28px;
     -webkit-box-shadow: 0 1px 4px 0 rgb(0 0 0 / 10%);
     box-shadow: 0 1px 4px 0 rgb(0 0 0 / 10%);
     margin-bottom: 24px;
@@ -27,7 +27,8 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
+    margin-top: 12px;
 }
 
 .sale_management-filter button {
@@ -36,7 +37,7 @@
 }
 
 .sale_management-filter input {
-    margin: 0 24px 0 8px;
+    margin: 0px 24px 0 8px;
 }
 
 .sale_management__select {

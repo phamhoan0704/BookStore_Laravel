@@ -68,8 +68,8 @@ class ExportFile implements FromQuery
     {
         $currentDate = "$this->currentDate";
         $previousDate = "$this->previousDate";
-        $currentDate = Carbon::now()->format('Y-m-d');
-        $previousDate = Carbon::now()->subDays(30)->format('Y-m-d');
+        // $currentDate = Carbon::now()->format('Y-m-d');
+        // $previousDate = Carbon::now()->subDays(30)->format('Y-m-d');
         // dd($currentDate);
         //return User::query()->whereYear('created_at', $this->year);
         return Product::query()

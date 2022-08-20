@@ -1,9 +1,18 @@
 @extends('admin.layout_admin')
 @section('Content')
 {{-- Model --}}
+    <div class="homepage__box sale-analysis">
+        <div class="title-box">Tổng Quan
+
+            <p class="body-box" style="margin-bottom: 0;">Tổng quan về doanh thu của cửa hàng trong năm</p>
+
+        </div>
+        <div id="linechart"></div>
+    </div>
     <div class="sale_management_content">
         <div class="sale_management_main">  
-            <h1>THỐNG KÊ DOANH THU</h1>
+            <!-- <div class="title-box">Tổng quan</div> -->
+            <div class="title-box">Chi Tiết</div>
             <div class="sale_management-head">
                 <div class="sale_management-filter">
                     <form action="" method="get">
@@ -15,7 +24,7 @@
                     </form>
                 </div>
                 <div class="sale_management-option">
-                    <select id="selectBox" class="sale_management__select" name="order_management__select" onchange="dropdownOption(value)">
+                    <select id="selectBox" class="sale_management__select" name="order_management__select" onchange="dropdownOption(value,{{$previousDate}},{{$currentDate}})">
                         <option value="productID">Mã Sản Phẩm</option>
 
                         <option 
@@ -87,12 +96,7 @@
             </div>
         </div>  
     </div>
-    <div class="homepage__box sale-analysis">
-        <div class="title-box">Phân Tích Bán Hàng
-            <p style="margin-bottom: 0;">Tổng quan về doanh thu của cửa hàng trong năm</p>
-        </div>
-        <div id="linechart"></div>
-    </div>
+    
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
         google.charts.load('current', {'packages':['line']});
@@ -105,7 +109,7 @@
             data.addColumn('number', 'Doanh Thu');
 
             data.addRows([
-                @foreach ($homepageList as $item)
+                @foreach ($lineChart as $item)
                     [{{$item->sale_amount}},{{$item->total}}],
                 @endforeach
 
@@ -126,10 +130,14 @@
 
             chart.draw(data, google.charts.Line.convertOptions(options));
             }
-            
-        function dropdownOption(value)
+             
+        function dropdownOption(value,previousDate,currentDate)
         {
+            @if( str_contains(url()->full(),'currentDate') )
+                var url = "http://127.0.0.1:8000/admin/report/index?previousDate={{$previousDate}}&currentDate={{$currentDate}}&sort_by=" + value;
+            @else
             var url = "http://127.0.0.1:8000/admin/report/index?sort_by=" + value;
+            @endif
             window.location.href = url;
         }
             
