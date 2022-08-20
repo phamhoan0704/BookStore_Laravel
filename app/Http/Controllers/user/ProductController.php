@@ -35,6 +35,7 @@ class ProductController extends Controller
 
         $productList=$this->productService->getNewProduct();
         $productListBestSeller=$this->productService->getListProductBestSeller();
+        $productHotDeals=$this->productService->getListProductHotDeals();
         $categoryList=$this->categoryService->getCategoryList();
         
         $data=array();
@@ -42,7 +43,7 @@ class ProductController extends Controller
         if(Session::has('loginId')){
             $data=DB::table('users')->where('id','=',Session::get('loginId'))->first();
         } else $cartList=array();
-        return view('user.home',compact(['productList','categoryList','data','cartList','productListBestSeller']));
+        return view('user.home',compact(['productList','categoryList','data','cartList','productListBestSeller','productHotDeals']));
 
     }
 
