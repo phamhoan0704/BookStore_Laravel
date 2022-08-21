@@ -26,11 +26,12 @@ class ReportController extends Controller
 
     public function index(Request $request){
         $currentDate = Carbon::now()->format('Y-m-d');
-        $previousDate = Carbon::now()->subDays(30)->format('Y-m-d');
+        // $previousDate = Carbon::now()->subDays(360)->format('Y-m-d');
+        $previousDate = "2022-01-01";
         if(!empty($request->currentDate)) $currentDate=$request->currentDate;
         if(!empty($request->previousDate)) $previousDate=$request->previousDate;
         $lineChart=$this->reportService->getDataForLineChart();
-        
+        // dd(Carbon::now()->format('Y-m-d H:i:s'));
         $reportList=$this->reportService->getData($currentDate, $previousDate);
         $total = 0;
         foreach($reportList as $item)

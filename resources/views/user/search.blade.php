@@ -122,7 +122,7 @@
 
         }
         
-        function logOut()
+        function closePopup()
         {
             console.log('close');
             document.getElementById("notice").style.display = "none"; 
