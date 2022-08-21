@@ -18,7 +18,8 @@
                 <div class="modal-body">
                     @if (session()->has('success'))
                     <h5> {{session('success')}}</h5>
-                    @else
+                    @endif
+                    @if(session()->has('error'))
                     <h5> {{session('error')}}</h5>
                     @endif
                 </div>

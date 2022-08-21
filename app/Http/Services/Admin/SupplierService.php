@@ -98,8 +98,24 @@ public function add($dataInsert){
         ]);
         
     }
+    public function checkSupplier($author_id){
+        try{
+            $list=DB::table($this->table)
+            ->join('products','products.category_id','suppliers.id')
+            ->where('category_id',$author_id)
+            ->get();
+            return count($list);
+        }catch(Exception $err){
+        dd($err);
+            // session()->flash('error','Có lỗi xảy ra. Vui lòng thử lại!');
+        }
+    }
     public function delete($id)
     {
+        if($this->checkSupplier($id)>0){
+            session()->flash('success','Nhà cung cấp này không thể xóa!');
+           }
+           else{
         try{
             DB::table($this->table)
             ->where('id',$id)
@@ -109,5 +125,6 @@ public function add($dataInsert){
             session()->flash('error','Có lỗi xảy ra. Vui lòng thử lại!');
         }
 
+    }
     }
 }

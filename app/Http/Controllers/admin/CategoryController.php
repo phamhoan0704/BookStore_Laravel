@@ -96,9 +96,12 @@ class CategoryController extends Controller
         $category_id=$request->category_delete_id;
         if(!empty($category_id)){
             $this->categoryService->deleteCategory($category_id);
-        return redirect()->back();
+
         }
-    }
+        return redirect()->back();
+    
+        }
+    
     // public function destroyAll(Request $request){
     //     $ids=$request->ids;
     //     if(!empty($ids)){
