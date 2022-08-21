@@ -442,19 +442,21 @@
                 document.getElementById({{$item->id}}).removeAttribute("href");
             @endif
         @endforeach
-        function checkSoldOut(id) {
-            if(id == '0') 
+        @foreach ($productHotDeals as $item)
+            @if($item->product_quantity == 0) 
+                document.getElementById({{$item->id}}).removeAttribute("href");
+            @endif
+        @endforeach
+        function checkSoldOut(quantity) {
+            if(quantity == '0') 
             {
                 document.getElementById('notice').style.display = 'block';
                 document.getElementById("showSoldOutNotice").innerHTML = "Sản Phẩm Đã Hết Hàng";
-
             }
-
         }
         
-        function logOut()
+        function closePopup()
         {
-            console.log('close');
             document.getElementById("notice").style.display = "none"; 
         }   
     </script>

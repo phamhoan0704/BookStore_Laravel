@@ -17,6 +17,7 @@ class ReportService{
         ->join('orders', 'orders.id', '=', 'order_product.order_id')
         ->where('orders.order_date','<',$currentDate)
         ->where('orders.order_date','>', $previousDate)
+        ->where('orders.order_status','=', '3')
         ->groupBy('order_product.product_id','products.product_name','products.product_price');
         
         if( str_contains(url()->full(),'sale-amount-asc') ) {
@@ -47,6 +48,7 @@ class ReportService{
         $reportList=DB::table('order_product')
         ->select(DB::raw('month(orders.order_date) AS sale_amount'), DB::raw('SUM(order_product.product_price*order_product.product_amount) AS total'),)
         ->join('orders', 'orders.id', '=', 'order_product.order_id')
+        ->where('orders.order_status','=', '3')
         ->whereYear('orders.order_date','=','2022')
         ->groupBy('sale_amount')
         ->orderBy('sale_amount')

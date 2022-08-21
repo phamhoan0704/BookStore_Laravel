@@ -247,6 +247,7 @@ class ProductService{
         ->select('*')
         ->where('product_name','like','%'.$search.'%');
         $search_list=$search_list->paginate(16);
+        if($search == '') $search_list = array();
         return $search_list; 
     }
 

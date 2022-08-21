@@ -18,42 +18,15 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\FromQuery;
-use App\Http\Services\Admin\ReportService;
-
-// class ExportFile implements FromCollection
-// {
-//     /**
-//     * @return \Illuminate\Support\Collection
-//     */
-//     public function collection()
-//     {
-//         return Product::all();
-//     }
-
-//     public function headings(): array {
-//         return [
-//             'ID',
-//             'Name',
-//             'Price',    
-//             "Amout",
-//             "Revenue"
-            
-//         ];
-//     }
- 
-//     public function map($item): array {
-//         return [
-//             $item->product_id,
-//             $item->product_name,
-//             $item->product_price,
-//             $item->sale_amout,
-//             $item->$item->product_price,
-//         ];
-//     }
-
-// }
-
-class ExportFile implements FromQuery
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Events\AfterSheet;
+class ExportFile implements 
+    FromQuery, 
+    ShouldAutoSize, 
+    WithHeadings,
+    WithEvents
 {
     use Exportable;
  
@@ -80,48 +53,30 @@ class ExportFile implements FromQuery
         ->where('orders.order_date','>',$previousDate)
         ->groupBy('order_product.product_id','products.product_name','products.product_price');
     }
+
+    public function headings(): array
+    {
+        return [
+            'Mã sản phẩm',
+            'Tên sản phẩm',
+            'Giá Bán',
+            'Số lượng',
+            'Doanh Thu',
+        ];
+    }
+
+    public function registerEvents(): array
+    {
+        return [
+            AfterSheet::class    => function(AfterSheet $event) {
+                $event->sheet->getStyle('A1:E1')->applyFromArray([
+                    'font' => [
+                        'bold' => true
+                    ]
+                ]);
+                
+            }
+        ];
+    }
+
 }
-
-// class ExportFile implements FromArray
-// {
-//     // use RegistersEventListeners;
-//     /**
-//     * @return \Illuminate\Support\Collection
-//     */
-
-//     public $points;
-
-//     public function __construct(array $points)
-//     {
-//         $this->points = $points;
-//     }
-
-//     public function array(): array
-//     {
-//         return $this->points[0];
-//     }
-    
-    // use Exportable;
- 
-    // public function __construct( $currentDate, $previousDate)
-    // {
-    //     $this->currentDate = $currentDate;
-    //     $this->previousDate = $previousDate;
-    // }
- 
-    // public function query()
-    // {
-    //     $currentDate = $this->currentDate;
-    //     $previousDate = $this->previousDate;
-    //     dd($currentDate);
-    //     //return User::query()->whereYear('created_at', $this->year);
-    //     return Product::query()
-    //     ->select('order_product.product_id','products.product_name','products.product_price', DB::raw('SUM(order_product.product_amount) AS sale_amount'),)
-    //     ->join('order_prodduct', 'order_product.product_id', '=', 'products.id')
-    //     ->join('orders', 'orders.id', '=', 'order_product.order_id')
-    //     ->where('orders.order_date','<',$this->currentDate)
-    //     ->where('orders.order_date','>',$this->previousDate)
-    //     ->groupBy('order_product.product_id','products.product_name','products.product_price')
-    //     ->get();
-    // }
-// }
