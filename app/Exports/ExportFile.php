@@ -50,6 +50,7 @@ class ExportFile implements
         ->join('order_product', 'order_product.product_id', '=', 'products.id')
         ->join('orders', 'orders.id', '=', 'order_product.order_id')
         ->where('orders.order_date','<',$currentDate)
+        ->where('orders.order_status','=', '3')
         ->where('orders.order_date','>',$previousDate)
         ->groupBy('order_product.product_id','products.product_name','products.product_price');
     }

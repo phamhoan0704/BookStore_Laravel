@@ -3,7 +3,7 @@
   <link rel="shortcut icon" href="//theme.hstatic.net/200000287623/1000800165/14/favicon.png?v=126" type="image/png" />
   <title>Nhà Sách IPM</title>
   <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="{{asset('https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css')}}">
+  <link rel="stylesheet" href="{{asset('https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css')}}">
 
   <!-- jQuery library -->
   <script src="{{asset('https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js')}}"></script>
