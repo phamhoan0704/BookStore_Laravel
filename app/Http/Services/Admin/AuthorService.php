@@ -95,9 +95,24 @@ public function add($dataInsert){
         ]);
         
     }
+    public function checkAuthor($author_id){
+        try{
+            $list=DB::table($this->table)
+            ->join('products','products.category_id','authors.id')
+            ->where('category_id',$author_id)
+            ->get();
+            return count($list);
+        }catch(Exception $err){
+        dd($err);
+            // session()->flash('error','Có lỗi xảy ra. Vui lòng thử lại!');
+        }
+    }
     public function delete($id)
     {
-       
+        if($this->checkAuthor($id)>0){
+            session()->flash('success','Tác giả này không thể xóa!');
+           }
+           else{
         try{
             DB::table($this->table)
             ->where('id',$id)
@@ -106,6 +121,7 @@ public function add($dataInsert){
         }catch(Exception $err){
             session()->flash('error','Có lỗi xảy ra. Vui lòng thử lại!');
         }
+    }
 
     }
 

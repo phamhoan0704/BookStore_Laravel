@@ -149,17 +149,35 @@ class CategoryService{
             session()->flash('error','Có lỗi xảy ra. Vui lòng thử lại!');
         }
     }
-
+    public function checkCategory($category_id){
+        try{
+            $list=DB::table($this->table)
+            ->join('products','products.category_id','categories.id')
+            ->where('category_id',$category_id)
+            ->get();
+            return count($list);
+        }catch(Exception $err){
+        dd($err);
+            // session()->flash('error','Có lỗi xảy ra. Vui lòng thử lại!');
+        }
+    }
     public function deleteCategory($category_id)
     {
-        try{
-            DB::table($this->table)
-            ->where('id',$category_id)
-            ->delete();
-            session()->flash('success','Xóa danh mục thành công!');
-        }catch(Exception $err){
-            session()->flash('error','Có lỗi xảy ra. Vui lòng thử lại!');
-        }
+        if($this->checkCategory($category_id)>0){
+            session()->flash('success','Danh mục này không thể xóa!');
+           }
+           else{
+               try{
+                   DB::table($this->table)
+                   ->where('id',$category_id)
+                   ->delete();
+
+                 session()->flash('success','Xóa danh mục thành công!');
+               }catch(Exception $err){
+                   session()->flash('erro','Có lỗi xảy ra. Vui lòng thử lại!');
+               }
+           }
+
 
     }
 

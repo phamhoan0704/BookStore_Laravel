@@ -143,15 +143,32 @@ class ProductService{
         return true;
 
     }
+    public function checkProduct($product_id){
+        try{
+            $list=DB::table($this->table)
+            ->join('order_product','order_product.product_id','product_id')
+            ->where('product_id',$product_id)
+            ->get();
+            return count($list);
+        }catch(Exception $err){
+        dd($err);
+            // session()->flash('error','Có lỗi xảy ra. Vui lòng thử lại!');
+        }
+    }
     public function deleteProduct($id)
     {
-        try{
-            DB::table($this->table)
-            ->where('id',$id)
-            ->delete();
-            session()->flash('success','Xóa sản phẩm thành công!');
-        }catch(Exception $err){
-            session()->flash('error','Có lỗi xảy ra. Vui lòng thử lại!');
+        if($this->checkProduct($id)>0){
+            session()->flash('success','Sản phẩm này không thể xóa!');
+
+        }else{
+            try{
+                DB::table($this->table)
+                ->where('id',$id)
+                ->delete();
+                session()->flash('success','Xóa sản phẩm thành công!');
+            }catch(Exception $err){
+                session()->flash('error','Có lỗi xảy ra. Vui lòng thử lại!');
+            }
         }
 
     }
