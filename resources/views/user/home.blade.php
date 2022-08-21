@@ -419,12 +419,12 @@
             <div class="hnb-list">
                 <div class="hnb-item">
                     <a href="" class="hnb-item-link">
-                        <img class="hnb-item-img " src="https://theme.hstatic.net/200000287623/1000800165/14/hnb_img_1.jpg?v=126" alt=" ">
+                        <img class="hnb-item-img " src="{{ url('template/user/image/new-banner/hnb_img_1.jpg') }}" alt=" ">
                     </a>
                 </div>
                 <div class="hnb-item ">
                     <a href=" " class="hnb-item-link ">
-                        <img class="hnb-item-img " src="https://theme.hstatic.net/200000287623/1000800165/14/hnb_img_2.jpg?v=126" alt=" ">
+                        <img class="hnb-item-img " src="{{ url('template/user/image/new-banner/hnb_img_2.jpg') }}" alt=" ">
                     </a>
                 </div>
             </div>

@@ -64,28 +64,28 @@
                     </div> -->
                 </div>
                 <table class="sale_management-table">
-                    <thead>
-                        <tr>
-                            <td style="width: 15%">Mã sản phẩm</td>
-                            <td>Tên sản phẩm</td>
-                            <td>Giá Bán</td>
-                            <td>Số lượng</td>
-                            <td>Doanh Thu</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($reportList as $item)
+                        <thead>
                             <tr>
-                                <td>{{$item->product_id}}</td>
-                                <td>{{$item->product_name}}</td>
+                                <td style="width: 15%">Mã sản phẩm</td>
+                                <td>Tên sản phẩm</td>
+                                <td>Giá Bán</td>
+                                <td>Số lượng</td>
+                                <td>Doanh Thu</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($reportList as $item)
+                                <tr>
+                                    <td>{{$item->product_id}}</td>
+                                    <td>{{$item->product_name}}</td>
                                 <td style="text-align: right;">{{number_format($item->product_price)}}</td>
                                 <td style="text-align: right;">{{$item->sale_amount}}</td>
                                 <td style="text-align: right;">{{number_format($item->product_price*$item->sale_amount)}}</td>
-                            </tr>
-                        @endforeach
+                                </tr>
+                            @endforeach
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
                 <div class="sale_management-total"> 
                     <p>Tổng cộng          
                         <span>
