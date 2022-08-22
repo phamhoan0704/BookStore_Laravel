@@ -117,7 +117,7 @@ class ProductService{
         ]);
         
     }
-    public function updateQuantity($cartList){
+    public function updateQuantityOrder($cartList){
  
             
         try{
