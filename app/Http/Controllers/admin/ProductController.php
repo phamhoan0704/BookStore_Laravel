@@ -78,7 +78,7 @@ class ProductController extends Controller
         return redirect()->route('admin.product.index');
     }
 
-    public function getEdit(Product $id){
+    public function getEdit(ProductRequest $id){
         $productDetail=$id;
         $cat=new CategoryService();
         $category=$cat->getCategory();

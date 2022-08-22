@@ -46,6 +46,9 @@
                         @if(Session::has('fail2'))
                         {{Session::get('fail2')}}
                         @endif
+                        @if(Session::has('fail3'))
+                        {{Session::get('fail3')}}
+                        @endif
                         </span>
                 </div>
             </div>

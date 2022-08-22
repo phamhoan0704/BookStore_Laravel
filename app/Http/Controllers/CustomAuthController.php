@@ -77,13 +77,13 @@ class CustomAuthController extends Controller
             
             if(Hash::check($request->input('password'),$user->user_password))
             {
-                $request->session()->put('loginId',$user->id);
-               
-
-
-                return redirect('user/home');
-
-
+                if($user->active==1){
+                    $request->session()->put('loginId',$user->id);
+                    return redirect('user/home');
+                }
+                else{
+                    return back()->with('fail3','Tài khoản của bạn đã bị khóa!');
+                }
             }
             else{
                 return back()->with('fail2','Mật khẩu không chính xác!');

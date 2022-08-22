@@ -16,13 +16,7 @@ class OrderService{
         ->get();
         return $orderDetail;
     }
-    public function getOrderList()
-    {
-        $user_id=session()->get('loginId');
-        $orderList=DB::table($this->table)->where('user_id',$user_id)->get();
-        return $orderList;
-        
-    }
+   
     public function getOrderListActive($filters=[]){
         
         if($filters==6){
@@ -35,23 +29,7 @@ class OrderService{
         return $orderListActive;
     }
     
-    public function destroyOrder( $order_id){
-            try{
-
-        $order= DB::table($this->table)
-            ->join('order_product','id','=','order_id')
-            ->where('order_id',$order_id);
-            //order_status=4
-            DB::table('orders')->where('id',$order_id)->update(['order_status'=>'0']);
-           $orderlist= Db::table('products')->select('order_id','product_id','product_amount')
-            ->join('order_product','prodcut.id','order_product.product_id')->where('order_id',$order_id);
-           
-            session()->flash('success','Xóa danh mục thành công!');
-        }catch(Exception $err){
-            session()->flash('error','Có lỗi xảy ra. Vui lòng thử lại!');
-        }
-
-    }
+   
     public function getCount($status)
     {
         if($status==6){
@@ -64,14 +42,47 @@ class OrderService{
         return $orderListActive->count();
     }
     public function getOrderDetailList($order_id){
-        
+            
             $orderDetailList= DB::table($this->table)
-            ->join('order_product','id','=','order_id')
-            ->where('order_id',$order_id);
+            ->join('order_product','order_product.order_id','=','orders.id')
+            ->join('products','.products.id','=','order_product.product_id')
+            ->where('orders.id','=',$order_id)->get();
             return $orderDetailList;
        
     }
+    public function searchOrder($search){
+        if(!empty($search)){
+            $search_list=DB::table($this->table)
+            ->select('*')
+            ->where('id','like','%'.$search.'%')->get();
+            if(empty($search_list[0])){
+                $titleSearch="Không có kết quả phù hợp";
+            }else{
+                $titleSearch= $search_list->count();
+            }
+            $resultSearch=[
+                'listSearch'=>$search_list,
+                'titleSearch'=>$titleSearch,
+            ];
+    
+        return $resultSearch; 
+        }
+       
+     }
+     public function sortOrder($sortBy,$status){
+        
 
+
+     }
+     public function getTotal($user_id)
+     {
+        $totalById=Db::table($this->table)
+        ->select('user_id')
+        ->sum('total_money')->as('Tong')
+        ->groupby('user_id');
+        return $totalById;
+     }
+    
 
 
 }

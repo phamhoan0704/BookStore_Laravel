@@ -42,6 +42,7 @@ class ProductService{
         ->get();
         if(empty($category[0])){
             $titleSearch="Không có kết quả phù hợp";
+            
         }else{
             $titleSearch= $category->count();
         }
@@ -181,13 +182,13 @@ class ProductService{
     }
     public function updateQuantity($product_id,$quantity)
     {
-        $num=DB::table($this->talbe)
+        $num=DB::table($this->table)
         ->select('product_quantity')
-        ->where('id',$product_id)->first();
-        $total=$num+$quantity;
-        DB::table($this->talbe)
+        ->where('id','=',$product_id)->first();
+        $total=$num->product_quantity+$quantity;
+        DB::table($this->table)
         ->where('id',$product_id)
-        ->update(['product_quantity',$total]);
+        ->update(['product_quantity'=>$total]);
     }
 
 
