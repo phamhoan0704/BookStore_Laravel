@@ -45,62 +45,59 @@
 
                 <!-- Tab content -->
                 <div class="tabs-content">
-                    <!-- Sách mới -->
                     <div class="tabs-pane active">
                         <!-- Sách bán chạy -->
                         <table class="sale_management-table">
-                                <thead>
+                            <thead>
+                                <tr>
+                                    <td style="width: 15%;">Mã sản phẩm</td>
+                                    <td style="width: 30%;">Tên sản phẩm</td>
+                                    <td style="text-align: right; width: 15%;">Giá Bán</td>
+                                    <td style="text-align: right; width: 20%;">Số lượng đã bán</td>
+                                    <td style="text-align: right; width: 20%;">Doanh Mục</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($listProductBestSeller as $item)
                                     <tr>
-                                        <td style="width: 15%">Mã sản phẩm</td>
-                                        <td>Tên sản phẩm</td>
-                                        <td>Giá Bán</td>
-                                        <td>Số lượng đã bán</td>
-                                        <td>Danh mục</td>
+                                        <td style="width: 15%;">{{$item->product_id}}</td>
+                                        <td style="width: 30%;">{{$item->product_name}}</td>
+                                        <td style="text-align: right; width: 15%;">{{number_format($item->product_price)}}</td>
+                                        <td style="text-align: right; width: 20%;">{{$item->sale_amount}}</td>
+                                        <td style="text-align: right; width: 20%;">{{$item->category_name}}</td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    <!--  -->
-                                    @foreach ($listProductBestSeller as $item)
-                                        <tr>
-                                            <td>{{$item->product_id}}</td>
-                                            <td>{{$item->product_name}}</td>
-                                            <td style="text-align: right;">{{number_format($item->product_price)}}</td>
-                                            <td style="text-align: right;">{{$item->sale_amount}}</td>
-                                            <td>{{$item->category_name}}</td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        
+                                @endforeach
+
+                            </tbody>
+                        </table>
                     </div>
                     <div class="tabs-pane">
-                        <!-- Sách hot deal -->
+                        <!-- Thống kê theo danh mục -->
                         <table class="sale_management-table">
-                                <thead>
+                            <thead>
+                                <tr>
+                                    <td style="width: 25%">Mã danh mục</td>
+                                    <td style="width: 50%">Tên danh mục</td>
+                                    <td style="width: 25%">Số lượng sản phẩm đã bán</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($listCategoryBestSeller as $item)
                                     <tr>
-                                    <td style="width: 15%">Mã danh mục</td>
-                                    <td style="width: 60%">Tên danh mục</td>
-                                    <td>Số lượng sản phẩm đã bán</td>
+                                        <td style="width: 25%">{{$item->id}}</td>
+                                        <td style="width: 50%">{{$item->category_name}}</td>
+                                        <td style="text-align: right; width: 25%">{{number_format($item->sale_amount)}}</td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    <!--  -->
-                                    @foreach ($listCategoryBestSeller as $item)
-                                        <tr>
-                                            <td>{{$item->id}}</td>
-                                            <td>{{$item->category_name}}</td>
-                                            <td style="text-align: right;">{{number_format($item->sale_amount)}}</td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                
-                
             </div>
+                
+                
         </div>
+    </div>
         <!-- <div class="homepage__box sale-analysis">
             <div class="title-box">Phân Tích Bán Hàng
                 <p style="margin-bottom: 0;">Tổng quan về doanh thu của cửa hàng trong năm</p>
