@@ -66,21 +66,21 @@
                 <table class="sale_management-table">
                         <thead>
                             <tr>
-                                <td style="width: 15%">Mã sản phẩm</td>
-                                <td>Tên sản phẩm</td>
-                                <td>Giá Bán</td>
-                                <td>Số lượng</td>
-                                <td>Doanh Thu</td>
+                                <td style="width: 15%;">Mã sản phẩm</td>
+                                <td style="width: 40%;">Tên sản phẩm</td>
+                                <td style="text-align: right; width: 15%;">Giá Bán</td>
+                                <td style="text-align: right; width: 15%;">Số lượng</td>
+                                <td style="text-align: right; width: 15%;">Doanh Thu</td>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($reportList as $item)
                                 <tr>
-                                    <td>{{$item->product_id}}</td>
-                                    <td>{{$item->product_name}}</td>
-                                <td style="text-align: right;">{{number_format($item->product_price)}}</td>
-                                <td style="text-align: right;">{{$item->sale_amount}}</td>
-                                <td style="text-align: right;">{{number_format($item->product_price*$item->sale_amount)}}</td>
+                                    <td style="width: 15%;">{{$item->product_id}}</td>
+                                    <td style="width: 40%;">{{$item->product_name}}</td>
+                                    <td style="text-align: right; width: 15%;">{{number_format($item->product_price)}}</td>
+                                    <td style="text-align: right; width: 15%;">{{$item->sale_amount}}</td>
+                                    <td style="text-align: right; width: 15%;">{{number_format($item->product_price*$item->sale_amount)}}</td>
                                 </tr>
                             @endforeach
 
