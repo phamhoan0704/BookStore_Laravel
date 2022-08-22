@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\Admin\SupplierController;
@@ -7,12 +7,15 @@ use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\admin\AuthorController;
 use App\Http\Controllers\user\CartController;
 use App\Http\Controllers\user\OrderController;
+use App\Http\Controllers\Admin\SendEmailController;
 
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\backend\NewsController;
 use App\Models\Category;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\CustomAuthController;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -126,24 +129,45 @@ Route::prefix('/admin')->name('admin.')->group(function(){
     }); 
     Route::prefix('/order')->name('order.')->group(function(){
         
-        Route::get('/index/{status?}',[App\Http\Controllers\admin\OrderController::class,'getOrderList'])->name('index');
-        Route::get('/show-detail/{id}',[App\Http\Controllers\Admin\OrderController::class,'getDetail'])->name('orderDetail')->name('detail');
-    //     Route::post('/edit/{id}',[AuthorController::class,'postEdit'])->name('post-edit');
-    //    // Route::post('/update',[AuthorController::class,'postEdit'])->name('post-edit');
+        Route::any('/index/{status?}',[App\Http\Controllers\admin\OrderController::class,'getOrderList'])->name('index');
+        Route::get('/show-detail/{id}',[App\Http\Controllers\Admin\OrderController::class,'getDetail'])->name('detail');
+        Route::post('/edit/{id}',[App\Http\Controllers\Admin\OrderController::class,'updateOrder'])->name('post-edit');
+        Route::post('/destroy/{id}',[App\Http\Controllers\Admin\OrderController::class,'destroyOrder'])->name('destroy');
+       // Route::post('/search',[App\Http\Controllers\Admin\OrderController::class,'getResultSearch'])->name('search');
 
-    //    //Hide,show
-    //     Route::post('/activecategory/{name?}/{id?}',[AuthorController::class,'postActive'])->name('active-author');
-
-    //     //Delete
-    //     Route::post('/delete',[AuthorController::class,'destroy'])->name('delete'); Rou
-        // Route::post('/deleteall/{id?}',[SupplierController::class,'destroyAll'])->name('deleteall');
     }); 
     //SALE REPORT
     Route::get('/report/index',[ReportController::class,'index'])->name('report');
     Route::get('/report/export',[ReportController::class,'export'])->name('export');
 
     Route::get('/homepage/index',[ReportController::class,'homepage'])->name('homepage');   
+    //Account\
+    Route::prefix('/account')->name('account.')->group(function(){
+        // Add
+        Route::get('/add',[AccountController::class,'create'])->name('create');
+        Route::post('/add',[AccountController::class,'postAdd'])->name('postAdd');
+        Route::get('/index2',[AccountController::class,'index'])->name('index2');
+        //Index
+         Route::get('/{name?}',[AccountController::class,'index'])->name('index');
+       
+        Route::post('/activecategory/{name?}/{id?}',[AccountController::class,'postActive'])->name('active-account');
 
+    });
+    // Route::get('/send-email', [SendEmailController::class,'getdata'])->name('sendMail');
+    Route::get('/email',[SendEmailController::class,'index'])->name('index');
+    
+    Route::post('/sendMail',[SendEmailController::class,'sendMail'])->name('sendMail');
+    // Route::get('send-mail', function () {
+   
+    //     $details = [
+    //         'title' => 'Mail from codecheef.org',
+    //         'body' => 'This is for testing email using smtp'
+    //     ];
+       
+    //     \Mail::to('your_receiver_email@gmail.com')->send(new \App\Mail\MyTestMail($details));
+       
+    //     dd("Email is Sent.");
+    // });
 });
 // Route::prefix('/user')->name('user.')->group(function(){
 //     Route::get('/home', [App\Http\Controllers\user\ProductController::class,'index'])->name('homepage');
@@ -202,3 +226,21 @@ route::get('/header',function(){
 route::get('/footer',function(){
     return view('footer');
 });
+// Route::get('/email/verify', function () {
+//     return view('auth.verify-email');
+// })->middleware('auth')->name('verification.notice');
+// Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+//     $request->fulfill();
+ 
+//     return redirect('/home');
+// })->middleware(['auth', 'signed'])->name('verification.verify');
+
+// Route::post('/email/verification-notification', function (Request $request) {
+//     $request->user()->sendEmailVerificationNotification();
+ 
+//     return back()->with('message', 'Verification link sent!');
+// })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+// Route::get('/profile', function () {
+//     // Only verified users may access this route...
+// // })->middleware('verified');
+

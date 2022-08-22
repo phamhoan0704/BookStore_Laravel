@@ -46,9 +46,10 @@
                 <li><a id="header-product" href="{{route('admin.product.index')}}">Quản lí sản phẩm</a></li>
                 <li><a id="header-author" href="{{route('admin.author.index')}}">Quản lí tác giả</a></li>
                 <li><a id="header-supply" href="{{route('admin.supplier.index')}}">Quản lí nhà cung cấp</a></li>
-                <li><a id="header-user" href="../admin/user_management_ad.php">Quản lí tài khoản</a></li>
+                <li><a id="header-user" href="{{route('admin.account.index')}}">Quản lí tài khoản</a></li>
                 <li><a id="header-order" href="{{route('admin.order.index',['status'=>'6'])}}">Quản lí đơn hàng</a></li>
                 <li><a id="header-report" href="{{route('admin.report')}}">Quản lí doanh thu</a></li>
+                <li><a id="header-notice" href="{{route('admin.index')}}">Thông báo khuyến mãi</a></li>
             </ul>
         </div>
 
@@ -127,6 +128,11 @@
     @case('homepage')
     <script>
         setColorForMenu('homepage');
+    </script>
+    @break
+    @case('email')
+    <script>
+        setColorForMenu('header-notice');
     </script>
     @break
 

@@ -10,15 +10,17 @@
   <!-- Latest compiled JavaScript -->
   <script src="{{asset('https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js')}}"></script> 
   <link rel="stylesheet" href="{{asset('template/admin/css/layout_admin.css')}}">
+  
+ <!-- // <link rel="stylesheet" href="{{asset('template/admin/css/orderDetail.css')}}"> -->
   <link rel="stylesheet" href="{{asset('template/admin/css/layout_list.css')}}">
   <link rel="stylesheet" href="{{asset('template/admin/css/tab.css')}}">
   <link rel="stylesheet" href="{{asset('template/admin/css/layout_add.css')}}">
 
   
-  <link rel="stylesheet" href="{{asset('template/admin/css/orderDeatil.css')}}">
 
   <link rel="stylesheet" href="{{asset('template/admin/css/sale_report.css')}}">
   <link rel="stylesheet" href="{{asset('template/admin/css/homepage.css')}}">
+  <link rel="stylesheet" href="{{asset('template/admin/css/notice.css')}}">
 
 
   @yield('head')

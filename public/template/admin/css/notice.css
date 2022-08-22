@@ -1,0 +1,22 @@
+.notice>h1{
+    font-size: 35px;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+}
+.notice_title input{
+    width: 90%;
+    height: 36px;
+    padding: 4px 6px;
+}
+.notice_label{
+    font-size: 18px;
+    padding: 14px 24px 9px 0px;
+
+}
+.notice_btn{
+    text-align: center;
+    margin: 12px ;
+    margin: 12px auto 8px;
+    display: block;
+}
