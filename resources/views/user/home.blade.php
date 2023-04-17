@@ -10,24 +10,41 @@
                 <li data-target="#slideShow" data-slide-to="1"></li>
                 <li data-target="#slideShow" data-slide-to="2"></li>
                 <li data-target="#slideShow" data-slide-to="3"></li>
+                <li data-target="#slideShow" data-slide-to="4"></li>
+                <li data-target="#slideShow" data-slide-to="5"></li>
+                <li data-target="#slideShow" data-slide-to="6"></li>
+                <li data-target="#slideShow" data-slide-to="7"></li>
             </ol>
 
             <!-- Wrapper for slides -->
             <div class="carousel-inner">
                 <div class="item active">
-                    <img src="{{ url('template/user/image/Slide/slideShow_1.jpg') }}" alt="">
+                    <img src="{{ url('template/user/image/Slide/slider1.jpg') }}" alt="">
                 </div>
 
                 <div class="item">
-                    <img src="{{ url('template/user/image/Slide/slideShow_2.jpg') }}" alt="">
+                    <img src="{{ url('template/user/image/Slide/slider2.jpg') }}" alt="">
                 </div>
 
                 <div class="item">
-                    <img src="{{ url('template/user/image/Slide/slideShow_3.jpg') }}" alt="">
+                    <img src="{{ url('template/user/image/Slide/slider3.jpg') }}" alt="">
                 </div>
                 <div class="item">
-                    <img src="{{ url('template/user/image/Slide/slideShow_4.jpg') }}" alt="">
+                    <img src="{{ url('template/user/image/Slide/slider4.jpg') }}" alt="">
                 </div>
+                <div class="item">
+                    <img src="{{ url('template/user/image/Slide/slider5.jpg') }}" alt="">
+                </div>
+                <div class="item">
+                    <img src="{{ url('template/user/image/Slide/slider6.jpg') }}" alt="">
+                </div>
+                <div class="item">
+                    <img src="{{ url('template/user/image/Slide/slider7.jpg') }}" alt="">
+                </div>
+                <div class="item">
+                    <img src="{{ url('template/user/image/Slide/slider8.jpg') }}" alt="">
+                </div>
+
             </div>
 
 
@@ -48,7 +65,8 @@
                 <div class="home-policy-list">
                     <div class="home-policy-item">
                         <div class="home-policy-item_icon">
-                            <img src="https://theme.hstatic.net/200000287623/1000800165/14/hpl_icon_1.jpg?v=126" alt="Uu dai van chuyen">
+                       
+                            <img src="{{ url('template/image/tab/free-delivery1.png') }}" alt="Uu dai van chuyen">
                         </div>
                         <div class="home-policy-item_info">
                             ƯU ĐÃI<br>VẬN CHUYỂN
@@ -56,15 +74,15 @@
                     </div>
                     <div class="home-policy-item">
                         <div class="home-policy-item_icon">
-                            <img src="https://theme.hstatic.net/200000287623/1000800165/14/hpl_icon_2.jpg?v=126" alt="Uu dai van chuyen">
+                            <img src="{{ url('template/image/tab/gift-box.png') }}" alt="Uu dai van chuyen">
                         </div>
                         <div class="home-policy-item_info">
-                            THỂ LOẠI SÁCH<br>PHONG PHÚ
+                            BẢO HÀNH<br>TRỌN ĐỜI 
                         </div>
                     </div>
                     <div class="home-policy-item">
                         <div class="home-policy-item_icon">
-                            <img src="https://theme.hstatic.net/200000287623/1000800165/14/hpl_icon_3.jpg?v=126" alt="Uu dai van chuyen">
+                            <img src="{{ url('template/image/tab/gift-card.png') }}" alt="Uu dai van chuyen">
                         </div>
                         <div class="home-policy-item_info">
                             KHUYẾN MẠI<br>HẤP DẪN
@@ -72,7 +90,7 @@
                     </div>
                     <div class="home-policy-item">
                         <div class="home-policy-item_icon">
-                            <img src="https://theme.hstatic.net/200000287623/1000800165/14/hpl_icon_4.jpg?v=126" alt="Uu dai van chuyen">
+                            <img src="{{ url('template/image/tab/call.png') }}" alt="Uu dai van chuyen">
                         </div>
                         <div class="home-policy-item_info">
                             HOTLINE<br>03 2838 3979<br>03 3319 3979
@@ -114,7 +132,10 @@
                                             >HẾT HÀNG</div>
                                         <div class="img">
                                             <a href="{{route('user.product-detail',['id'=>$item->id])}}" class="product__img-link">
-                                                <img src="{{ url('template/image/product/'.$item->product_image) }}" alt="" class="product__img">
+                                                <span class="wap_hover">
+                                                     <img src="{{ url('template/image/product/'.$item->product_image) }}" alt="" class="product__img img1">
+                                                     <img src="{{ url('template/image/product/pk_sofa1_2.jpg') }}" alt="" class="product__img img2">
+                                                </span>
                                             </a>
                                             <div class="pdt_icon">
                                                 <a class="btn-quickview" href="" title="Xem nhanh">
@@ -188,12 +209,19 @@
                                         </div>
                                     </div>
                                     <div class="product__detail">
-                                        <a href="" class="product__name" title="">{{$item->product_name}}</a>
-                                        <div class="product__price">
-                                            <p class="pro-price__new">{{number_format($item->product_price)}}đ</p>
-                                            <p class="pro-price__old">{{number_format($item->product_price_pre)}}đ</p>
-                                        </div>
-                                    </div>
+            <div class="product__detail_left">
+                <a href="{{route('user.product-detail',['id'=>$item->id])}}" class="product__name" title="">{{$item->product_name}}</a>
+                <div class="product__price">
+                    <del>
+                    <span class="pro-price__new">{{$item->product_price}}đ</span>
+                    <span class="pro-price__old">{{$item->product_price_pre}}đ</span>
+                    </del>
+                </div>
+            </div>
+            <div class="product__detail_right">
+                <a href="{{route('user.product-detail',['id'=>$item->id])}}">Xem thêm</a>
+            </div>
+        </div>
                                 </div>
                             @endforeach
                         </div>
@@ -461,7 +489,7 @@
         }   
     </script>
 
-    <script src="{{asset('template/user/js/home_tab.js')}}"></script>
+ <script src="{{asset('template/user/js/home_tab.js')}}"></script> 
 
     @endsection
 @extends('user.footer')

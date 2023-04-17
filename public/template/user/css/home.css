@@ -3,7 +3,7 @@ a:hover {
 }
 
 body {
-    background-color: #f7f7f7;
+    /* background-color: #f7f7f7; */
 }
 
 .home-page-content {
@@ -15,6 +15,10 @@ body {
 
 #slideShow {
     margin: 0;
+}
+
+.item >img{
+    width: 100%;
 }
 
 :root {
@@ -41,7 +45,7 @@ body {
     --col: 4;
     margin: 24px 0 0;
     border-radius: 4px;
-    border: 1px solid #01a14b;
+    border: 1px solid #F48408;
     padding: 4px 12px;
     width: calc(calc(100% / var(--col)) - var(--mar-left));
     display: flex;
@@ -62,7 +66,7 @@ body {
     line-height: 1.4;
     font-weight: 600;
     text-transform: uppercase;
-    color: #01a14b;
+    color: #F48408;
     width: calc(100% - 70px);
     text-align: center;
     margin-left: 12px;
@@ -174,7 +178,10 @@ body {
     overflow: hidden;
 }
 
-.product-list {}
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+}
 
 Footer © 2022 GitHub,
 Inc. Footer navigation Terms Privacy

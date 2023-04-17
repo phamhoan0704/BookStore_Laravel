@@ -49,10 +49,36 @@
           <span style="color: red">{{$message}}</span>
       </div>
       @enderror
-      <div class="form_row">
+      <!-- <div class="form_row">
         <label for="">Hình ảnh</label>
-        <input type="file" name="product_image" class="ipn_add" id="" value="">
-      </div>
+       // <input type="file" name="product_image" class="ipn_add" id="" value=""> 
+        <input id="multiple_img" type="file" name="sp_hinhanhlienquan[]" multiple>
+      </div> -->
+
+      
+      <div class="input-group hdtuto control-group lst increment" >
+            <div class="list-input-hidden-upload">
+                <input type="file" name="filenames[]" id="file_upload" class="myfrm form-control hidden">
+            </div>
+            <div class="input-group-btn"> 
+                <button class="btn btn-success btn-add-image" type="button"><i class="fldemo glyphicon glyphicon-plus"></i>+Add image</button>
+            </div>
+        </div>
+        <div class="list-images">
+            @if (isset($list_images) && !empty($list_images))
+                @foreach (json_decode($list_images) as $key => $img)
+                    <div class="box-image">
+                        <input type="hidden" name="images_uploaded[]" value="{{ $img }}" id="img-{{ $key }}">
+                        <img src="{{ asset('files/'.$img) }}" class="picture-box">
+                        <div class="wrap-btn-delete"><span data-id="img-{{ $key }}" class="btn-delete-image">x</span></div>
+                    </div>
+                @endforeach
+                <input type="hidden" name="images_uploaded_origin" value="{{ $list_images }}">
+                <input type="hidden" name="id" value="{{ $id }}">
+            @endif
+        </div>
+
+
       @error('product_image')
       <div class="form_row">
           <span style="color: red">{{$message}}</span>
@@ -116,5 +142,23 @@
   // Replace the <textarea id="editor1"> with a CKEditor 4
     // instance, using default configuration.
         CKEDITOR.replace('content');
+</script>
+
+<script>
+  $(document).ready(function() {
+  
+
+    // Ô nhập liệu cho phép chọn nhiều hình ảnh cùng lúc (các hình ảnh liên quan đến sản phẩm)
+    $("#sp_hinhanhlienquan").fileinput({
+      theme: 'fas',
+      showUpload: false,
+      showCaption: false,
+      browseClass: "btn btn-primary btn-lg",
+      fileType: "any",
+      previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+      overwriteInitial: false,
+      allowedFileExtensions: ["jpg", "gif", "png", "txt"]
+    });
+  });
 </script>
 @endsection

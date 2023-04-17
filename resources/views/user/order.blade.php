@@ -40,16 +40,22 @@
                     <span style="color: red">{{$message}}</span>
                 </div>
                 @enderror
-                <!-- <div class="frm_province order_frm">
+                <div  class="frm_address">
+
+
+                <label for="" class="label_add_detail">Tỉnh / Thành</label>
+                <div class="frm_province order_frm">
               <label for="" class="label_add_detail">Tỉnh / Thành</label>
                 <select class="order_add_detail" name="a"> 
                 <option value=null>Chọn Tỉnh/Thành</option>
                 <option value="volvo">Hà Nội</option>
                 <option value="saab">Hồ Chí Minh</option>
                 <option value="opel">Hải Phòng</option>
-                </select>                    
+                </select>  
+                </div>                 
             </div>
-       
+            <div  class="frm_address">
+                <label for="" class="label_add_detail">Quận / Huyện</label>
              <div class="frm_district order_frm">
                 <label for="" class="label_add_detail">Quận / Huyện</label>
                 <select class="order_add_detail" name="b"> 
@@ -59,7 +65,8 @@
                 <option value="opel">Nam Từ Liêm</option>
                 </select>                     
              </div>
-            -->
+             </div>
+           
             </div>
 
             <div class="order_inf">

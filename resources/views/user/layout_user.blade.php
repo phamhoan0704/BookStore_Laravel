@@ -10,8 +10,10 @@
             <div class="site-topbar">
                 <div class="site-topbar__container">
                     <div class="site-topbar__text">
-                        Công ty cổ phần xuất bản và truyền thông IPM
+                        Vẻ đẹp cho ngôi nhà của bạn
                     </div>
+                    
+
                     <div class="site-topbar__user @if(Session::has('loginId')){{'active'}}
                             @else {{''}}
                             @endif">
@@ -73,17 +75,31 @@
                                             </g>
                                         </g>
                                     </svg>
-                                    <!-- <i class="header__search-btn-icon fa-solid fa-magnifying-glass"></i> -->
+                                    
+                                    <i class="header__search-btn-icon fa-solid fa-magnifying-glass"></i>
                                 </button>
                             </div>
                         </form>
                     </div>
+                    <a>
+                        <div class="site-header__favorite">
+                            <div class="header-favorite__wap">
+                                <i class="fa fa-heart" aria-hidden="true" style="color: #f48408;font-size:24px"></i>
+                                <span class="header__favorite-notice">
+                                    @if(!empty($cartList)) {{$cartList->count()}} 
+                                    @else {{0}}
+                                    @endif</span>
+                            </div>
+                            <div class="header__favorite-info">
+                                <span class="top-cart">Yêu thích</span>
+                             </div>
+                        </div>
+                    </a>
                     <a href="{{route('user.cart.index')}}" class="site-header__cart-container">
                         <div class="site-header__cart">
                             <div class="header__cart-wrap">
-                                <i class="bi bi-cart-plus-fill" style="color: 009234;font-size:40px"></i>
-                                
-                                <span class="header__cart-notice">
+                                <i class="bi bi-cart-plus-fill" style="color: #sf0840c;font-size:26px"></i>
+                                    <span class="header__cart-notice">
                                     @if(!empty($cartList)) {{$cartList->count()}} 
                                     @else {{0}}
                                     @endif</span>
@@ -122,13 +138,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <p class="header__cart-info">
+                            <div class="header__cart-info">
                                 <span class="top-cart">Giỏ hàng</span>
-                                <span class="cart_quantity">
-                                </span> sản phẩm
-                            </p>
+                                
+                        </div>
                         </div>
                     </a>
+                    
                 </div>
             </div>
 
@@ -137,24 +153,37 @@
                     <li class="header__nav-item">
                         <a href="{{route('user.homepage')}}" class="header__nav-item-link">Trang chủ</a>
                     </li>
-                    <li class="header__nav-item">
-                        <a href="{{route('category')}}" class="header__nav-item-link">Sản phẩm</a>
+                    <li class="header__nav-item nav_tab1">
+                        <a href="{{route('category')}}" class="header__nav-item-link">Sản phẩm
+                        <span class="arrow-dropdown">
+                        <i class="fa fa-sort-desc" aria-hidden="true"></i>
+                        </span>
+                    </a>
                         <ul class="header__secondary-nav">
-                            @foreach ($categoryList as $item)
-                                <li class="secondary-nav-item">
-                                    <a class="secondary-nav-item-link" href="{{route('category',['id'=>$item->id])}}">{{$item->category_name}}</a>
-                                </li>
-                            @endforeach
+                           @foreach ($categoryMainList as $item)
+                                <li class="secondary-nav-item">{{$item->categorymain_name}}
+                                     <ul class="secondary-nav-item-link">
+                                     @foreach($categoryList as $item1)
+                                            @if($item1->categorymain_id==$item->id)
+                                            <li class="secondary-nav-item-link1"><a href="{{route('category',['id'=>$item1->id])}}">{{$item1->category_name}}</a></li>
+                                             @endif
+                                     @endforeach
+                                    
+                                     </ul>
+                                 </li>
+                           @endforeach
+                          
+                          
                         </ul>
                     </li>
                     <li class="header__nav-item">
                         <a href="{{route('user.news')}}" class="header__nav-item-link">Tin tức</a>
                     </li>
                     <li class="header__nav-item">
-                        <a href="about.php" class="header__nav-item-link">About</a>
+                        <a href="about.php" class="header__nav-item-link">Giới thiệu</a>
                     </li>
                     <li class="header__nav-item">
-                        <a href="contact.php" class="header__nav-item-link">Liên hệ</a>
+                        <a href="/contact" class="header__nav-item-link">Liên hệ</a>
                     </li>
                 </ul>
             </div>

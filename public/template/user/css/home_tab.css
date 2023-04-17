@@ -33,7 +33,7 @@
 
 .home-tab-item.active {
     opacity: 1;
-    color: #01a14b;
+    color: #92bcba;
 }
 
 .line {
@@ -43,7 +43,7 @@
     width: 0;
     height: 2px;
     border-radius: 15px;
-    background-color: #01a14b;
+    background-color: #92bcba;
     transition: all 0.2s ease;
 }
 

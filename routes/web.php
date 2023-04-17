@@ -31,7 +31,11 @@ use Illuminate\Http\Request;
 Route::get('/admin', function () {
     return view('admin.layout_admin');
 });
-Route::get('/user', function () {
+// Route::get('/user', function () {
+//     return view('user.layout_user');
+// });
+
+Route::get('', function () {
     return view('user.layout_user');
 });
 // Route::get('/user/cart', function () {
@@ -41,7 +45,82 @@ Route::get('/user', function () {
 //
 //Route::get('user/cart',[CartController::class, 'index'])->name('user.cart');
 Route::get('/user/news' ,[NewsController::class, 'index'])->name('user.news');
-//Admin
+
+Route::middleware(['isLogIn'])->group(function(){
+    Route::prefix('/user/auth')->name('user.')->group(function(){
+        Route::get('/profile', [CustomAuthController::class,'profile'])->name('infor');
+        Route::post('/change-Profile',[CustomAuthController::class,'updateProfile'])->name('changeProfile');
+        route::get('/changepass',[CustomAuthController::class,'newPass'])->name('changepass');
+        route::post('/storenewpass',[CustomAuthController::class,'changePass'])->name('storeNewPass');
+
+    Route::prefix('/cart')->name('cart.')->group(function(){
+        Route::get('/index',[CartController::class,'index'])->name('index');
+        Route::get('/delete/{id}',[CartController::class,'delete'])->name('delete');
+        Route::post('/update',[CartController::class,'update'])->name('update');
+        Route::any('/add/{id?}',[CartController::class,'add'])->name('add');
+
+    });
+    Route::prefix('/order')->name('order.')->group(function(){
+        Route::get('/index',[OrderController::class,'index'])->name('index');
+        Route::post('/add',[OrderController::class,'add'])->name('add');
+        Route::get('/order-detail/{id}',[OrderController::class,'getOrderDetail'])->name('orderDetail');
+        route::get('/orderList/{status?}',[OrderController::class,'OrderListActive'])->name('orderList');
+    });
+
+    });
+});
+
+Route::prefix('/user')->name('user.')->group(function(){
+    Route::get('/login',[CustomAuthController::class,'login'])->name('logIn');
+    Route::get('/register',[CustomAuthController::class,'register'])->name('register');
+    Route::post('/new-user',[CustomAuthController::class,'storeNewUser'])->name('storeUser');
+    Route::get('/logout',[CustomAuthController::class,'logOut'])->name('logOut');
+
+    Route::post('/checkAcount',[CustomAuthController::class,'checkLogin'])->name('check-login');
+    Route::get('/home', [App\Http\Controllers\user\ProductController::class,'index'])->name('homepage');
+    route::get('/product/{id}',[App\Http\Controllers\user\ProductController::class,'showProductDetail'])->name('product-detail');
+   
+});
+
+Route::prefix('/category')->name('category.')->group(function(){
+    Route::get('/{id?}',[CategoryController::class,'getProductByCategory'])->name('index');
+});
+
+Route::get('/category/{id?}', [App\Http\Controllers\user\ProductController::class,'getProductByCategory'])->name('category');
+Route::get('/search', [App\Http\Controllers\user\ProductController::class,'searchProduct'])->name('search');
+route::get('/header',function(){
+    return view('header');
+});
+route::get('/footer',function(){
+    return view('footer');
+});
+// Route::get('/email/verify', function () {
+//     return view('auth.verify-email');
+// })->middleware('auth')->name('verification.notice');
+// Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+//     $request->fulfill();
+ 
+//     return redirect('/home');
+// })->middleware(['auth', 'signed'])->name('verification.verify');
+
+// Route::post('/email/verification-notification', function (Request $request) {
+//     $request->user()->sendEmailVerificationNotification();
+ 
+//     return back()->with('message', 'Verification link sent!');
+// })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+// Route::get('/profile', function () {
+//     // Only verified users may access this route...
+// // })->middleware('verified');
+Route::get('/contact',function(){
+    return view('user.contact');
+
+});
+
+
+
+
+
+//----------------ADMIN--------------
 //Route::get('/admin/login',[LoginController::class, 'index'])->name('login');
 
 Route::prefix('/admin')->name('admin.')->group(function(){
@@ -169,78 +248,4 @@ Route::prefix('/admin')->name('admin.')->group(function(){
     //     dd("Email is Sent.");
     // });
 });
-// Route::prefix('/user')->name('user.')->group(function(){
-//     Route::get('/home', [App\Http\Controllers\user\ProductController::class,'index'])->name('homepage');
-//     Route::get('/login',[CustomAuthController::class,'logIn'])->name('login');
-//     Route::post('/checkAcount',[CustomAuthController::class,'checkLogin'])->name('check-login');
-
-
-// });
-Route::middleware(['isLogIn'])->group(function(){
-    Route::prefix('/user/auth')->name('user.')->group(function(){
-        Route::get('/profile', [CustomAuthController::class,'profile'])->name('infor');
-        Route::post('/change-Profile',[CustomAuthController::class,'updateProfile'])->name('changeProfile');
-        route::get('/changepass',[CustomAuthController::class,'newPass'])->name('changepass');
-        route::post('/storenewpass',[CustomAuthController::class,'changePass'])->name('storeNewPass');
-
-    Route::prefix('/cart')->name('cart.')->group(function(){
-        Route::get('/index',[CartController::class,'index'])->name('index');
-        Route::get('/delete/{id}',[CartController::class,'delete'])->name('delete');
-        Route::post('/update',[CartController::class,'update'])->name('update');
-        Route::any('/add/{id?}',[CartController::class,'add'])->name('add');
-
-    });
-    Route::prefix('/order')->name('order.')->group(function(){
-        Route::get('/index',[OrderController::class,'index'])->name('index');
-        Route::post('/add',[OrderController::class,'add'])->name('add');
-        Route::get('/order-detail/{id}',[OrderController::class,'getOrderDetail'])->name('orderDetail');
-        route::get('/orderList/{status?}',[OrderController::class,'OrderListActive'])->name('orderList');
-    });
-
-    });
-});
-
-Route::prefix('/user')->name('user.')->group(function(){
-    Route::get('/login',[CustomAuthController::class,'login'])->name('logIn');
-    Route::get('/register',[CustomAuthController::class,'register'])->name('register');
-    Route::post('/new-user',[CustomAuthController::class,'storeNewUser'])->name('storeUser');
-    Route::get('/logout',[CustomAuthController::class,'logOut'])->name('logOut');
-
-    Route::post('/checkAcount',[CustomAuthController::class,'checkLogin'])->name('check-login');
-    Route::get('/home', [App\Http\Controllers\user\ProductController::class,'index'])->name('homepage');
-    route::get('/product/{id}',[App\Http\Controllers\user\ProductController::class,'showProductDetail'])->name('product-detail');
-   
-   
-
-});
-
-Route::prefix('/category')->name('category.')->group(function(){
-    Route::get('/{id?}',[CategoryController::class,'getProductByCategory'])->name('index');
-});
-
-Route::get('/category/{id?}', [App\Http\Controllers\user\ProductController::class,'getProductByCategory'])->name('category');
-Route::get('/search', [App\Http\Controllers\user\ProductController::class,'searchProduct'])->name('search');
-route::get('/header',function(){
-    return view('header');
-});
-route::get('/footer',function(){
-    return view('footer');
-});
-// Route::get('/email/verify', function () {
-//     return view('auth.verify-email');
-// })->middleware('auth')->name('verification.notice');
-// Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-//     $request->fulfill();
- 
-//     return redirect('/home');
-// })->middleware(['auth', 'signed'])->name('verification.verify');
-
-// Route::post('/email/verification-notification', function (Request $request) {
-//     $request->user()->sendEmailVerificationNotification();
- 
-//     return back()->with('message', 'Verification link sent!');
-// })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
-// Route::get('/profile', function () {
-//     // Only verified users may access this route...
-// // })->middleware('verified');
 

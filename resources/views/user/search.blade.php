@@ -95,12 +95,19 @@
                         </div>
                     </div>
                     <div class="product__detail">
-                        <a href="" class="product__name" title="">{{$item->product_name}}</a>
-                        <div class="product__price">
-                            <p class="pro-price__new">{{$item->product_price}}đ</p>
-                            <p class="pro-price__old">{{$item->product_price_pre}}đ</p>
-                        </div>
-                    </div>
+            <div class="product__detail_left">
+                <a href="{{route('user.product-detail',['id'=>$item->id])}}" class="product__name" title="">{{$item->product_name}}</a>
+                <div class="product__price">
+                    <del>
+                    <span class="pro-price__new">{{$item->product_price}}đ</span>
+                    <span class="pro-price__old">{{$item->product_price_pre}}đ</span>
+                    </del>
+                </div>
+            </div>
+            <div class="product__detail_right">
+                <a href="{{route('user.product-detail',['id'=>$item->id])}}">Xem thêm</a>
+            </div>
+        </div>
                 </div>
             @endforeach
         </div>

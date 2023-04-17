@@ -51,9 +51,9 @@ class ProductController extends Controller
         $category=$cat->getCategory();
         $sup=new SupplierService();
         $supplier=$sup->getSupplier();
-        $aut=new AuthorService();
-        $author=$aut->getAuthor();
-        return view('admin.product.productAdd',compact (['category','author','supplier']));
+        // $aut=new AuthorService();
+        // $author=$aut->getAuthor();
+        return view('admin.product.productAdd',compact (['category','supplier']));
     }
 
     public function postAdd(ProductRequest $request){
@@ -71,7 +71,7 @@ class ProductController extends Controller
             'product_quantity'=>$request->product_quantity,
             'product_detail'=>$request->product_detail,
             'category_id'=>$request->category,
-            'author_id'=>$request->author_id,
+            // 'author_id'=>$request->author_id,
             'supplier_id'=>$request->supplier,
             'created_at'=>date('y-m-d'),
         ];
@@ -85,9 +85,9 @@ class ProductController extends Controller
         $category=$cat->getCategory();
         $sup=new SupplierService();
         $supplier=$sup->getSupplier();
-        $aut=new AuthorService();
-        $author=$aut->getAuthor();
-        return view('admin.product.productEdit',compact(['productDetail','category','author','supplier']));
+        // $aut=new AuthorService();
+        // $author=$aut->getAuthor();
+        return view('admin.product.productEdit',compact(['productDetail','category','supplier']));
     }
 
     public function postEdit(ProductRequest $request,$id){
@@ -104,7 +104,7 @@ class ProductController extends Controller
             'product_quantity'=>$request->product_quantity,
             'product_detail'=>$request->product_detail,
             'category_id'=>$request->category,
-            'author_id'=>$request->author_id,
+            // 'author_id'=>$request->author_id,
             'supplier_id'=>$request->supplier,
             'updated_at'=>date('y-m-d'),
         ];
